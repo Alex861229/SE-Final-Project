@@ -40,7 +40,7 @@ Released   : 20131203
     <div id="header" class="container">
         <div id="logo">
             <h1><a href="#">台韓景點地圖</a></h1>
-            <span style="display:block">Design by <a href="https://www.facebook.com/AlexHsu19971229/" rel="nofollow">Alex</a></span>
+            <span style="display:block">Design by <a href="https://www.facebook.com/AlexHsu19971229/" rel="nofollow">Alex Hsu</a></span>
             <span>今天想來點...</span>
         </div>    
         <div id="search" style="text-align:center; ">    
