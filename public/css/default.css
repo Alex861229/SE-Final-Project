@@ -367,30 +367,42 @@
 	{
 		color: rgba(255,255,255,0.8);
 	}
-    #SIDE{
+/*    #SIDE{
     height: 800px;
 	width: 100%;	
     }
     #tablel{
 	height: 100px;
-	width: 500px;
+	width: 300px;
 	float: left;
 	margin-right: 10px;
 	padding-left:10px;
     }
-    #map{
-
-	margin-left: 320px;
-	text-align:right;
-	padding-top:15px;
-	padding-left:10px;
-
-    padding-bottom:40px;
-    border: 1px solid 000000;
-    }
+    
     .comments{
     border: 1px solid 000000;	
-    }	
+    }
+    #button1{
+    	padding-top:40px;
+    	padding-bottom:40px;
+        border: 1px solid 000000;
+        height: 100px;
+	    width: 200px;
+	    position:relative;
+	    text-align:center;
+    }
+    .coffee{
+    	width: 100%;
+    	height: 100%;
+    }	*/
+
+    #map{
+	padding-top:15px;
+	padding-left:80px;
+    padding-right: :100px;
+    padding-bottom:40px;
+
+    }
 
 
 /*********************************************************************************/
