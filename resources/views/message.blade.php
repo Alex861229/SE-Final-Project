@@ -1,5 +1,5 @@
 @extends('layouts') 
-@section('title', '使用者專區') 
+@section('title', '景點評論') 
 
 @section('css')
 <!-- 放css -->
@@ -13,7 +13,13 @@
     {
         font-size: 48px;
         color: #ffffff;
-    } 
+    }
+#logo
+    {
+        font-size: 48px;
+        color: #ffffff;
+        padding: 2em 0em;
+    }  
 .title2
     {
        font-size: 48px; 
@@ -60,6 +66,9 @@
         background-position:-62px -608px;
         margin-left:3px;
     }
+    .intro{
+        color: #ffffff;
+    }
 </style>
 
 
@@ -69,13 +78,33 @@
 <div id="header-wrapper">
     <div id="header" class="container">
         <div id="logo">
-            <img src="{{ asset('css/images/logo.jpg') }}" width="200px" height="200px">
+            中央大學
         </div>    
-        <div id="name_edit" style="text-align:center; "> 
-            <div id="name">Alex
-                  <button type="button"  style="width: 40px; height: 30px;">edit</button>
-            </div>   
-        </div>
+        <table class="intro" style="border:3px #cccccc solid; text-align:center; " align="center" cellpadding="10" border='1'>
+            <tr>
+                <td style="width: 10%">地點</td>
+                <td width="70%">
+                    HTML 網頁設計不可或缺的元素就是表格（Table），通常表格用來做版面的排版，而表格的用法包含了幾個重要的標籤，分別是 table、tr 與 td 這幾個重點，組合起來才是個完整的表格，以下做個簡單的表格範例。                    
+                </td>
+            </tr>
+           <tr>
+                <td style="width: 10%">簡介</td>
+                <td width="70%">
+                    不錯的地方                       
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 10%">留言數</td>
+                <td width="70%">                      
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 10%">外部介紹</td>
+                <td width="70%">
+                    不錯的地方                     
+                </td>
+            </tr>
+        </table>    
     </div>
 </div>
 <div id="wrapper1">
@@ -89,92 +118,72 @@
         <table class="comment" style="border:3px #cccccc solid; text-align:center; " align="center" cellpadding="10" border='1'>
             <tr>
                 <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">中央大學</td>
+                <td style="width: 20%;">A</td>
                 <td width="70%">
-                    HTML 網頁設計不可或缺的元素就是表格（Table），通常表格用來做版面的排版，而表格的用法包含了幾個重要的標籤，分別是 table、tr 與 td 這幾個重點，組合起來才是個完整的表格，以下做個簡單的表格範例。
-                    <button type="button" class="edit_button">編輯</button>
-                    <button type="button" class="delete_button">刪除</button>                       
+                    HTML 網頁設計不可或缺的元素就是表格（Table），通常表格用來做版面的排版，而表格的用法包含了幾個重要的標籤，分別是 table、tr 與 td 這幾個重點，組合起來才是個完整的表格，以下做個簡單的表格範例。                     
                 </td>
             </tr>
            <tr>
                 <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">中央大學</td>
+                <td style="width: 20%;">B</td>
                 <td width="70%">
-                    不錯的地方
-                    <button type="button" class="edit_button">編輯</button>
-                    <button type="button" class="delete_button">刪除</button>                       
+                    不錯的地方                   
                 </td>
             </tr>
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
                 <td width="70%">
-                    不錯的地方
-                    <button type="button" class="edit_button">編輯</button>
-                    <button type="button" class="delete_button">刪除</button>                       
+                    不錯的地方                   
                 </td>
             </tr>
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
                 <td width="70%">
-                    不錯的地方
-                    <button type="button" class="edit_button">編輯</button>
-                    <button type="button" class="delete_button">刪除</button>                       
+                    不錯的地方                    
                 </td>
             </tr>
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
                 <td width="70%">
-                    不錯的地方
-                    <button type="button" class="edit_button">編輯</button>
-                    <button type="button" class="delete_button">刪除</button>                       
+                    不錯的地方                   
                 </td>
             </tr>
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
                 <td width="70%">
-                    不錯的地方
-                    <button type="button" class="edit_button">編輯</button>
-                    <button type="button" class="delete_button">刪除</button>                       
+                    不錯的地方                      
                 </td>
             </tr>
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
                 <td width="70%">
-                    不錯的地方
-                    <button type="button" class="edit_button">編輯</button>
-                    <button type="button" class="delete_button">刪除</button>                       
+                    不錯的地方                     
                 </td>
             </tr>
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
                 <td width="70%">
-                    不錯的地方
-                    <button type="button" class="edit_button">編輯</button>
-                    <button type="button" class="delete_button">刪除</button>                       
+                    不錯的地方                  
                 </td>
             </tr>
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
                 <td width="70%">
-                    不錯的地方
-                    <button type="button" class="edit_button">編輯</button>
-                    <button type="button" class="delete_button">刪除</button>                       
+                    不錯的地方                      
                 </td>
             </tr>
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
                 <td width="70%">
-                    不錯的地方
-                    <button type="button" class="edit_button">編輯</button>
-                    <button type="button" class="delete_button">刪除</button>                       
+                    不錯的地方                      
                 </td>
             </tr>     
         </table>

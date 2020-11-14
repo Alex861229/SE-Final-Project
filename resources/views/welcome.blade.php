@@ -30,8 +30,8 @@ Released   : 20131203
             <li style="float:left;" ><img class="l_img" src="{{ asset('css/images/logo.jpg') }}"  style="  width: 48px; height: 48px; float:left" ></a></li>
             <li style="float:left;  height: 48px; line-height: 48px; color: #ffffff" >台韓景點地圖</a></li>
             <li class="current_page_item"><a href="#" title="">主頁</a></li>
-            <li><a href="#" title="">註冊</a></li>
-            <li><a href="#" title="">登入</a></li>
+            <li><a href="{{ url('/user') }}" title="">註冊</a></li>
+            <li><a href="{{ url('/message') }}" title="">登入</a></li>
         </ul>
 </div>
 </div>
@@ -45,60 +45,38 @@ Released   : 20131203
         </div>    
         <div id="search" style="text-align:center; ">    
             <span class="icon"><i class="fa fa-search"></i></span>
-            <input type="search" id="search" placeholder="Search..." / style="width: 800px; height: 40px"> 
+            <input type="search" id="search" placeholder="Search..." / style="width: 800px; height: 40px; border-radius:15px;"> 
         </div>
     </div>
 </div>
 <div id="wrapper1">
 <div id="SIDE" >
-    <div id="tablel">
-        <div class="title">
-            <h2 style="color:#000000">熱門旅遊景點</h2>
-        </div>
-        <table class="comment" style="border:3px #cccccc solid;" cellpadding="10" border='1'>
-            <tr>
-                <td width="200px">1</td>
-                <td width="1400px">中央大學</td>
-            </tr>
-            <tr>
-                <td width="200px">2</td>
-                <td width="1400px">台灣大學</td>
-            <tr>
-                <td width="200px">3</td>
-                <td width="1400px">清華大學</td>
-            </tr>
-            <tr>
-                <td width="200px">4</td>
-                <td width="1400px">交通大學</td>
-            </tr>
-            <tr>
-                <td width="200px">5</td>
-                <td width="1400px">政治大學</td>
-            </tr>
-            <tr>
-                <td width="200px">6</td>
-                <td width="1400px">成功大學</td>
-            </tr>
-            <tr>
-                <td width="200px">7</td>
-                <td width="1400px">中山大學</td>
-            </tr>
-            <tr>
-                <td width="200px">8</td>
-                <td width="1400px">中興大學</td>
-            </tr>
-            <tr>
-                <td width="200px">9</td>
-                <td width="1400px">中正大學</td>
-            </tr>
-            <tr>
-                <td width="200px">10</td>
-                <td width="1400px">總統府</td>
-            </tr>            
-        </table>
+    <div id="map" style="padding-right: 80px">
+        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1nRkq3fdSQjFPzKRfoYwKGYbVRhqQo1cP"  width="100%" height="780px"></iframe> 
     </div>
-    <div id="map" >
-        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1nRkq3fdSQjFPzKRfoYwKGYbVRhqQo1cP"  width="1500px" height="780px"></iframe> 
+    <div class="t" style="font-size: 48px; text-align: center; padding-right: 50px">
+        搜尋附近
+    </div>    
+    <div id="tablel" align="center">
+        <table>
+            <tr>
+                <td style="height: 100px; width: 300px">
+                    <div id="button1" align="center" style="height: 80%; width: 80%">
+                        <button type="button" class="coffee" style="height: 80%; width: 80%; border-radius:15px;">咖啡廳</button>
+                    </div>
+                </td>
+                <td style="height: 100px; width: 300px">    
+                    <div id="button2"  align="center" style="height: 80%; width: 80%">
+                        <button type="button" class="restaurant" style="height: 80%; width: 80%; border-radius:15px;">餐廳</button> 
+                    </div>  
+                </td>
+                <td style="height: 100px; width: 300px">    
+                    <div id="button2"  align="center" style="height: 80%; width: 80%">
+                        <button type="button" class="gas" style="height: 80%; width: 80%; border-radius:15px;">加油站</button> 
+                    </div>  
+                </td>                
+            </tr>          
+        </table>        
     </div>
 </div>
 </div>
@@ -159,7 +137,7 @@ Released   : 20131203
         </div>
         <div class="box2">
             <h2><span class="icon icon-briefcase"></span>資料來源</h2>
-            <p><a href="https://dataportal.asia/home">亞洲公開資料數據集</p>
+            <p><a href="https://dataportal.asia/home">亞洲公開資料數據集</a>
         </div>
     </div>
 </div>
