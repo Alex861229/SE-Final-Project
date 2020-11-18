@@ -11,6 +11,7 @@ Released   : 20131203
 
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
+<div class="bootstrap-iso">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>台韓景點地圖</title>
@@ -19,23 +20,54 @@ Released   : 20131203
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 <link href="{{asset('css/default.css')}}" rel="stylesheet">
 <link href="{{asset('css/fonts.css')}}" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,500' rel='stylesheet' type='text/css'>
+<script src="{{ URL::asset('js/jquery-2.1.4.min.js') }}"></script>
+<!-- BS JavaScript -->
+ <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css" />
+
+    <!-- Bootstrap -->
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Have fun using Bootstrap JS -->
 
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
 
 </head>
+
 <div class="row">
-<div id="menu" style="position: relative;">
-        <ul>
+<div id="menu" style="position: relative; text-align: right; margin: 3px;padding: 0;">
+        <ul style="display: block;list-style-type: disc;">
             <li style="float:left;" ><img class="l_img" src="{{ asset('css/images/logo.jpg') }}"  style="  width: 48px; height: 48px; float:left" ></a></li>
             <li style="float:left;  height: 48px; line-height: 48px; color: #ffffff" >台韓景點地圖</a></li>
             <li class="current_page_item"><a href="#" title="">主頁</a></li>
-            <li><a href="{{ url('/user') }}" title="">註冊</a></li>
+            <li><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">註冊</button></li>
             <li><a href="{{ url('/message') }}" title="">登入</a></li>
         </ul>
 </div>
 </div>
-<body>    
+<div class="modal fade" id="myModal" role="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!-- 編輯Modal content-->
+        <div class="modal-content">                                                    
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+            </div>
+        <div class="modal-body">在这里添加一些文本</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">提交更改</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<body style="font-family: 'Source Sans Pro', sans-serif;font-size: 12pt;font-weight: 400;
+    background-color: #333333;">    
 <div id="header-wrapper">
     <div id="header" class="container">
         <div id="logo">
@@ -137,10 +169,13 @@ Released   : 20131203
         </div>
         <div class="box2">
             <h2><span class="icon icon-briefcase"></span>資料來源</h2>
-            <p><a href="https://dataportal.asia/home">亞洲公開資料數據集</a>
+            <p><a href="https://dataportal.asia/home">亞洲公開資料數據集</p>
         </div>
     </div>
 </div>
 
+
+
 </body>
+</div>
 </html>
