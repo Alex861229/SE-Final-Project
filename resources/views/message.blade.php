@@ -69,6 +69,13 @@
     .intro{
         color: #ffffff;
     }
+    .comment td{
+        padding: 5px;
+    }
+    .intro td{
+        padding: 5px;
+        font-size: 18px;
+    }    
 </style>
 
 
@@ -80,7 +87,7 @@
         <div id="logo">
             中央大學
         </div>    
-        <table class="intro" style="border:3px #cccccc solid; text-align:center; " align="center" cellpadding="10" border='1'>
+        <table class="intro" style="border:3px #cccccc solid; text-align:center; width: 100%; border-radius: 5px; " align="center" cellpadding="10" border='1'>
             <tr>
                 <td style="width: 10%">地點</td>
                 <td width="70%">
@@ -95,7 +102,8 @@
             </tr>
             <tr>
                 <td style="width: 10%">留言數</td>
-                <td width="70%">                      
+                <td width="70%">
+                    100                      
                 </td>
             </tr>
             <tr>
@@ -109,85 +117,104 @@
 </div>
 <div id="wrapper1">
         <div class="title2" style="padding: 3px; margin: 3px">
-            <h2 style="color:#000000">歷史留言紀錄</h2>
+            <h2 style="color:#000000">留言評分</h2>
         </div>
 </div>
 
 <div id="wrapper2">
     <div id="portfolio" class="container">
         <table class="comment" style="border:3px #cccccc solid; text-align:center; " align="center" cellpadding="10" border='1'>
+            <tr style="background-color: #BEBEBE">
+                <td style="width: 10%">日期</td>
+                <td style="width: 20%;">景點</td>
+                <td width="60%">評論</td>
+                <td style="width: 10%;">評分</td>
+            </tr>
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">A</td>
-                <td width="70%">
+                <td width="60%">
                     HTML 網頁設計不可或缺的元素就是表格（Table），通常表格用來做版面的排版，而表格的用法包含了幾個重要的標籤，分別是 table、tr 與 td 這幾個重點，組合起來才是個完整的表格，以下做個簡單的表格範例。                     
                 </td>
+                <td style="width: 10%;">5</td>
             </tr>
            <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">B</td>
-                <td width="70%">
+                <td width="60%">
                     不錯的地方                   
                 </td>
+                <td style="width: 10%;">5</td>
             </tr>
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
-                <td width="70%">
+                <td width="60%">
                     不錯的地方                   
                 </td>
+                <td style="width: 10%;">5</td>
             </tr>
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
-                <td width="70%">
+                <td width="60%">
                     不錯的地方                    
                 </td>
+                <td style="width: 10%;">5</td>
             </tr>
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
-                <td width="70%">
+                <td width="60%">
                     不錯的地方                   
                 </td>
+                <td style="width: 10%;">5</td>
             </tr>
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
-                <td width="70%">
+                <td width="60%">
                     不錯的地方                      
                 </td>
+                <td style="width: 10%;">5</td>
             </tr>
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
-                <td width="70%">
+                <td width="60%">
                     不錯的地方                     
                 </td>
+                <td style="width: 10%;">5</td>
             </tr>
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
-                <td width="70%">
+                <td width="60%">
                     不錯的地方                  
                 </td>
+                <td style="width: 10%;">5</td>
             </tr>
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
-                <td width="70%">
+                <td width="60%">
                     不錯的地方                      
                 </td>
+                <td style="width: 10%;">5</td>
             </tr>
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
-                <td width="70%">
+                <td width="60%">
                     不錯的地方                      
                 </td>
+                <td style="width: 10%;">5</td>
             </tr>     
         </table>
-        <div align="center" id="page" style="font-weight: bold; padding: 20px">
+        <div class="m_add" style="padding: 5px">
+            <button type="button" class="register" data-toggle="modal" data-target="#addModal" style="background: #ff6816; border-radius: 5px;color: white;">新增留言</button>
+        </div>    
+        <div align="center" id="page" style="font-weight: bold; padding: 20px;border-radius: 5px;font-color: #000000">
              <div class="page-icon">
     <span class="page-disabled"><i></i>上一頁</span>
     <span class="page-current">1</span>
@@ -205,6 +232,59 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="addModal" role="dialog" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!-- 編輯Modal content-->
+        <div class="modal-content">                                                    
+            <div class="modal-header">
+                <table>
+                    <tr>
+                        <td style="text-align: center">
+                            <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px; font-size: 24px" >新增留言</h5>
+                        </td>
+                        <td style="width: 500px">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modal_close1">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        <div class="modal-body">
+            <form id="activity-form-edit" enctype="multipart/form-data">
+                <table align="center" id="add_table">
+                        <div class = "modal-body-body">   
+                            <br>        
+                            <tr>
+                                <td style="padding-right: 50px " required="required">評論</td>
+                                <td>
+                                    <textarea class="add_word" name='introduce' id="introduce-edit"></textarea> 
+                                </td>  
+                            </tr>
+                            <tr>
+                            <tr>
+                                <td style="padding-right: 50px " required="required">評分</td>
+                                <td>
+                                    <input type="radio" name="class" >1<br>
+                                    <input type="radio" name="class" >2<br>
+                                    <input type="radio" name="class" >3<br>
+                                    <input type="radio" name="class" >4<br>
+                                    <input type="radio" name="class" >5<br>
+                                </td>
+                            </tr>
+                        </div>    
+                </table>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="submit" value="送出" class="btn btn-primary" >
+        </div>                                        
+        </form>
+    </div>
+    </div>
+</div>
+</div>
+
 <div id="copyright">
     <div id="featured" class="container">
         <div class="box1">

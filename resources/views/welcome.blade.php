@@ -46,25 +46,9 @@ Released   : 20131203
             <li style="float:left;  height: 48px; line-height: 48px; color: #ffffff" >台韓景點地圖</a></li>
             <li class="current_page_item"><a href="#" title="">主頁</a></li>
             <li class="reg_bt"><button type="button" class="register" data-toggle="modal" data-target="#myModal">註冊</button></li>
-            <li class="logout_bt" style="margin-right: 5px"><button type="button" class="logout" data-toggle="modal" data-target="#myModal">登入</button></li>
+            <li class="login_bt" style="margin-right: 5px"><button type="button" class="login" data-toggle="modal" data-target="#loginModal">登入</button></li>
         </ul>
 </div>
-</div>
-<div class="modal fade" id="myModal" role="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <!-- 編輯Modal content-->
-        <div class="modal-content">                                                    
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
-            </div>
-        <div class="modal-body">在这里添加一些文本</div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">提交更改</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
 </div>
 <body style="font-family: 'Source Sans Pro', sans-serif;font-size: 12pt;font-weight: 400;
     background-color: #333333;">    
@@ -174,6 +158,128 @@ Released   : 20131203
         <div class="box2">
             <h2><span class="icon icon-briefcase"></span>資料來源</h2>
             <p><a href="https://dataportal.asia/home">亞洲公開資料數據集</p>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" role="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!-- 編輯Modal content-->
+        <div class="modal-content">                                                    
+            <div class="modal-header">
+                <table>
+                    <tr>
+                        <td>
+                            <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px">註冊帳號</h5>
+                        </td>
+                        <td style="width: 500px">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modal_close1">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        <div class="modal-body">
+            <form id="activity-form-edit" enctype="multipart/form-data">
+                <table align="center" id="add_table">
+                        <div class = "modal-body-body">   
+                            <br>        
+                            <div style="padding-left: 50px"><h3><b>輸入資訊</b></h3></div>
+                            <tr>
+                                <td style="padding-right: 50px " required="required">帳號</td>
+                                <td>
+                                    <input class="add_bar" name='account' required="required">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-right: 50px " required="required">密碼</td>
+                                <td>
+                                    <input class="add_bar" name='password' required="required">
+                                </td>  
+                            </tr>
+                            <tr>
+                                <td style="padding-right: 50px " required="required">密碼確認</td>
+                                <td>
+                                    <input class="add_bar" name='password2' required="required">
+                                </td>  
+                            </tr>
+                            <tr>
+                                <td style="padding-right: 50px " required="required">使用者名稱</td>
+                                <td>
+                                    <input class="add_bar" name='name' required="required">
+                                </td>  
+                            </tr>
+                            <tr>
+                                <td style="padding-right: 50px " required="required">信箱</td>
+                                <td>
+                                    <input class="add_bar" name='email' required="required">
+                                </td>  
+                            </tr>
+                        </div>    
+                </table>
+                <table align="center" id="pic_table">
+                    <tr>
+                        <td>
+                            <div class="addpic">上傳個人照片</div>
+                                <input type="file" id="progressbarTWInput" name = "picture" accept="image/*" / >
+                        </td>    
+                    </tr>
+                </table>  
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="submit" value="送出" class="btn btn-primary" >
+        </div>                                        
+        </form>
+    </div>
+    </div>
+</div>
+</div>
+
+
+<div class="modal fade" id="loginModal" role="dialog" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!-- 編輯Modal content-->
+        <div class="modal-content">                                                    
+            <div class="modal-header">
+                <table>
+                    <tr>
+                        <td>
+                            <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px">登入</h5>
+                        </td>
+                        <td style="width: 500px">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modal_close1">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        <div class="modal-body">
+            <form id="activity-form-edit" enctype="multipart/form-data">
+                <table align="center" id="add_table">
+                        <div class = "modal-body-body">   
+                            <br>        
+                            <div style="padding-left: 50px"><h3><b>輸入資訊</b></h3></div>
+                            <tr>
+                                <td style="padding-right: 50px " required="required">帳號</td>
+                                <td>
+                                    <input class="add_bar" name='account' required="required">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-right: 50px " required="required">密碼</td>
+                                <td>
+                                    <input class="add_bar" name='password' required="required">
+                                </td>  
+                            </tr>
+                        </div>       
+                </table>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" value="送出" class="btn btn-primary" >
+                </div>                                        
+            </form>
+        </div>
         </div>
     </div>
 </div>

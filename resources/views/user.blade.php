@@ -92,25 +92,33 @@
             <tr style="background-color: #BEBEBE">
                 <td style="width: 10%">日期</td>
                 <td style="width: 20%;">景點</td>
-                <td width="70%">
+                <td width="50%">
                     評論                      
                 </td>
+                <td style="width: 10%;">評分</td>
+                <td style="width: 10%"></td>
             </tr>
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
-                <td width="70%">
+                <td width="50%">
                     HTML 網頁設計不可或缺的元素就是表格（Table），通常表格用來做版面的排版，而表格的用法包含了幾個重要的標籤，分別是 table、tr 與 td 這幾個重點，組合起來才是個完整的表格，以下做個簡單的表格範例。
                     <br>
-                    <button type="button" class="edit_button">編輯</button>
+                </td>    
+                <td style="width: 10%;">5</td>
+                <td style="width: 10%">
+                    <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
             </tr>
            <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
-                <td width="70%">
+                <td width="50%">
                     不錯的地方
+                </td>
+                <td style="width: 10%;">5</td>
+                <td style="width: 10%">    
                     <button type="button" class="edit_button">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
@@ -118,8 +126,11 @@
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
-                <td width="70%">
+                <td width="50%">
                     不錯的地方
+                </td>
+                <td style="width: 10%;">5</td>
+                <td style="width: 10%">    
                     <button type="button" class="edit_button">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
@@ -127,8 +138,11 @@
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
-                <td width="70%">
+                <td width="50%">
                     不錯的地方
+                </td>
+                <td style="width: 10%;">5</td>
+                <td style="width: 10%">    
                     <button type="button" class="edit_button">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
@@ -136,8 +150,11 @@
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
-                <td width="70%">
+                <td width="50%">
                     不錯的地方
+                </td>
+                <td style="width: 10%;">5</td>
+                <td style="width: 10%">    
                     <button type="button" class="edit_button">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
@@ -145,8 +162,11 @@
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
-                <td width="70%">
+                <td width="50%">
                     不錯的地方
+                </td>
+                <td style="width: 10%;">5</td>
+                <td style="width: 10%">    
                     <button type="button" class="edit_button">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
@@ -154,8 +174,11 @@
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
-                <td width="70%">
+                <td width="50%">
                     不錯的地方
+                </td>
+                <td style="width: 10%;">5</td>
+                <td style="width: 10%">    
                     <button type="button" class="edit_button">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
@@ -163,8 +186,11 @@
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
-                <td width="70%">
+                <td width="50%">
                     不錯的地方
+                </td>
+                <td style="width: 10%;">5</td>
+                <td style="width: 10%">    
                     <button type="button" class="edit_button">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
@@ -172,8 +198,11 @@
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
-                <td width="70%">
+                <td width="50%">
                     不錯的地方
+                </td>
+                <td style="width: 10%;">5</td>
+                <td style="width: 10%">    
                     <button type="button" class="edit_button">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
@@ -181,8 +210,11 @@
             <tr>
                 <td style="width: 10%">2020/11/12</td>
                 <td style="width: 20%;">中央大學</td>
-                <td width="70%">
+                <td width="50%">
                     不錯的地方
+                </td>
+                <td style="width: 10%;">5</td>
+                <td style="width: 10%">    
                     <button type="button" class="edit_button">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
@@ -282,6 +314,57 @@
                         </td>    
                     </tr>
                 </table>  
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="submit" value="送出" class="btn btn-primary" >
+        </div>                                        
+        </form>
+    </div>
+    </div>
+</div>
+</div>
+<div class="modal fade" id="addModal" role="dialog" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!-- 編輯Modal content-->
+        <div class="modal-content">                                                    
+            <div class="modal-header">
+                <table>
+                    <tr>
+                        <td style="text-align: center">
+                            <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px; font-size: 24px" >新增留言</h5>
+                        </td>
+                        <td style="width: 500px">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modal_close1">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        <div class="modal-body">
+            <form id="activity-form-edit" enctype="multipart/form-data">
+                <table align="center" id="add_table">
+                        <div class = "modal-body-body">   
+                            <br>        
+                            <tr>
+                                <td style="padding-right: 50px " required="required">評論</td>
+                                <td>
+                                    <textarea class="add_word" name='introduce' id="introduce-edit"></textarea> 
+                                </td>  
+                            </tr>
+                            <tr>
+                            <tr>
+                                <td style="padding-right: 50px " required="required">評分</td>
+                                <td>
+                                    <input type="radio" name="class" >1<br>
+                                    <input type="radio" name="class" >2<br>
+                                    <input type="radio" name="class" >3<br>
+                                    <input type="radio" name="class" >4<br>
+                                    <input type="radio" name="class" >5<br>
+                                </td>
+                            </tr>
+                        </div>    
+                </table>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <input type="submit" value="送出" class="btn btn-primary" >
