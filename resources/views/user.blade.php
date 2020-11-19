@@ -275,12 +275,6 @@
                             <br>        
                             <div style="padding-left: 50px"><h3><b>輸入資訊</b></h3></div>
                             <tr>
-                                <td style="padding-right: 50px " required="required">帳號</td>
-                                <td>
-                                    <input class="add_bar" name='account' required="required">
-                                </td>
-                            </tr>
-                            <tr>
                                 <td style="padding-right: 50px " required="required">密碼</td>
                                 <td>
                                     <input class="add_bar" name='password' required="required">
