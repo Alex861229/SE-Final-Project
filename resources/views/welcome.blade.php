@@ -157,10 +157,17 @@ Released   : 20131203
         </div>
         <div class="box2">
             <h2><span class="icon icon-briefcase"></span>資料來源</h2>
-            <p><a href="https://dataportal.asia/home">亞洲公開資料數據集</p>
+            <p><a href="https://dataportal.asia/home">亞洲公開資料數據集</a></p>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+</body>
 <div class="modal fade" id="myModal" role="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <!-- 編輯Modal content-->
@@ -234,8 +241,6 @@ Released   : 20131203
     </div>
 </div>
 </div>
-
-
 <div class="modal fade" id="loginModal" role="dialog" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <!-- 編輯Modal content-->
@@ -283,9 +288,5 @@ Released   : 20131203
         </div>
     </div>
 </div>
-
-
-
-</body>
 </div>
 </html>
