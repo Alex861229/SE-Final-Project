@@ -39,14 +39,14 @@ Released   : 20131203
 
 </head>
 
-<div class="row">
+<div class="row" style="margin-left: 5px; margin-right: 5px">
 <div id="menu" style="position: relative; text-align: right; margin: 3px;padding: 0;">
         <ul style="display: block;list-style-type: disc;">
-            <li style="float:left;" ><img class="l_img" src="{{ asset('css/images/logo.jpg') }}"  style="  width: 48px; height: 48px; float:left" ></a></li>
+            <li style="float:left;" ><img class="l_img" src="{{ asset('css/images/logo.jpg') }}"  style="  width: 48px; height: 48px; float:left; margin-top: 5px" ></a></li>
             <li style="float:left;  height: 48px; line-height: 48px; color: #ffffff" >台韓景點地圖</a></li>
             <li class="current_page_item"><a href="#" title="">主頁</a></li>
-            <li><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">註冊</button></li>
-            <li><a href="{{ url('/message') }}" title="">登入</a></li>
+            <li class="reg_bt"><button type="button" class="register" data-toggle="modal" data-target="#myModal">註冊</button></li>
+            <li class="logout_bt" style="margin-right: 5px"><button type="button" class="logout" data-toggle="modal" data-target="#myModal">登入</button></li>
         </ul>
 </div>
 </div>
@@ -94,17 +94,17 @@ Released   : 20131203
             <tr>
                 <td style="height: 100px; width: 300px">
                     <div id="button1" align="center" style="height: 80%; width: 80%">
-                        <button type="button" class="coffee" style="height: 80%; width: 80%; border-radius:15px;">咖啡廳</button>
+                        <button type="button" class="coffee" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">咖啡廳</button>
                     </div>
                 </td>
                 <td style="height: 100px; width: 300px">    
                     <div id="button2"  align="center" style="height: 80%; width: 80%">
-                        <button type="button" class="restaurant" style="height: 80%; width: 80%; border-radius:15px;">餐廳</button> 
+                        <button type="button" class="restaurant" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">餐廳</button> 
                     </div>  
                 </td>
                 <td style="height: 100px; width: 300px">    
                     <div id="button2"  align="center" style="height: 80%; width: 80%">
-                        <button type="button" class="gas" style="height: 80%; width: 80%; border-radius:15px;">加油站</button> 
+                        <button type="button" class="gas" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">加油站</button> 
                     </div>  
                 </td>                
             </tr>          
@@ -116,47 +116,51 @@ Released   : 20131203
 <div id="wrapper3">
     <div id="portfolio" class="container">
         <div class="title">
-            <h2>附近景點</h2>
+            <h2 style="font-size: 48px; text-align: center; padding-right: 50px">附近景點</h2>
         </div>
-        <table class="comment" style="border:3px #cccccc solid;" cellpadding="10" border='1'>
-            <tr>
-                <td width="200px">1</td>
-                <td width="1400px">中央大學</td>
+        <table class="comment" style="border:3px #cccccc solid; text-align:center; width: 100%; border-radius: 5px; font-size: 18px " align="center" cellpadding="10" border='1'>
+            <tr style="background-color: #BEBEBE;">
+                <td width="200px" style="padding: 5px">編號</td>
+                <td width="1400px" style="padding: 5px">景點</td>
             </tr>
             <tr>
-                <td width="200px">2</td>
-                <td width="1400px">台灣大學</td>
-            <tr>
-                <td width="200px">3</td>
-                <td width="1400px">清華大學</td>
+                <td width="200px" style="padding: 5px">1</td>
+                <td width="1400px" style="padding: 5px">中央大學</td>
             </tr>
             <tr>
-                <td width="200px">4</td>
-                <td width="1400px">交通大學</td>
+                <td width="200px" style="padding: 5px">2</td>
+                <td width="1400px" style="padding: 5px">台灣大學</td>
+            <tr>
+                <td width="200px" style="padding: 5px">3</td>
+                <td width="1400px" style="padding: 5px">清華大學</td>
             </tr>
             <tr>
-                <td width="200px">5</td>
-                <td width="1400px">政治大學</td>
+                <td width="200px" style="padding: 5px">4</td>
+                <td width="1400px" style="padding: 5px">交通大學</td>
             </tr>
             <tr>
-                <td width="200px">6</td>
-                <td width="1400px">成功大學</td>
+                <td width="200px" style="padding: 5px">5</td>
+                <td width="1400px" style="padding: 5px">政治大學</td>
             </tr>
             <tr>
-                <td width="200px">7</td>
-                <td width="1400px">中山大學</td>
+                <td width="200px" style="padding: 5px">6</td>
+                <td width="1400px" style="padding: 5px">成功大學</td>
             </tr>
             <tr>
-                <td width="200px">8</td>
-                <td width="1400px">中興大學</td>
+                <td width="200px" style="padding: 5px">7</td>
+                <td width="1400px" style="padding: 5px">中山大學</td>
             </tr>
             <tr>
-                <td width="200px">9</td>
-                <td width="1400px">中正大學</td>
+                <td width="200px" style="padding: 5px">8</td>
+                <td width="1400px" style="padding: 5px">中興大學</td>
             </tr>
             <tr>
-                <td width="200px">10</td>
-                <td width="1400px">總統府</td>
+                <td width="200px" style="padding: 5px">9</td>
+                <td width="1400px" style="padding: 5px">中正大學</td>
+            </tr>
+            <tr>
+                <td width="200px" style="padding: 5px">10</td>
+                <td width="1400px" style="padding: 5px">總統府</td>
             </tr>       
         </table>
     </div>

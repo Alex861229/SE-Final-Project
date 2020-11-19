@@ -438,6 +438,7 @@
 		outline: 0;
 		color: #FFF;
 	}
+
 	
 	#menu li:hover a, #menu li.active a, #menu li.active span
 	{
@@ -448,7 +449,14 @@
 		background: #ff6816;
 		border-radius: 8px;
 		color: #FFF;
+		margin: 5px;
 	}
+	#menu button{
+        background: #000000;
+        color: #ffffff;
+        margin: 5px;
+    }
+
 	
 
 /*********************************************************************************/

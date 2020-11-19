@@ -108,7 +108,7 @@
     </div>
 </div>
 <div id="wrapper1">
-        <div class="title2">
+        <div class="title2" style="padding: 3px; margin: 3px">
             <h2 style="color:#000000">歷史留言紀錄</h2>
         </div>
 </div>
@@ -213,7 +213,7 @@
         </div>
         <div class="box2">
             <h2><span class="icon icon-briefcase"></span>資料來源</h2>
-            <p><a href="https://dataportal.asia/home">亞洲公開資料數據集</a>
+            <p><a href="https://dataportal.asia/home">亞洲公開資料數據集</a></p>
         </div>
     </div>
 </div>
