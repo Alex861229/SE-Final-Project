@@ -94,7 +94,7 @@
                 <td style="width: 25%;">bbbbb</td>
                 <td style="width: 25%;">abc@gmail.com</td>
                 <td style="width: 25%;">
-                    <button type="button" class="edit_button">編輯</button>
+                    <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
             </tr>
@@ -103,7 +103,7 @@
                 <td style="width: 25%;">bbbbb</td>
                 <td style="width: 25%;">abc@gmail.com</td>
                 <td style="width: 25%;">
-                    <button type="button" class="edit_button">編輯</button>
+                    <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
             </tr>
@@ -112,7 +112,7 @@
                 <td style="width: 25%;">bbbbb</td>
                 <td style="width: 25%;">abc@gmail.com</td>
                 <td style="width: 25%;">
-                    <button type="button" class="edit_button">編輯</button>
+                    <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
             </tr>
@@ -121,7 +121,7 @@
                 <td style="width: 25%;">bbbbb</td>
                 <td style="width: 25%;">abc@gmail.com</td>
                 <td style="width: 25%;">
-                    <button type="button" class="edit_button">編輯</button>
+                    <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
             </tr>
@@ -130,7 +130,7 @@
                 <td style="width: 25%;">bbbbb</td>
                 <td style="width: 25%;">abc@gmail.com</td>
                 <td style="width: 25%;">
-                    <button type="button" class="edit_button">編輯</button>
+                    <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
             </tr>
@@ -139,7 +139,7 @@
                 <td style="width: 25%;">bbbbb</td>
                 <td style="width: 25%;">abc@gmail.com</td>
                 <td style="width: 25%;">
-                    <button type="button" class="edit_button">編輯</button>
+                    <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
             </tr>
@@ -148,7 +148,7 @@
                 <td style="width: 25%;">bbbbb</td>
                 <td style="width: 25%;">abc@gmail.com</td>
                 <td style="width: 25%;">
-                    <button type="button" class="edit_button">編輯</button>
+                    <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
             </tr>
@@ -157,7 +157,7 @@
                 <td style="width: 25%;">bbbbb</td>
                 <td style="width: 25%;">abc@gmail.com</td>
                 <td style="width: 25%;">
-                    <button type="button" class="edit_button">編輯</button>
+                    <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
             </tr>
@@ -166,7 +166,7 @@
                 <td style="width: 25%;">bbbbb</td>
                 <td style="width: 25%;">abc@gmail.com</td>
                 <td style="width: 25%;">
-                    <button type="button" class="edit_button">編輯</button>
+                    <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
             </tr>
@@ -175,7 +175,7 @@
                 <td style="width: 25%;">bbbbb</td>
                 <td style="width: 25%;">abc@gmail.com</td>
                 <td style="width: 25%;">
-                    <button type="button" class="edit_button">編輯</button>
+                    <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
             </tr>
@@ -184,7 +184,7 @@
                 <td style="width: 25%;">bbbbb</td>
                 <td style="width: 25%;">abc@gmail.com</td>
                 <td style="width: 25%;">
-                    <button type="button" class="edit_button">編輯</button>
+                    <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
             </tr>
@@ -193,7 +193,7 @@
                 <td style="width: 25%;">bbbbb</td>
                 <td style="width: 25%;">abc@gmail.com</td>
                 <td style="width: 25%;">
-                    <button type="button" class="edit_button">編輯</button>
+                    <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
             </tr>
@@ -202,7 +202,7 @@
                 <td style="width: 25%;">bbbbb</td>
                 <td style="width: 25%;">abc@gmail.com</td>
                 <td style="width: 25%;">
-                    <button type="button" class="edit_button">編輯</button>
+                    <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
             </tr>
@@ -211,7 +211,7 @@
                 <td style="width: 25%;">bbbbb</td>
                 <td style="width: 25%;">abc@gmail.com</td>
                 <td style="width: 25%;">
-                    <button type="button" class="edit_button">編輯</button>
+                    <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
             </tr>
@@ -220,7 +220,7 @@
                 <td style="width: 25%;">bbbbb</td>
                 <td style="width: 25%;">abc@gmail.com</td>
                 <td style="width: 25%;">
-                    <button type="button" class="edit_button">編輯</button>
+                    <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
             </tr>
@@ -229,7 +229,7 @@
                 <td style="width: 25%;">bbbbb</td>
                 <td style="width: 25%;">abc@gmail.com</td>
                 <td style="width: 25%;">
-                    <button type="button" class="edit_button">編輯</button>
+                    <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
             </tr>
@@ -238,7 +238,7 @@
                 <td style="width: 25%;">bbbbb</td>
                 <td style="width: 25%;">abc@gmail.com</td>
                 <td style="width: 25%;">
-                    <button type="button" class="edit_button">編輯</button>
+                    <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
             </tr>
@@ -247,7 +247,7 @@
                 <td style="width: 25%;">bbbbb</td>
                 <td style="width: 25%;">abc@gmail.com</td>
                 <td style="width: 25%;">
-                    <button type="button" class="edit_button">編輯</button>
+                    <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
             </tr>
@@ -256,7 +256,7 @@
                 <td style="width: 25%;">bbbbb</td>
                 <td style="width: 25%;">abc@gmail.com</td>
                 <td style="width: 25%;">
-                    <button type="button" class="edit_button">編輯</button>
+                    <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
                     <button type="button" class="delete_button">刪除</button>                       
                 </td>
             </tr>
@@ -290,6 +290,79 @@
             <p><a href="https://dataportal.asia/home">亞洲公開資料數據集</a>
         </div>
     </div>
+</div>
+<div class="modal fade" id="addModal" role="dialog" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!-- 編輯Modal content-->
+        <div class="modal-content">                                                    
+            <div class="modal-header">
+                <table>
+                    <tr>
+                        <td>
+                            <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px">編輯會員</h5>
+                        </td>
+                        <td style="width: 500px">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modal_close1">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        <div class="modal-body">
+            <form id="activity-form-edit" enctype="multipart/form-data">
+                <table align="center" id="add_table">
+                        <div class = "modal-body-body">   
+                            <br>        
+                            <div style="padding-left: 50px"><h3><b>輸入資訊</b></h3></div>
+                            <tr>
+                                <td style="padding-right: 50px " required="required">帳號</td>
+                                <td>
+                                    <input class="add_bar" name='account' required="required">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-right: 50px " required="required">密碼</td>
+                                <td>
+                                    <input class="add_bar" name='password' required="required">
+                                </td>  
+                            </tr>
+                            <tr>
+                                <td style="padding-right: 50px " required="required">密碼確認</td>
+                                <td>
+                                    <input class="add_bar" name='password2' required="required">
+                                </td>  
+                            </tr>
+                            <tr>
+                                <td style="padding-right: 50px " required="required">使用者名稱</td>
+                                <td>
+                                    <input class="add_bar" name='name' required="required">
+                                </td>  
+                            </tr>
+                            <tr>
+                                <td style="padding-right: 50px " required="required">信箱</td>
+                                <td>
+                                    <input class="add_bar" name='email' required="required">
+                                </td>  
+                            </tr>
+                        </div>    
+                </table>
+                <table align="center" id="pic_table">
+                    <tr>
+                        <td>
+                            <div class="addpic">上傳個人照片</div>
+                                <input type="file" id="progressbarTWInput" name = "picture" accept="image/*" / >
+                        </td>    
+                    </tr>
+                </table>  
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="submit" value="送出" class="btn btn-primary" >
+        </div>                                        
+        </form>
+    </div>
+    </div>
+</div>
 </div>
 @endsection 
 
