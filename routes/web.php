@@ -25,3 +25,31 @@ Route::get('/admin', function () {
 });
 
 
+
+Route::get('/test', function () {
+    return view('test_welcome');
+});
+
+// ========================================== Auth ==========================================
+// Auth::routes();
+// Custom Auth Route
+// Authentication Routes...
+
+// 註冊
+
+Route::get('/register', function () {
+    return view('test_register');
+});
+Route::post('/register', 'UserController@register');
+
+// 登入
+Route::get('/login', function () {
+    return view('test_login');
+});
+Route::post('/login', 'UserController@login');
+
+// 登出
+
+Route::group(['before'=>'auth'], function(){
+	Route::get('/logout', 'UserController@logout');
+});
