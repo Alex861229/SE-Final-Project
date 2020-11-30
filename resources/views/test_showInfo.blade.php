@@ -7,6 +7,37 @@
 <!-- Bootstrap -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+@can('member')
+<table class="table content-table" align="center">
+    <thead>
+        <tr>
+            <th scope="col">頭貼</th>
+            <th scope="col">姓名</th>
+            <th scope="col">帳號</th>
+            <th scope="col">信箱</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <img width="30%" src="{{ asset($users->avatar) }}">
+            </td>
+            <td>
+                <span style="color:#4F4F4F;" >{{ $users->name }}</span>
+            </td>
+
+            <td>
+                <span style="color:#4F4F4F;" >{{ $users->account }}</span>
+            </td>
+
+            <td>
+                <span style="color:#4F4F4F;" >{{ $users->email }}</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+@endcan
+
 @can('admin')
 <table class="table content-table" align="center">
     <thead>
@@ -55,7 +86,7 @@
 </table>
 @endcan
 
-@canany(['admin', 'user'])
+@can('admin')
 <!-- 修改個人資料 -->
 <div class="modal fade" id="editInfo" role="dialog" tabindex="-1" role="dialog" aria-labelledby="editInfoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -178,4 +209,4 @@
     </div>
 </div>
 </div>
-@endcanany
+@endcan

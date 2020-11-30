@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         // 一般使用者 Gate 規則
-        Gate::define('user', function ($user) {
+        Gate::define('member', function ($user) {
             return $user->isAdmin === User::ROLE_USER;
         });
     }

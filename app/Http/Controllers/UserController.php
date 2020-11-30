@@ -179,7 +179,7 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    public function ResetPassword(Request $request, $user_id)
+    public function resetPassword(Request $request, $user_id)
     {
         $validator = Validator::make($request->all(),[
             'new_password' => ['required', 'string', 'min:6'],

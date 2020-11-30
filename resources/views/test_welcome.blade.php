@@ -12,7 +12,7 @@
 
 	    Welcome to Laravel <br><br>
 
-	    @canany(['admin', 'user'])
+	    @canany(['admin', 'member'])
 		
 			@can('admin')
 
@@ -51,7 +51,7 @@
 
 </body>
 
-@canany(['admin', 'user'])
+@canany(['admin', 'member'])
 <!-- 修改個人資料 -->
 <div class="modal fade" id="editInfo" role="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
