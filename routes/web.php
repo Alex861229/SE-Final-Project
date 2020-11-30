@@ -26,9 +26,7 @@ Route::get('/admin', function () {
 
 
 
-Route::get('/test', function () {
-    return view('test_welcome');
-});
+Route::get('/test', 'UserController@welcome');
 
 // ========================================== Auth ==========================================
 // Auth::routes();
@@ -36,7 +34,6 @@ Route::get('/test', function () {
 // Authentication Routes...
 
 // 註冊
-
 Route::get('/register', function () {
     return view('test_register');
 });
@@ -48,8 +45,19 @@ Route::get('/login', function () {
 });
 Route::post('/login', 'UserController@login');
 
-// 登出
-
-Route::group(['before'=>'auth'], function(){
+// 需登入後才能執行
+Route::group(['middleware' => 'auth'], function() {
+	// 登出
 	Route::get('/logout', 'UserController@logout');
+	// 顯示個人資料
+	Route::get('/showInfo/{user_id}', 'UserController@showInfo');
+	// 修改個人資料
+	Route::put('/updateInfo/{user_id}', 'UserController@updateInfo');
+	// 重製密碼
+	Route::put('/resetPassword/{user_id}', 'UserController@resetPassword');
+	// 修改密碼
+	Route::put('/updatePassword/{user_id}', 'UserController@updatePassword');
+	// 刪除帳戶
+	Route::delete('/{user_id}/deleteAccount', 'UserController@deleteAccount');
 });
+

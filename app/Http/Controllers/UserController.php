@@ -13,6 +13,19 @@ use Auth;
 
 class UserController extends Controller
 {
+	public function welcome()
+	{
+		if (Auth::check()) {
+
+			$user = Auth::user(); 
+
+			return view('test_welcome', compact('user'));
+		
+		}
+
+		return view('test_welcome');
+	}
+
     public function register(Request $request)
     {
     	$this->middleware('guest');
@@ -46,7 +59,7 @@ class UserController extends Controller
                 $path = public_path($folder_name);
                 $name = 'avatar_'.$user->id.'.'.$avatar_file->getClientOriginalExtension();
                 $avatar_file->move($path, $name);
-                $user->avatar = $path;
+                $user->avatar = '/'.$folder_name.'/'.$name;
             }
             $user->save();
 
@@ -56,7 +69,7 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-    	// $this->middleware('guest');
+    	$this->middleware('guest');
 
         $validator = Validator::make($request->all(),[
             'account' => ['required', 'string'],
@@ -69,12 +82,12 @@ class UserController extends Controller
 
         } else {
 
-            if (\Auth::attempt([
+            if (Auth::attempt([
                 'account' => $request->account,
                 'password' => $request->password
             ])){
 
-                return redirect('/');
+            	return redirect('test');
             
             } else {
 
@@ -87,101 +100,127 @@ class UserController extends Controller
 
 		Auth::logout();
 
-		return redirect('/');
+		return redirect()->back();
 
 	}
 
-    // public function update(Request $request, $user_id)
-    // {
-    // 	$this->middleware('auth');
-    //     $this->validate($request, [
-    //         'name' => ['required', 'string'],
-    //         'birthday' => ['required', 'date_format:Y-m-d'],
-    //         'email' => ['required', 'email'],
-    //         'city_id' => ['required'],
-    //         'district_id' => ['required'],
-    //         //'avatar' => ['image', 'max:1024'],
-    //         'status' => ['in:0,1'],
-    //     ]);
-    //     $avatar_file = $request->file('avatar');
-    //     $user = User
-    //         ::where('id', $user_id)
-    //         ->first();
-    //     if (!$user) {
-    //         return response()->json(null, 404);
-    //     }
-    //     $result = $user->update($request->only([
-    //         'name',
-    //         'birthday',
-    //         'email',
-    //         'city_id',
-    //         'district_id',
-    //         'status',
-    //     ]));
-    //     if ($avatar_file) {
-    //         $folder_name = 'members';
-    //         $path = public_path($folder_name);
-    //         $name = 'avatar_'.$user->id.'.'.$avatar_file->getClientOriginalExtension();
-    //         $avatar_file->move($path, $name);
-    //         $user->avatar = '/'.$folder_name.'/'.$name;
-    //         $user->save();
-    //     }
+	public function showInfo($user_id) {
 
-    //     return response()->json($user);
-    // }
+		// 判斷User是否存在
+		$user = User::find($user_id);
 
-    // public function deleteByAccount(Request $request, $account)
-    // {   
-    //     $user = User
-    //         ::where('account', $account)
-    //         ->first();
-    //     $deleted = false;
-    //     if ($user) {
-    //         $deleted = $user->forceDelete();
-    //     }
-    //     if ($deleted) {
-    //         return response()->json([
-    //             'deleted' => true,
-    //         ]);
-    //     }
-    //     return response()->json(null, 400);
-    // }
+		if ($user) {
+			// 判斷是否為Admin
 
-    // public function ResetPassword(Request $request, $user_id)
-    // {
-    //     $this->validate($request, [
-    //         'new_password' => ['required', 'string'],
-    //         'check_new_password' => ['required', 'string'],
-    //     ]);
+			if (User::isAdmin()) {
+				$users = User::getAllMemberInfo();
+			
+			} else {
+				$users = User::getOneMemberInfo($user_id);
+			} 
 
-    //     $user = User::where('id', $user_id)
-    //             ->first();
+			return view('test_showInfo', compact('users'));
+		
+		} else {
 
-    //     if ($user) {
-    //         $user->password = $request->input('new_password');
-    //         $user->save();
-    //         return response()->json('OK',200);
-    //     } else {
-    //         return '此帳號尚未註冊';
-    //     }
-    // }
+			return redirect()->back();
+		}
 
-    // public function ModifyPassword(Request $request, $user_id)
-    // {
-    //     $this->validate($request, [
-    //         'old_password' => ['required', 'string'],
-    //         'new_password' => ['required', 'string'],
-    //     ]);
+		
+	}
 
-    //     $user = User::where('id', $user_id)
-    //             ->first();
+    public function updateInfo(Request $request, $user_id)
+    {
+    	$this->middleware('auth');
+        Log::info('updateInfo',$request -> input());
 
-    //     if ($user && password_verify($request->input('old_password'), $user->password)) {
-    //         $user->password = $request->input('new_password');
-    //         $user->save();
-    //         return response()->json('OK',200);
-    //     } else {
-    //         return 'failed';
-    //     }
-    // }
+        $validator = Validator::make($request->all(), [
+            'name' => 'nullable|string',
+            'email' => 'nullable|email',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+
+            return redirect()->back()->withErrors($validator);
+
+        } else {
+
+	        $input = array_filter(request()->except(['_token','_method']));
+
+            $user = User::find($user_id);
+
+            $user->update($input);
+            
+            if ($request->hasFile('avatar')) {
+
+            	\File::delete(public_path($user->avatar));
+
+            	$avatar_file = $request->file('avatar');
+                $folder_name = 'members';
+                $path = public_path($folder_name);
+                $name = 'avatar_'.$user_id.'_'.$avatar_file->getClientOriginalName();
+                $avatar_file->move($path, $name);
+                $user->avatar = '/'.$folder_name.'/'.$name;
+                $user->save();
+            }
+            
+        }
+
+        return redirect()->back();
+    }
+
+    public function deleteAccount($user_id)
+    {   
+        $user = User::findOrFail($user_id);
+
+    	$user->delete();
+
+        return redirect()->back();
+    }
+
+    public function ResetPassword(Request $request, $user_id)
+    {
+        $validator = Validator::make($request->all(),[
+            'new_password' => ['required', 'string', 'min:6'],
+            'check_new_password' => ['required', 'same:new_password', 'string', 'min:6'],
+        ]);
+
+        if ($validator->fails()) {
+
+            return redirect()->back()->withErrors($validator);
+
+        } else {
+
+            $user = User::find($user_id);
+            
+            $user->update([
+                'password'=> $request->new_password
+            ]);
+
+            $user->save();
+
+            return redirect('test');
+        }
+    }
+
+    public function updatePassword(Request $request, $user_id)
+    {
+        $this->validate($request, [
+            'old_password' => ['required', 'string'],
+            'new_password' => ['required', 'string'],
+            'check_new_password' => ['required', 'same:new_password', 'string', 'min:6'],
+        ]);
+
+        $user = User::where('id', $user_id)
+                ->first();
+
+        if ($user && password_verify($request->input('old_password'), $user->password)) {
+            $user->password = Hash::make($request->input('new_password'));
+            $user->save();
+            return redirect()->back();
+        } else {
+            return 'failed';
+        }
+    }
 }
