@@ -6,54 +6,58 @@
 
 <!-- Bootstrap -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<body>
-	
-	<div class="content">
 
-	    Welcome to Laravel <br><br>
+@can('admin')
+<table class="table content-table" align="center">
+    <thead>
+        <tr>
+            <th scope="col">姓名</th>
+            <th scope="col">帳號</th>
+            <th scope="col">信箱</th>
+            <th scope="col">修改個人資料</th>
+            <th scope="col">重製密碼</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($users as $user)
+        <tr>
+            <td>
+                <span style="color:#4F4F4F;" >{{ $user->name }}</span>
+            </td>
 
-	    @canany(['admin', 'user'])
-		
-			@can('admin')
+            <td>
+                <span style="color:#4F4F4F;" >{{ $user->account }}</span>
+            </td>
 
-		    <!-- 系統管理者 --> 
-		    Hi Admin! <br><br>
-		    
-		    @endcan
+            <td>
+                <span style="color:#4F4F4F;" >{{ $user->email }}</span>
+            </td>
 
-		    <a href="{{ url('showInfo/'.$user->id) }}"> 顯示個人資料 </a><br><br>
+            <td>
+                <button data-toggle="modal" data-target="#editInfo">修改個人資料</button>
+            </td>
 
-		    <button data-toggle="modal" data-target="#editInfo">修改資料</button></li><br><br>
+            <td>
+                <button data-toggle="modal" data-target="#resetPassword">重製密碼</button>
+            </td>
 
-            <button data-toggle="modal" data-target="#updatePassword">修改密碼</button></li><br><br>
-
-		    <a href="{{ url('logout') }}"> 登出 </a>
-		
-		@else
-		    <!-- 訪客 -->
-		    <a href="{{ url('login') }}"> 登入 </a> <br><br>
-
-			<a href="{{ url('register') }}"> 註冊 </a>
-		@endcanany
-
-	</div>
-
-	@if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <strong>上傳失敗！</strong>檔案出現以下問題：
-        <ul class="mb-0">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-
-</body>
+            <td>
+                <form action="{{ url($user->id.'/deleteAccount') }}" method="post">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="submit" role="btn" class="btn bnt-danger" value="刪除" onClick="return confirm('確定要刪除嗎？');">
+                </form>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+@endcan
 
 @canany(['admin', 'user'])
 <!-- 修改個人資料 -->
-<div class="modal fade" id="editInfo" role="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="editInfo" role="dialog" tabindex="-1" role="dialog" aria-labelledby="editInfoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <!-- 編輯Modal content-->
         <div class="modal-content">                                                    
@@ -73,8 +77,8 @@
             </div>
         <div class="modal-body">
             <form id="activity-form-edit" action="{{ url('updateInfo/'.$user->id) }}" method="post" enctype="multipart/form-data">
-				@csrf
-		        <input type="hidden" name="_method" id="method" value="PUT">
+                @csrf
+                <input type="hidden" name="_method" id="method" value="PUT">
                 <table align="center" id="add_table">
                     <div class = "modal-body-body">   
                         <tr>
@@ -98,26 +102,27 @@
                     </div>    
                 </table>     
                 <div class="modal-footer">
-		            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		            <input type="submit" value="送出" class="btn btn-primary" >
-		        </div>                           
-        	</form>
-        	@if (count($errors) > 0)
-		    <div class="alert alert-danger">
-		        <strong>上傳失敗！</strong>檔案出現以下問題：
-		        <ul class="mb-0">
-		            @foreach ($errors->all() as $error)
-		                <li>{{ $error }}</li>
-		            @endforeach
-		        </ul>
-		    </div>
-		    @endif
-    	</div>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" value="送出" class="btn btn-primary" >
+                </div>                           
+            </form>
+            @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <strong>上傳失敗！</strong>檔案出現以下問題：
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+        </div>
     </div>
 </div>
 </div>
-<!-- 修改密碼 -->
-<div class="modal fade" id="updatePassword" role="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+<!-- 重製密碼 -->
+<div class="modal fade" id="resetPassword" role="dialog" tabindex="-1" role="dialog" aria-labelledby="resetPasswordLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <!-- 編輯Modal content-->
         <div class="modal-content">                                                    
@@ -125,7 +130,7 @@
                 <table>
                     <tr>
                         <td>
-                            <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px">修改密碼</h5>
+                            <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px">重製密碼</h5>
                         </td>
                         <td style="width: 500px">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modal_close1">
@@ -136,17 +141,11 @@
                 </table>
             </div>
         <div class="modal-body">
-            <form id="activity-form-edit" action="{{ url('updatePassword/'.$user->id) }}" method="post" enctype="multipart/form-data">
+            <form id="activity-form-edit" action="{{ url('/resetPassword/'.$user->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="_method" id="method" value="PUT">
                 <table align="center" id="add_table">
                     <div class = "modal-body-body">   
-                        <tr>
-                            <td style="padding-right: 50px " >輸入舊密碼</td>
-                            <td>
-                                <input type="password" name="old_password">
-                            </td>  
-                        </tr>
                         <tr>
                             <td style="padding-right: 50px " >新密碼</td>
                             <td>
@@ -168,7 +167,6 @@
             </form>
             @if (count($errors) > 0)
             <div class="alert alert-danger">
-                <strong>上傳失敗！</strong>檔案出現以下問題：
                 <ul class="mb-0">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>

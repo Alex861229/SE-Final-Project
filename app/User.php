@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+use Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -18,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'account','name', 'email', 'password','role'
+        'account','name', 'email', 'password','isAdmin'
     ];
 
     /**
@@ -30,13 +31,22 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function isAdmin(){
+    public static function isAdmin(){
 
         if(Auth::user()){
 
             $rs = User::where('id', Auth::user()->id)->value('isAdmin');
             return $rs == '1' ? true : false;
-        
         }
+    }
+
+    public static function getAllMemberInfo () {
+
+        return User::select('id','name','account','email')->get();
+    }
+
+    public static function getOneMemberInfo ($user_id) {
+
+        return User::find($user_id);
     }
 }
