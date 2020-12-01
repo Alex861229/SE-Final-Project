@@ -66,7 +66,10 @@
             </td>
 
             <td>
-                <button data-toggle="modal" data-target="#editInfo">修改個人資料</button>
+                <form action="{{ url('updateInfo/'.$user->id) }}" method="GET">
+                    <button type="button" class="edit_button" data-toggle="modal" data-target="{{'#updateInfo/'.$user->id}}" id="edit-Info-{{$user->id}}">修改個人資料</button> 
+                </form>
+                <!-- <button data-toggle="modal" data-target="#editInfo">修改個人資料</button> -->
             </td>
 
             <td>
@@ -88,7 +91,7 @@
 
 @can('admin')
 <!-- 修改個人資料 -->
-<div class="modal fade" id="editInfo" role="dialog" tabindex="-1" role="dialog" aria-labelledby="editInfoLabel" aria-hidden="true">
+<div class="modal fade" id="{{'updateInfo/'.$user->id}}" role="dialog" tabindex="-1" role="dialog" aria-labelledby="editInfoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <!-- 編輯Modal content-->
         <div class="modal-content">                                                    

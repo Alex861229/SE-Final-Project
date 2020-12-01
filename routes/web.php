@@ -33,17 +33,19 @@ Route::get('/test', 'UserController@welcome');
 // Custom Auth Route
 // Authentication Routes...
 
-// 註冊
-Route::get('/register', function () {
-    return view('test_register');
-});
-Route::post('/register', 'UserController@register');
+Route::group(['middleware' => 'guest'], function() {
+	// 註冊
+	Route::get('/register', function () {
+	    return view('test_register');
+	});
+	Route::post('/register', 'UserController@register');
 
-// 登入
-Route::get('/login', function () {
-    return view('test_login');
+	// 登入
+	Route::get('/login', function () {
+	    return view('test_login');
+	});
+	Route::post('/login', 'UserController@login');
 });
-Route::post('/login', 'UserController@login');
 
 // 需登入後才能執行
 Route::group(['middleware' => 'auth'], function() {
