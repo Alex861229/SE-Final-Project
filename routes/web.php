@@ -54,6 +54,8 @@ Route::group(['middleware' => 'auth'], function() {
 	// 顯示個人資料
 	Route::get('/showInfo/{user_id}', 'UserController@showInfo');
 	// 修改個人資料
+	Route::get('/updateInfo/{user_id}', 'UserController@updateInfoModal');
+	// 修改個人資料
 	Route::put('/updateInfo/{user_id}', 'UserController@updateInfo');
 	// 重製密碼
 	Route::put('/resetPassword/{user_id}', 'UserController@resetPassword');
@@ -61,5 +63,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::put('/updatePassword/{user_id}', 'UserController@updatePassword');
 	// 刪除帳戶
 	Route::delete('/{user_id}/deleteAccount', 'UserController@deleteAccount');
+
+	Route::resource('user', 'UserController');
 });
 

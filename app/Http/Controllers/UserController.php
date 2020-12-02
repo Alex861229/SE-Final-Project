@@ -125,9 +125,12 @@ class UserController extends Controller
 
 			return redirect()->back();
 		}
-
-		
 	}
+
+    public function show($class)
+    {
+        return redirect()->back();
+    }
 
     public function updateInfo(Request $request, $user_id)
     {
