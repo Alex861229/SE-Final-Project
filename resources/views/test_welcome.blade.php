@@ -27,10 +27,16 @@
 
             <button data-toggle="modal" data-target="#updatePassword">修改密碼</button></li><br><br>
 
-		    <a href="{{ url('logout') }}"> 登出 </a>
+            @can('member')
+            
+            <a href="{{ url('message') }}"> 進入留言頁 </a><br><br>
+
+            @endcan
+
+            <a href="{{ url('logout') }}"> 登出 </a>		
 		
-		@else
-		    <!-- 訪客 -->
+        @else
+            <!-- 訪客 -->
 		    <a href="{{ url('login') }}"> 登入 </a> <br><br>
 
 			<a href="{{ url('register') }}"> 註冊 </a>

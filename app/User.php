@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Message;
 
 class User extends Authenticatable
 {
@@ -48,5 +49,11 @@ class User extends Authenticatable
     public static function getOneMemberInfo ($user_id) {
 
         return User::find($user_id);
+    }
+    
+    // 可以取得該User的所有message。
+    public function messages(){
+
+        return $this->hasMany('App\Message');
     }
 }

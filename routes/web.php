@@ -67,3 +67,19 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::resource('user', 'UserController');
 });
 
+// 不需登入：留言功能
+// 顯示所有留言
+Route::get('/message', 'MsgController@index');
+// 查看留言詳情
+Route::get('/message/{msg_id}', 'MsgController@show');
+
+// 需登入：留言功能
+Route::group(['middleware' => 'auth'], function() {
+    // 新增留言
+    Route::post('/message', 'MsgController@store');
+    // 刪除留言
+    Route::delete('/message/{msg_id}', 'MsgController@destroy');
+    // 編輯留言
+    Route::get('/message/{msg_id}/edit','MsgController@edit');
+    Route::patch('message/{msg_id}', 'MsgController@update');
+});
