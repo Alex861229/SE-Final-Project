@@ -65,6 +65,7 @@
         </tbody>
     </table><br><br><br><br><br><br><br><br><br><br>
 
+    @can('member')
     <h1>新增留言</h1>
     <div>
         <!-- 送出留言 -->
@@ -76,4 +77,5 @@
             <button type="submit">留言</button>
         </form>
     </div>
+    @endcan
 </body>
