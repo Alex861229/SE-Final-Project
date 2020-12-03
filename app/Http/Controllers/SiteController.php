@@ -35,13 +35,13 @@ class SiteController extends Controller
 
         	if ($country == 'tw') {
 
+                $search_address = TaiwanSite::
+                            where('address', 'like', '%'.$request->search.'%')->get();
+
         		$search_name = TaiwanSite::
         					where('name', 'like', '%'.$request->search.'%')->get();
 
-        		$search_address = TaiwanSite::
-        					where('address', 'like', '%'.$request->search.'%')->get();
-
-        		$sites = $search_name->merge($search_address);
+        		$sites = $search_address->merge($search_name);
 
         		$sites = $sites->take(10);
 
@@ -62,19 +62,21 @@ class SiteController extends Controller
 
             if ($country == 'tw') {
 
-                $messages = TaiwanMessage::where('id', $site_id)
+                $site = TaiwanSite::find($site_id);
+                $messages = TaiwanMessage::where('site_id', $site_id)
                                 ->orderBy('created_at', 'desc')
                                 ->get();
 
-                return view('msg_test', compact('user','messages','country'));
+                return view('test_search_result_message', compact('user','messages','country','site'));
             
             } else {
 
-                $messages = KoreaMessage::where('id', $site_id)
+                $site = KoreaSite::find($site_id);
+                $messages = KoreaMessage::where('site_id', $site_id)
                                 ->orderBy('created_at', 'desc')
                                 ->get();
 
-                return view('msg_test', compact('user','messages','country'));
+                return view('test_search_result_message', compact('user','messages','country','site'));
             }
 			
 		
@@ -82,19 +84,21 @@ class SiteController extends Controller
 
             if ($country == 'tw') {
 
-                $messages = TaiwanMessage::where('id', $site_id)
+                $site = TaiwanSite::find($site_id);
+                $messages = TaiwanMessage::where('site_id', $site_id)
                                 ->orderBy('created_at', 'desc')
                                 ->get();
 
-                return view('msg_test', compact('messages','country'));
+                return view('test_search_result_message', compact('messages','country','site'));
             
             } else {
 
-                $messages = KoreaMessage::where('id', $site_id)
+                $site = KoreaSite::find($site_id);
+                $messages = KoreaMessage::where('site_id', $site_id)
                                 ->orderBy('created_at', 'desc')
                                 ->get();
 
-                return view('msg_test', compact('messages','country'));
+                return view('test_search_result_message', compact('messages','country','site'));
             }
         }
     }

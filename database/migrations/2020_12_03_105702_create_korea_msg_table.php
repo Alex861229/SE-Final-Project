@@ -17,7 +17,6 @@ class CreateKoreaMsgTable extends Migration
             $table->increments('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('site_id');
-            $table->string('title', 100);
             $table->string('content', 500);
             $table->bigInteger('rating');
             $table->timestamps();
