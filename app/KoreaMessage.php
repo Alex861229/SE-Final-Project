@@ -7,7 +7,7 @@ use App\User;
 
 class TaiwanMessage extends Model
 {
-    protected $table = 'taiwan_messages';
+    protected $table = 'korea_messages';
     protected $fillable = [
         'user_id', 'site_id', 'content', 'rating'
     ];
@@ -17,10 +17,10 @@ class TaiwanMessage extends Model
     {
         return $this->belongsTo('App\User','user_id');
     }
-    
+
     // 取得此篇message所評論的Site_id
     public function site()
     {
-        return $this->belongsTo('App\TaiwanSite','user_id');
+        return $this->belongsTo('App\KoreaSite','user_id');
     }
 }

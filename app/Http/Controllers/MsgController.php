@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Message;
+use App\KoreaMessage;
+use App\TaiwanMessage;
 use App\User;
 
 class MsgController extends Controller
@@ -15,34 +16,50 @@ class MsgController extends Controller
     //     $this->middleware('auth');
     // }
     // 顯示所有留言
-    public function index()
-    {
-        $messages = Message::with('user')->get();
-        return view('msg_test')->with('messages',$messages);
-    }
-    // 查看詳細留言
-    public function show(Message $msg_id) 
-    {
-        return view('msg_detail',[
-            'message' => $msg_id,
-        ]);  
-    }
+    // public function index()
+    // {
+    //     $messages = Message::with('user')->get();
+    //     return view('msg_test')->with('messages',$messages);
+    // }
     // 新增留言
-    public function store(Request $request) 
+    public function store(Request $request, $country, $site_id) 
     {
-        $this->validate($request, [
-                'title' => 'required|string|max:191',
-                'content' => 'nullable|string|max:191',
-                'rating' => 'required|integer',
-            ]);
-        // laravel為relationship提供create方法,會接收一個陣列並自動設置foreign key, 使用$request->user()得到目前的使用者,會被create自動填入user_id
-        $request->user()->messages()->create([
-                'title' => $request->title,
-                'content' => $request->content,
-                'rating' => $request->rating,
-            ]);
+        $validator = Validator::make($request->all(),[
+            'content' => 'nullable|string|max:191',
+            'rating' => 'required|integer',
+        ]);
         
-            return redirect('/message');
+        if ($validator->fails()) {
+
+            return redirect()->back()->withErrors($validator);
+
+        } else {
+
+        	if ($country == 'tw') {
+            
+                // laravel為relationship提供create方法,會接收一個陣列並自動設置foreign key, 使用$request->user()得到目前的使用者,會被create自動填入user_id
+                $request->user()->messages()->TaiwanMessage::create([
+                    'site_id' => $site_id,
+                    'title' => $request->title,
+                    'content' => $request->content,
+                    'rating' => $request->rating,
+                ]);
+        
+                return redirect('/tw/{site_id}');
+
+        	} else {
+
+                // laravel為relationship提供create方法,會接收一個陣列並自動設置foreign key, 使用$request->user()得到目前的使用者,會被create自動填入user_id
+                $request->user()->messages()->KoreaMessage::create([
+                    'site_id' => $site_id,
+                    'title' => $request->title,
+                    'content' => $request->content,
+                    'rating' => $request->rating,
+                ]);
+        
+                return redirect('/kr/{site_id}');
+        	}
+        }
     }
     // 刪除留言
     public function destroy(Request $request, Message $msg_id)

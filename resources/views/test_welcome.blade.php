@@ -29,7 +29,7 @@
 
             @can('member')
             
-            <a href="{{ url('message') }}"> 進入留言頁 </a><br><br>
+            <a href="{{ url('/message/{user_id}') }}"> 編輯個人留言 </a><br><br>
 
             @endcan
 
