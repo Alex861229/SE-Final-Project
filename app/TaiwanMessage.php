@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 
-class Message extends Model
+class TaiwanMessage extends Model
 {
-    protected $table = 'messages';
+    protected $table = 'taiwan_messages';
     protected $fillable = [
-        'user_id', 'title', 'content', 'rating'
+        'user_id', 'site_id', 'title', 'content', 'rating'
     ];
 
     // 取得此篇message撰寫之user

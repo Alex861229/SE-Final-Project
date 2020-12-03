@@ -25,8 +25,11 @@ Route::get('/admin', function () {
 });
 
 
-
+//  Cheng
 Route::get('/test', 'UserController@welcome');
+Route::get('/search', 'SiteController@index');
+Route::get('/search/result', 'SiteController@search');
+Route::get('/search/{country}/{site_id}/message', 'SiteController@siteAllMsg');
 
 // ========================================== Auth ==========================================
 // Auth::routes();
@@ -63,8 +66,6 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::put('/updatePassword/{user_id}', 'UserController@updatePassword');
 	// 刪除帳戶
 	Route::delete('/{user_id}/deleteAccount', 'UserController@deleteAccount');
-
-	Route::resource('user', 'UserController');
 });
 
 // 不需登入：留言功能

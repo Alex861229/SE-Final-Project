@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTwTable extends Migration
+class CreateKoreaSiteTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,20 @@ class CreateTwTable extends Migration
      */
     public function up()
     {
-        Schema::create('tw_table', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('korea_site', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('name', 100);
             $table->string('description', 5000);
             $table->string('address', 1000);
             $table->decimal('longitude', 10, 5);
             $table->decimal('latitude', 10, 5);
             $table->string('parkinginfo', 100);
-            $table->string('ticketinfo', 100);
+            $table->string('public_facility', 1000);
+            $table->string('accommodation', 1000);
+            $table->string('sports_facility', 1000);
+            $table->string('entertainment_facility', 1000);
+            $table->string('support_facility', 1000);
+            $table->string('name_kr', 100);
         });
     }
 
@@ -32,7 +37,7 @@ class CreateTwTable extends Migration
      */
     public function down()
     {
-        Schema::table('tw_table', function (Blueprint $table) {
+        Schema::table('korea_site', function (Blueprint $table) {
             //
         });
     }
