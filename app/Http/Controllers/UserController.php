@@ -133,7 +133,7 @@ class UserController extends Controller
     }
 
     public function updateInfo(Request $request, $user_id)
-    {
+    {        
     	$this->middleware('auth');
         Log::info('updateInfo',$request -> input());
 

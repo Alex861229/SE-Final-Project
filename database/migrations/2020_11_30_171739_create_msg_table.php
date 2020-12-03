@@ -16,8 +16,7 @@ class CreateMsgTable extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('title', 100);
-            $table->string('content', 500);
+            $table->string('content', 500) ->nullable();
             $table->bigInteger('rating');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
