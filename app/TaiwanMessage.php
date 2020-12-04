@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use App\TaiwanSite;
 
 class TaiwanMessage extends Model
 {
@@ -21,6 +22,6 @@ class TaiwanMessage extends Model
     // 取得此篇message所評論的Site_id
     public function site()
     {
-        return $this->belongsTo('App\TaiwanSite','user_id');
+        return $this->belongsTo('App\TaiwanSite','site_id');
     }
 }

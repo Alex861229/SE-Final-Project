@@ -79,7 +79,7 @@ Route::group(['middleware' => 'auth'], function() {
 	// // 顯示該名User的所有留言
 	// Route::get('/message/{user_id}', 'MsgController@index_user');
 	// 新增留言
-    Route::post('/{country}/{site_id}', 'MsgController@store');
+    Route::post('/search/{country}/{site_id}/message', 'MsgController@store');
     // 刪除留言
     // Route::delete('/{country}/{msg_id}', 'MsgController@destroy'); 
     // // 編輯留言

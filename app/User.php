@@ -5,7 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Message;
+use App\TaiwanMessage;
+use App\KoreaMessage;
 
 class User extends Authenticatable
 {
@@ -51,9 +52,15 @@ class User extends Authenticatable
         return User::find($user_id);
     }
     
-    // 可以取得該User的所有message。
-    public function messages(){
+    // 可以取得該User對TW景點的所有message。
+    public function twMessages(){
 
-        return $this->hasMany('App\Message');
+        return $this->hasMany('App\TaiwanMessage');
+    }
+
+    // 可以取得該User對KR景點的所有message。
+    public function krMessages(){
+
+        return $this->hasMany('App\KoreaMessage');
     }
 }
