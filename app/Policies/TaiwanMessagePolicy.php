@@ -3,10 +3,9 @@
 namespace App\Policies;
 
 use App\User;
-use App\Message;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class MessagePolicy
+class TaiwanMessagePolicy
 {
     use HandlesAuthorization;
 
@@ -19,10 +18,12 @@ class MessagePolicy
     {
         //
     }
+
     public function destroy(User $user, Message $message)
     {
         return $user->id === $message->user_id;
     }
+    
     public function edit(User $user, Message $message)
     {
         return $user->id === $message->user_id;

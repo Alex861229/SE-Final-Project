@@ -70,17 +70,19 @@ Route::group(['middleware' => 'auth'], function() {
 
 // 不需登入：留言功能
 // 顯示所有留言
-Route::get('/message', 'MsgController@index');
+// Route::get('/{country}/{site_id}', 'MsgController@index');
 // 查看留言詳情
-Route::get('/message/{msg_id}', 'MsgController@show');
+// Route::get('/{country}/{site_id}/{msg_id}', 'MsgController@show'); 
 
 // 需登入：留言功能
 Route::group(['middleware' => 'auth'], function() {
-    // 新增留言
-    Route::post('/message', 'MsgController@store');
+	// // 顯示該名User的所有留言
+	// Route::get('/message/{user_id}', 'MsgController@index_user');
+	// 新增留言
+    Route::post('/search/{country}/{site_id}/message', 'MsgController@store');
     // 刪除留言
-    Route::delete('/message/{msg_id}', 'MsgController@destroy');
-    // 編輯留言
-    Route::get('/message/{msg_id}/edit','MsgController@edit');
-    Route::patch('message/{msg_id}', 'MsgController@update');
+    // Route::delete('/{country}/{msg_id}', 'MsgController@destroy'); 
+    // // 編輯留言
+    // Route::get('/{country}/{msg_id}/edit','MsgController@edit');
+    // Route::patch('/{country}/{msg_id}', 'MsgController@update');
 });

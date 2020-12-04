@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
-use App\TaiwanSite;
+use App\KoreaSite;
 
-class TaiwanMessage extends Model
+class KoreaMessage extends Model
 {
-    protected $table = 'taiwan_messages';
+    protected $table = 'korea_messages';
     protected $fillable = [
         'user_id', 'site_id', 'content', 'rating'
     ];
@@ -18,10 +18,10 @@ class TaiwanMessage extends Model
     {
         return $this->belongsTo('App\User','user_id');
     }
-    
+
     // 取得此篇message所評論的Site_id
     public function site()
     {
-        return $this->belongsTo('App\TaiwanSite','site_id');
+        return $this->belongsTo('App\KoreaSite','site_id');
     }
 }
