@@ -74,9 +74,23 @@
         <div id="logo">
             <img src="{{ asset('css/images/logo.jpg') }}" width="200px" height="200px">
         </div>    
-        <div id="name_edit" style="text-align:center; "> 
-            <li class="uname" value="Alex" style="list-style-type: none; ">Alex</li>
-            <li class="edt_bt" style="list-style-type: none; "><button type="button" class="editf" data-toggle="modal" data-target="#editfModal" >編輯</button></li>  
+        <div id="name_edit" style="text-align:center; ">    
+            <li class="uname" value="name" style="list-style-type: none; ">{{ $user->name }}</li> 
+            <table align="center">
+                <tr >
+                    <td>        
+                        <li class="edt_bt" style="list-style-type: none; "><button type="button" class="editf" data-toggle="modal" data-target="#editInfo" >編輯資料</button></li>
+                    </td>
+                    <td>        
+                        <li class="edt_bt" style="list-style-type: none; "><button type="button" class="editf" data-toggle="modal" data-target="#updatePassword" >編輯密碼</button></li>
+                    </td>
+                    <td>    
+                        @can('admin')
+                        <li class="adm_bt" style="list-style-type: none; "><button type="button" onclick="location.href='{{ url('admin/'.$user->id) }}'" >管理員頁面</button></li>
+                        @endcan
+                    </td>
+                </tr>
+            </table>             
         </div>
     </div>
 </div>
@@ -250,7 +264,8 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="editfModal" role="dialog" tabindex="-1" role="dialog" aria-labelledby="editfModalLabel" aria-hidden="true">
+<!-- 修改個人資料 -->
+<div class="modal fade" id="editInfo" role="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <!-- 編輯Modal content-->
         <div class="modal-content">                                                    
@@ -258,7 +273,7 @@
                 <table>
                     <tr>
                         <td>
-                            <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px">註冊帳號</h5>
+                            <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px">修改資料</h5>
                         </td>
                         <td style="width: 500px">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modal_close1">
@@ -269,54 +284,116 @@
                 </table>
             </div>
         <div class="modal-body">
-            <form id="activity-form-edit" enctype="multipart/form-data">
+            <form id="activity-form-edit" action="{{ url('updateInfo/'.$user->id) }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="_method" id="method" value="PUT">
                 <table align="center" id="add_table">
-                        <div class = "modal-body-body">   
-                            <br>        
-                            <div style="padding-left: 50px"><h3><b>輸入資訊</b></h3></div>
-                            <tr>
-                                <td style="padding-right: 50px " required="required">密碼</td>
-                                <td>
-                                    <input class="add_bar" name='password' required="required">
-                                </td>  
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 50px " required="required">密碼確認</td>
-                                <td>
-                                    <input class="add_bar" name='password2' required="required">
-                                </td>  
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 50px " required="required">使用者名稱</td>
-                                <td>
-                                    <input class="add_bar" name='name' required="required">
-                                </td>  
-                            </tr>
-                            <tr>
-                                <td style="padding-right: 50px " required="required">信箱</td>
-                                <td>
-                                    <input class="add_bar" name='email' required="required">
-                                </td>  
-                            </tr>
-                        </div>    
-                </table>
-                <table align="center" id="pic_table">
+                    <div class = "modal-body-body">   
+                        <tr>
+                            <td style="padding-right: 50px " >使用者名稱</td>
+                            <td>
+                                <input class="add_bar" name='name'>
+                            </td>  
+                        </tr>
+                        <tr>
+                            <td style="padding-right: 50px " >信箱</td>
+                            <td>
+                                <input class="add_bar" name='email'>
+                            </td>  
+                        </tr>
+                        <tr>
+                            <td style="padding-right: 50px " >上傳個人照片</td>
+                            <td>
+                                <input type="file" name="avatar">
+                            </td>  
+                        </tr>
+                    </div>    
+                </table>     
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" value="送出" class="btn btn-primary" >
+                </div>                           
+            </form>
+            @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <strong>上傳失敗！</strong>檔案出現以下問題：
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- 修改密碼 -->
+<div class="modal fade" id="updatePassword" role="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!-- 編輯Modal content-->
+        <div class="modal-content">                                                    
+            <div class="modal-header">
+                <table>
                     <tr>
                         <td>
-                            <div class="addpic">上傳個人照片</div>
-                                <input type="file" id="progressbarTWInput" name = "picture" accept="image/*" / >
-                        </td>    
+                            <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px">修改密碼</h5>
+                        </td>
+                        <td style="width: 500px">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modal_close1">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </td>
                     </tr>
-                </table>  
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <input type="submit" value="送出" class="btn btn-primary" >
-        </div>                                        
-        </form>
-    </div>
+                </table>
+            </div>
+        <div class="modal-body">
+            <form id="activity-form-edit" action="{{ url('updatePassword/'.$user->id) }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="_method" id="method" value="PUT">
+                <table align="center" id="add_table">
+                    <div class = "modal-body-body">   
+                        <tr>
+                            <td style="padding-right: 50px " >輸入舊密碼</td>
+                            <td>
+                                <input type="password" name="old_password">
+                            </td>  
+                        </tr>
+                        <tr>
+                            <td style="padding-right: 50px " >新密碼</td>
+                            <td>
+                                <input type="password" name="new_password">
+                            </td>  
+                        </tr>
+                        <tr>
+                            <td style="padding-right: 50px " >確認新密碼</td>
+                            <td>
+                                <input type="password" name="check_new_password">
+                            </td>  
+                        </tr>
+                    </div>    
+                </table>     
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" value="送出" class="btn btn-primary" >
+                </div>                           
+            </form>
+            @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <strong>上傳失敗！</strong>檔案出現以下問題：
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+        </div>
     </div>
 </div>
 </div>
+
 <div class="modal fade" id="addModal" role="dialog" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <!-- 編輯Modal content-->

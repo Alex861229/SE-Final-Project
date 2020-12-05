@@ -11,22 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/user', function () {
-    return view('user');
-});
+
 Route::get('/message', function () {
     return view('message');
 });
-Route::get('/admin', function () {
-    return view('admin');
-});
+
 
 
 //  Cheng
-Route::get('/test', 'UserController@welcome');
+Route::get('/', 'UserController@welcome');
+Route::get('/user', 'UserController@user');
 Route::get('/search', 'SiteController@index');
 Route::get('/search/result', 'SiteController@search');
 Route::get('/search/{country}/{site_id}/message', 'SiteController@siteAllMsg');
@@ -45,7 +39,7 @@ Route::group(['middleware' => 'guest'], function() {
 
 	// 登入
 	Route::get('/login', function () {
-	    return view('test_login');
+	    return view('welcome');
 	});
 	Route::post('/login', 'UserController@login');
 });
@@ -55,7 +49,7 @@ Route::group(['middleware' => 'auth'], function() {
 	// 登出
 	Route::get('/logout', 'UserController@logout');
 	// 顯示個人資料
-	Route::get('/showInfo/{user_id}', 'UserController@showInfo');
+	Route::get('/admin/{user_id}', 'UserController@showInfo');
 	// 修改個人資料
 	Route::get('/updateInfo/{user_id}', 'UserController@updateInfoModal');
 	// 修改個人資料
