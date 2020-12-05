@@ -22,6 +22,7 @@ class CreateTaiwanSiteTable extends Migration
             $table->decimal('latitude', 10, 5);
             $table->string('parkinginfo', 100);
             $table->string('ticketinfo', 100);
+            $table->decimal('avg_rating', 2, 1)->nullable();
         });
     }
 
