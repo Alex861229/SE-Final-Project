@@ -27,6 +27,7 @@ class CreateKoreaSiteTable extends Migration
             $table->string('entertainment_facility', 1000);
             $table->string('support_facility', 1000);
             $table->decimal('avg_rating', 2, 1)->nullable();
+            $table->bigInteger('total_comments')->nullable();
             $table->string('name_kr', 100);
         });
     }

@@ -75,8 +75,8 @@ Route::group(['middleware' => 'auth'], function() {
 	// 顯示該名User的所有留言
 	Route::get('/message', 'MsgController@index');
     // 刪除留言
-    Route::delete('/message/{country}/{msg_id}', 'MsgController@destroy'); 
+	Route::delete('/message/{country}/{msg_id}', 'MsgController@destroy');
     // 編輯留言
     Route::get('/message/{country}/{msg_id}/edit','MsgController@edit');
-    Route::patch('/message/{country}/{msg_id}', 'MsgController@update');
+	Route::patch('/message/{country}/{msg_id}', 'MsgController@update');
 });
