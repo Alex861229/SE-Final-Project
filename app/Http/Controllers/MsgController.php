@@ -30,7 +30,6 @@ class MsgController extends Controller
 
         $id = Auth::id();
         
-        
         if ($validator->fails()) {
 
             return redirect()->back()->withErrors($validator);
@@ -45,7 +44,7 @@ class MsgController extends Controller
                     'content' => $request->content,
                     'rating' => $request->rating,
                 ]);
-                
+
         	} else {
 
                 $KrMessages = DB::table('korea_messages')->insert([
@@ -55,6 +54,10 @@ class MsgController extends Controller
                     'rating' => $request->rating,
                 ]);
             }
+            
+            // 更新留言的平均評分和評分個數
+            $this->updateRating($request, $country, $site_id); 
+            
             return redirect()->back();
         }
     }
@@ -72,18 +75,25 @@ class MsgController extends Controller
         if ($country == 'tw') {
             $TwMessages = TaiwanMessage::findOrFail($msg_id);
             $TwMessages->delete();
+            $site_id = $TwMessages->site_id;
         
         } else {
             $KrMessages = KoreaMessage::findOrFail($msg_id);
             $KrMessages->delete();
+            $site_id = $KrMessages->site_id;
 
         }
+        
+        // 更新留言的平均評分和評分個數
+        $this->updateRating($request, $country, $site_id); 
+        
         return redirect()->back(); 
     }
     // 編輯留言
     public function edit($country, $msg_id)
     {
         if ($country == 'tw') {
+
             $TwMessage = TaiwanMessage::where('id', $msg_id)->first();
             $site = TaiwanSite::find($TwMessage['site_id']);
             return view('msg_edit', compact('TwMessage','country','msg_id', 'site'));
@@ -92,7 +102,7 @@ class MsgController extends Controller
             $KrMessage = KoreaMessage::where('id', $msg_id)->first();
             $site = KoreaSite::find($KrMessage['site_id']);
             return view('msg_edit', compact('KrMessage','country', 'msg_id', 'site'));    
-        }   
+        }
     }
     public function update(Request $request, $country, $msg_id) 
     {
@@ -107,67 +117,49 @@ class MsgController extends Controller
 
         } else {
             if ($country == 'tw') {
-                $site_id = DB::table('taiwan_messages')->where('id', $msg_id)->value('site_id');
-                $new_message = DB::table('taiwan_messages')
-                    ->where('id', $msg_id)
-                    ->update([
-                        'content' => $request->content,
-                        'rating' => $request->rating,
-                    ]);
-                
-            } else {
-                $site_id = DB::table('korea_messages')->where('id', $msg_id)->value('site_id');
-                $new_message = DB::table('korea_messages')
-                    ->where('id', $msg_id)
-                    ->update([
-                        'content' => $request->content,
-                        'rating' => $request->rating,
-                    ]);
+                $messages_table = 'taiwan_messages';
                     
+            } else { 
+                $messages_table = 'korea_messages';
+
             }
+            // 更新Message
+            $new_message = DB::table($messages_table)
+                ->where('id', $msg_id)
+                ->update([
+                    'content' => $request->content,
+                    'rating' => $request->rating,
+                ]); 
+            
+            // 更新留言的平均評分和評分個數
+            $message = DB::table($messages_table)->where('id', $msg_id)->first();
+            $site_id = $message->site_id;
+            $this->updateRating($request, $country, $site_id); 
+            
             return redirect('/message');
-            // return redirect('/message')
-            //     ->action('MsgController@updateRating', [
-            //         'request' => $request,
-            //         'country' => $country,
-            //         'site_id' => $site_id,
-            //         'msg_id' => $msg_id,
-            //         'method' => 'update',
-            //     ]);
         }      
     }
     // 更新留言的平均評分和評分個數
-    public function updateRating(Request $request, $country, $site_id, $msg_id, $method) 
+    public function updateRating(Request $request, $country, $site_id) 
     {
         if ($country == 'tw') {
-            $site = TaiwanSite::find($site_id);
-            $cur_rating = DB::table('taiwan_messages')->where('id', $msg_id)->value('rating');            
-        } else {
-            $site = KoreaSite::find($site_id);
-            $cur_rating = DB::table('korea_messages')->where('id', $msg_id)->value('rating');    
-        }
-                
-        if ($method == 'store') {
-            $new_total_comments = $site['total_comments'] + 1;
-            $new_avg_rating = ($site['avg_rating']*$site['total_comments'] + $request['rating']) / $new_total_comments;
+            $site_table = 'taiwan_site';
+            $messages_table = 'taiwan_messages';
 
-        } elseif($method == 'destroy') {
-            $new_total_comments = $site['total_comments'] - 1;
-            $new_avg_rating = ($site['avg_rating']*$site['total_comments'] - cur_rating) / $new_total_comments;
-            
-        } else {
-            $new_avg_rating = ($site['avg_rating']*$site['total_comments'] - cur_rating + $request['rating']) / $site['total_comments'];
-        }
+        } else {  
+            $site_table = 'korea_site';
+            $messages_table = 'korea_messages';
 
-        if ($country == 'tw') {
-            $new_Site = DB::table('taiwan_site')
-                ->where('id', $site_id)
-                ->update(['avg_rating' => $new_avg_rating, 'total_comments' => $new_total_comments]);       
-        } else {
-            $new_Site = DB::table('korea_site')
-                ->where('id', $site_id)
-                ->update(['avg_rating' => $new_avg_rating, 'total_comments' => $new_total_comments]);       
-             
         }
+        $new_avg_rating = DB::table($messages_table)
+                ->where('site_id', $site_id)
+                ->avg('rating');
+        $new_total_comments = DB::table($messages_table)
+            ->where('site_id', $site_id)
+            ->count('rating');
+        
+        $new_site = DB::table($site_table)
+            ->where('id', $site_id)
+            ->update(['avg_rating' => $new_avg_rating, 'total_comments' => $new_total_comments]); 
     }
 }
