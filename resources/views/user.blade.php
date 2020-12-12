@@ -72,7 +72,7 @@
 <div id="header-wrapper">
     <div id="header" class="container">
         <div id="logo">
-            <img src="{{ asset('css/images/logo.jpg') }}" width="200px" height="200px">
+            <img src="{{ asset('/member/'.$user->avatar) }}" width="200px" height="200px">
         </div>    
         <div id="name_edit" style="text-align:center; ">    
             <li class="uname" value="name" style="list-style-type: none; ">{{ $user->name }}</li> 
@@ -103,136 +103,36 @@
 <div id="wrapper2">
     <div id="portfolio" class="container" style="padding: 5px">
         <table class="comment" style="border:3px #cccccc solid; text-align:center; width: 100%; border-radius: 5px; " align="center" cellpadding="10" border='1'>
-            <tr style="background-color: #BEBEBE">
-                <td style="width: 10%">日期</td>
-                <td style="width: 20%;">景點</td>
-                <td width="50%">
-                    評論                      
-                </td>
-                <td style="width: 10%;">評分</td>
-                <td style="width: 10%"></td>
-            </tr>
-            <tr>
-                <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">中央大學</td>
-                <td width="50%">
-                    HTML 網頁設計不可或缺的元素就是表格（Table），通常表格用來做版面的排版，而表格的用法包含了幾個重要的標籤，分別是 table、tr 與 td 這幾個重點，組合起來才是個完整的表格，以下做個簡單的表格範例。
-                    <br>
-                </td>    
-                <td style="width: 10%;">5</td>
-                <td style="width: 10%">
-                    <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
-                    <button type="button" class="delete_button">刪除</button>                       
-                </td>
-            </tr>
-           <tr>
-                <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">中央大學</td>
-                <td width="50%">
-                    不錯的地方
-                </td>
-                <td style="width: 10%;">5</td>
-                <td style="width: 10%">    
-                    <button type="button" class="edit_button">編輯</button>
-                    <button type="button" class="delete_button">刪除</button>                       
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">中央大學</td>
-                <td width="50%">
-                    不錯的地方
-                </td>
-                <td style="width: 10%;">5</td>
-                <td style="width: 10%">    
-                    <button type="button" class="edit_button">編輯</button>
-                    <button type="button" class="delete_button">刪除</button>                       
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">中央大學</td>
-                <td width="50%">
-                    不錯的地方
-                </td>
-                <td style="width: 10%;">5</td>
-                <td style="width: 10%">    
-                    <button type="button" class="edit_button">編輯</button>
-                    <button type="button" class="delete_button">刪除</button>                       
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">中央大學</td>
-                <td width="50%">
-                    不錯的地方
-                </td>
-                <td style="width: 10%;">5</td>
-                <td style="width: 10%">    
-                    <button type="button" class="edit_button">編輯</button>
-                    <button type="button" class="delete_button">刪除</button>                       
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">中央大學</td>
-                <td width="50%">
-                    不錯的地方
-                </td>
-                <td style="width: 10%;">5</td>
-                <td style="width: 10%">    
-                    <button type="button" class="edit_button">編輯</button>
-                    <button type="button" class="delete_button">刪除</button>                       
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">中央大學</td>
-                <td width="50%">
-                    不錯的地方
-                </td>
-                <td style="width: 10%;">5</td>
-                <td style="width: 10%">    
-                    <button type="button" class="edit_button">編輯</button>
-                    <button type="button" class="delete_button">刪除</button>                       
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">中央大學</td>
-                <td width="50%">
-                    不錯的地方
-                </td>
-                <td style="width: 10%;">5</td>
-                <td style="width: 10%">    
-                    <button type="button" class="edit_button">編輯</button>
-                    <button type="button" class="delete_button">刪除</button>                       
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">中央大學</td>
-                <td width="50%">
-                    不錯的地方
-                </td>
-                <td style="width: 10%;">5</td>
-                <td style="width: 10%">    
-                    <button type="button" class="edit_button">編輯</button>
-                    <button type="button" class="delete_button">刪除</button>                       
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">中央大學</td>
-                <td width="50%">
-                    不錯的地方
-                </td>
-                <td style="width: 10%;">5</td>
-                <td style="width: 10%">    
-                    <button type="button" class="edit_button">編輯</button>
-                    <button type="button" class="delete_button">刪除</button>                       
-                </td>
-            </tr>     
+            <thead>
+                <tr style="background-color: #BEBEBE">
+                    <td style="width: 20%">標題</td>
+                    <td style="width: 10%;">評分</td>
+                    <td width="40%">
+                        評論                      
+                    </td>
+                    <td style="width: 10%;">評論日期</td>
+                    <td style="width: 10%">修改日期</td>
+                    <td style="width: 10%"></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($messages as $message)    
+                <tr>
+                    <td style="width: 10%">{{ $message -> title }}</td>
+                    <td style="width: 20%;">{{ $message -> content }}</td>
+                    <td width="50%">
+                        {{ $message -> rating }}
+                        <br>
+                    </td>    
+                    <td style="width: 10%;">{{ $message -> created_at }}</td>
+                    <td style="width: 10%;">{{ $message -> updated_at }}</td>
+                    <td style="width: 10%">
+                        <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
+                        <button type="button" class="delete_button">刪除</button>                       
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
         </table>
         <div align="center" id="page" style="font-weight: bold; padding: 20px">
              <div class="page-icon">

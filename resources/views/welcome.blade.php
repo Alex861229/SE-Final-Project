@@ -66,7 +66,11 @@ Released   : 20131203
         </div>    
         <div id="search" style="text-align:center; ">    
             <span class="icon"><i class="fa fa-search"></i></span>
-            <input type="search" id="search" placeholder="Search..." / style="width: 800px; height: 40px; border-radius:15px;"> 
+            <form action="{{ url('search/result') }}" method="get">
+                <input type="radio" name="country" value="tw" checked>台灣
+                <input type="radio" name="country" value="kr">韓國
+                <input type="text" class="form-controller" id="search" name="search"></input>
+            </form> 
         </div>
     </div>
 </div>

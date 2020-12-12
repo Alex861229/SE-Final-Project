@@ -30,7 +30,9 @@ class UserController extends Controller
         if (Auth::check()) {
 
             $user = Auth::user(); 
-
+            $id = Auth::id();
+            $TwMessages = TaiwanMessage::where('user_id', $id)->with('user')->with('site')->get();
+            $KrMessages = KoreaMessage::where('user_id', $id)->with('user')->with('site')->get();;
             return view('user', compact('user'));
         
         }

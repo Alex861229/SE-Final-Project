@@ -12,9 +12,6 @@
 */
 
 
-Route::get('/message', function () {
-    return view('message');
-});
 
 
 
