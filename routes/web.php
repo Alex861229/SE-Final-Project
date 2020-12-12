@@ -64,13 +64,13 @@ Route::group(['middleware' => 'auth'], function() {
 
 // 需登入：留言功能
 Route::group(['middleware' => 'auth'], function() {
-	// 新增留言
-	Route::post('/search/{country}/{site_id}/message', 'MsgController@store');
 	// 顯示該名User的所有留言
 	Route::get('/message', 'MsgController@index');
+	// 新增留言
+	Route::post('/search/{country}/{site_id}/message', 'MsgController@store');
     // 刪除留言
-    Route::delete('/message/{country}/{msg_id}', 'MsgController@destroy'); 
+	Route::delete('/message/{country}/{msg_id}', 'MsgController@destroy');
     // 編輯留言
     Route::get('/message/{country}/{msg_id}/edit','MsgController@edit');
-    Route::patch('/message/{country}/{msg_id}', 'MsgController@update');
+	Route::patch('/message/{country}/{msg_id}', 'MsgController@update');
 });
