@@ -85,31 +85,37 @@
 <div id="header-wrapper">
     <div id="header" class="container">
         <div id="logo">
-            中央大學
+            {{ $site->name }}
         </div>    
         <table class="intro" style="border:3px #cccccc solid; text-align:center; width: 100%; border-radius: 5px; " align="center" cellpadding="10" border='1'>
-            <tr>
-                <td style="width: 10%">地點</td>
-                <td width="70%">
-                    HTML 網頁設計不可或缺的元素就是表格（Table），通常表格用來做版面的排版，而表格的用法包含了幾個重要的標籤，分別是 table、tr 與 td 這幾個重點，組合起來才是個完整的表格，以下做個簡單的表格範例。                    
-                </td>
-            </tr>
            <tr>
-                <td style="width: 10%">簡介</td>
+                <td style="width: 10%">地址</td>
                 <td width="70%">
-                    不錯的地方                       
+                    <span style="color:#4F4F4F;" >{{ $site->address }}</span>                       
                 </td>
             </tr>
             <tr>
-                <td style="width: 10%">留言數</td>
+                <td style="width: 10%">描述</td>
                 <td width="70%">
-                    100                      
+                    <span style="color:#4F4F4F;" >{{ $site->description }}</span>                     
                 </td>
             </tr>
             <tr>
-                <td style="width: 10%">外部介紹</td>
+                <td style="width: 10%">停車資訊</td>
                 <td width="70%">
-                    不錯的地方                     
+                    <span style="color:#4F4F4F;" >{{ $site->parkinginfo }}</span>                     
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 10%">總留言數</td>
+                <td width="70%">
+                    <span style="color:#4F4F4F;" >{{ $site->total_comments }}</span>                     
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 10%">平均評分</td>
+                <td width="70%">
+                    <span style="color:#4F4F4F;" >{{ $site->avg_rating }}</span>                     
                 </td>
             </tr>
         </table>    
@@ -124,96 +130,30 @@
 <div id="wrapper2">
     <div id="portfolio" class="container">
         <table class="comment" style="border:3px #cccccc solid; text-align:center; " align="center" cellpadding="10" border='1'>
+            <thead>
             <tr style="background-color: #BEBEBE">
-                <td style="width: 10%">日期</td>
-                <td style="width: 20%;">景點</td>
-                <td width="60%">評論</td>
-                <td style="width: 10%;">評分</td>
+                <td style="width: 10%">留言者</td>
+                <td style="width: 60%;">內容</td>
+                <td style="width: 10%">評分</td>
+                <td style="width: 20%;">時間</td>
             </tr>
+            </thead>
+            <tbody>
+            @foreach ($messages as $message)
             <tr>
-                <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">A</td>
-                <td width="60%">
-                    HTML 網頁設計不可或缺的元素就是表格（Table），通常表格用來做版面的排版，而表格的用法包含了幾個重要的標籤，分別是 table、tr 與 td 這幾個重點，組合起來才是個完整的表格，以下做個簡單的表格範例。
-                </td>
-                <td style="width: 10%;">5</td>
+                <td style="width: 10%">{{ $message->user->name }}</td>
+                <td style="width: 60%;">{{ $message->content }}</td>
+                <td style="width: 10%;">{{ $message->rating }}</td>
+                <td style="width: 20%;">{{ $message->created_at }}</td>
             </tr>
-           <tr>
-                <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">B</td>
-                <td width="60%">
-                    不錯的地方                   
-                </td>
-                <td style="width: 10%;">5</td>
-            </tr>
-            <tr>
-                <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">中央大學</td>
-                <td width="60%">
-                    不錯的地方                   
-                </td>
-                <td style="width: 10%;">5</td>
-            </tr>
-            <tr>
-                <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">中央大學</td>
-                <td width="60%">
-                    不錯的地方                    
-                </td>
-                <td style="width: 10%;">5</td>
-            </tr>
-            <tr>
-                <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">中央大學</td>
-                <td width="60%">
-                    不錯的地方                   
-                </td>
-                <td style="width: 10%;">5</td>
-            </tr>
-            <tr>
-                <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">中央大學</td>
-                <td width="60%">
-                    不錯的地方                      
-                </td>
-                <td style="width: 10%;">5</td>
-            </tr>
-            <tr>
-                <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">中央大學</td>
-                <td width="60%">
-                    不錯的地方                     
-                </td>
-                <td style="width: 10%;">5</td>
-            </tr>
-            <tr>
-                <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">中央大學</td>
-                <td width="60%">
-                    不錯的地方                  
-                </td>
-                <td style="width: 10%;">5</td>
-            </tr>
-            <tr>
-                <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">中央大學</td>
-                <td width="60%">
-                    不錯的地方                      
-                </td>
-                <td style="width: 10%;">5</td>
-            </tr>
-            <tr>
-                <td style="width: 10%">2020/11/12</td>
-                <td style="width: 20%;">中央大學</td>
-                <td width="60%">
-                    不錯的地方                      
-                </td>
-                <td style="width: 10%;">5</td>
-            </tr>     
+            @endforeach
+        </tbody>
         </table>
+        @can('member')
         <div class="m_add" style="padding: 5px">
             <button type="button" class="register" data-toggle="modal" data-target="#addModal" style="background: #ff6816; border-radius: 5px;color: white;">新增留言</button>
-        </div>    
+        </div> 
+        @endcan   
         <div align="center" id="page" style="font-weight: bold; padding: 20px;border-radius: 5px;font-color: #000000">
              <div class="page-icon">
     <span class="page-disabled"><i></i>上一頁</span>
@@ -252,25 +192,26 @@
                 </table>
             </div>
         <div class="modal-body">
-            <form id="activity-form-edit" enctype="multipart/form-data">
+            <form action="{{ url('search/'.$country.'/'.$site->id.'/message') }}" method="POST">
+                {{ csrf_field() }}
                 <table align="center" id="add_table">
                         <div class = "modal-body-body">   
                             <br>        
                             <tr>
                                 <td style="padding-right: 50px " required="required">評論</td>
                                 <td>
-                                    <textarea class="add_word" name='introduce' id="introduce-edit"></textarea> 
+                                    <textarea class="add_word" name='content'></textarea> 
                                 </td>  
                             </tr>
                             <tr>
                             <tr>
                                 <td style="padding-right: 50px " required="required">評分</td>
                                 <td>
-                                    <input type="radio" name="class" >1<br>
-                                    <input type="radio" name="class" >2<br>
-                                    <input type="radio" name="class" >3<br>
-                                    <input type="radio" name="class" >4<br>
-                                    <input type="radio" name="class" >5<br>
+                                    <input type="radio" name="rating" value="1">1<br>
+                                    <input type="radio" name="rating" value="2">2<br>
+                                    <input type="radio" name="rating" value="3">3<br>
+                                    <input type="radio" name="rating" value="4">4<br>
+                                    <input type="radio" name="rating" value="5">5<br>
                                 </td>
                             </tr>
                         </div>    

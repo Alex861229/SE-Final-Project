@@ -19,12 +19,27 @@ class UserController extends Controller
 
 			$user = Auth::user(); 
 
-			return view('test_welcome', compact('user'));
+			return view('welcome', compact('user'));
 		
 		}
 
-		return view('test_welcome');
+		return view('welcome');
 	}
+    public function user()
+    {
+        if (Auth::check()) {
+
+            $user = Auth::user(); 
+            $id = Auth::id();
+            $TwMessages = TaiwanMessage::where('user_id', $id)->with('user')->with('site')->get();
+            $KrMessages = KoreaMessage::where('user_id', $id)->with('user')->with('site')->get();;
+            return view('user', compact('user'));
+        
+        }
+
+        return view('welcome');
+    }
+
 
     public function register(Request $request)
     {
@@ -63,7 +78,7 @@ class UserController extends Controller
             }
             $user->save();
 
-            return view('test_login');
+            return view('welcome');
         }
     }
 
@@ -87,7 +102,7 @@ class UserController extends Controller
                 'password' => $request->password
             ])){
 
-            	return redirect('test');
+            	return redirect('/');
             
             } else {
 
@@ -100,7 +115,7 @@ class UserController extends Controller
 
 		Auth::logout();
 
-		return redirect()->back();
+		return redirect('/');
 
 	}
 
@@ -119,7 +134,7 @@ class UserController extends Controller
 				$users = User::getOneMemberInfo($user_id);
 			} 
 
-			return view('test_showInfo', compact('users'));
+			return view('admin', compact('users'));
 		
 		} else {
 
