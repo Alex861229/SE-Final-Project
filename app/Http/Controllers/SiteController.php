@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Validator;
 
 class SiteController extends Controller
 {
+    public function test () {
+        return TaiwanSite::all();
+    }
+
     public function index (){
 
     	return view('test_search');
@@ -47,10 +51,24 @@ class SiteController extends Controller
 
         		return view('message', compact('sites','country'));
 
+        	} elseif ($country == 'kr')  {
+
+                $search_address = KoreaSite::
+                            where('address', 'like', '%'.$request->search.'%')->get();
+
+                $search_name = KoreaSite::
+                            where('name', 'like', '%'.$request->search.'%')->get();
+
+                $sites = $search_address->merge($search_name);
+
+                $sites = $sites->take(10);
+
+                return view('test_search_result', compact('sites','country'));
+        		
         	} else {
 
-        		return redirect()->back();
-        	}
+                return redirect()->back();
+            }
     	}
     }
 

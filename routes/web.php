@@ -14,6 +14,8 @@
 
 
 
+// Google地圖API
+// Route::get('/getSite', 'SiteController@test');
 
 //  Cheng
 Route::get('/', 'UserController@welcome');
