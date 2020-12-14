@@ -127,11 +127,6 @@ class UserController extends Controller
 		}
 	}
 
-    public function show($class)
-    {
-        return redirect()->back();
-    }
-
     public function updateInfo(Request $request, $user_id)
     {        
     	$this->middleware('auth');

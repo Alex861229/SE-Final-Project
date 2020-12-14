@@ -22,6 +22,7 @@ Released   : 20131203
 <link href="{{asset('css/fonts.css')}}" rel="stylesheet">
 <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,500' rel='stylesheet' type='text/css'>
 <script src="{{ URL::asset('js/jquery-2.1.4.min.js') }}"></script>
+
 <!-- BS JavaScript -->
  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <!-- Latest compiled and minified CSS -->
@@ -67,9 +68,43 @@ Released   : 20131203
 </div>
 <div id="wrapper1">
 <div id="SIDE" >
-    <div id="map" style="padding-right: 80px">
-        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1nRkq3fdSQjFPzKRfoYwKGYbVRhqQo1cP"  width="100%" height="780px"></iframe> 
+    <div class="map" id="app">
+        
+        <p>顯示搜尋結果地圖</p>
+        <!-- 顯示搜尋結果地圖 -->
+        <gmap-map 
+        ref="mapRef"
+        :center="mapCenter"
+        :zoom="10"
+        style="width: 100%; height:440px;"
+        >
+            <gmap-info-window
+                :options="infoWindowOptions"
+                :position="infoWindowPosition"
+                :opened="infoWindowOpened"
+                @closeclick="handleInfoWindowClose"
+            >
+                <div class="info-window">
+                    <h2 v-text="activeRestaurent.latitude"></h2>
+                    <h2 v-text="activeRestaurent.longitude"></h2>
+                    <h2 v-text="activeRestaurent.name"></h2>
+                    <p v-text="activeRestaurent.address"></p>
+                </div>
+            </gmap-info-window>
+            <gmap-marker
+            v-for="(r, index) in restaurents"
+            :key="r.id"
+            :position="getPosition(r)"
+            :clickable="true"
+            :draggable="false"
+            @click="handleMarkerClicked(r);handleNearby(r)"
+            >                        
+            </gmap-marker>                   
+        </gmap-map>
+        
     </div>
+    <!-- Google API -->
+        <script src="{{ mix('js/app.js') }}"></script>
     <div class="t" style="font-size: 48px; text-align: center; padding-right: 50px">
         搜尋附近
     </div>    
