@@ -61,12 +61,20 @@ class MsgController extends Controller
             return redirect()->back();
         }
     }
-    // 顯示該名User的所有留言
+    // 顯示該名User的所有留言、個人資訊
     public function index()
     {
         $id = Auth::id();
-        $TwMessages = TaiwanMessage::where('user_id', $id)->with('user')->with('site')->get();
-        $KrMessages = KoreaMessage::where('user_id', $id)->with('user')->with('site')->get();;
+        $TwMessages = TaiwanMessage::where('user_id', $id)
+                        ->with('user')
+                        ->with('site')
+                        ->get();
+
+        $KrMessages = KoreaMessage::where('user_id', $id)
+                        ->with('user')
+                        ->with('site')
+                        ->get();
+
         return view('msg_test', compact('TwMessages','KrMessages')); 
     }
     // 刪除留言

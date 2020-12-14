@@ -24,6 +24,8 @@ Route::get('/admin', function () {
     return view('admin');
 });
 
+// Google地圖API
+// Route::get('/getSite', 'SiteController@test');
 
 //  Cheng
 Route::get('/test', 'UserController@welcome');
