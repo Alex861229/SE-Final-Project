@@ -11,6 +11,11 @@
 <link href="{{asset('css/fonts.css')}}" rel="stylesheet">
 <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,500' rel='stylesheet' type='text/css'>
 <script src="{{ URL::asset('js/jquery-2.1.4.min.js') }}"></script>
+
+<!-- Test -->
+<script src=//code.jquery.com/jquery-3.5.1.slim.min.js integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin=anonymous></script>
+<!-- Test End -->
+
 <!-- BS JavaScript -->
  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <!-- Latest compiled and minified CSS -->

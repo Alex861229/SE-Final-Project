@@ -38,6 +38,83 @@ class TaiwanMessageTableSeeder extends Seeder
         ]);
 
         DB::table('taiwan_messages')->insert([
+            'user_id' => 1,
+            'site_id' => 2,
+            'content'    => '留言4',
+            'rating' => 5,
+        ]);
+
+        DB::table('taiwan_messages')->insert([
+            'user_id' => 1,
+            'site_id' => 2,
+            'content'    => '留言5',
+            'rating' => 5,
+        ]);
+
+        DB::table('taiwan_messages')->insert([
+            'user_id' => 1,
+            'site_id' => 2,
+            'content'    => '留言6',
+            'rating' => 5,
+        ]);
+
+        DB::table('taiwan_messages')->insert([
+            'user_id' => 1,
+            'site_id' => 2,
+            'content'    => '留言7',
+            'rating' => 5,
+        ]);
+
+        DB::table('taiwan_messages')->insert([
+            'user_id' => 1,
+            'site_id' => 2,
+            'content'    => '留言8',
+            'rating' => 5,
+        ]);
+
+        DB::table('taiwan_messages')->insert([
+            'user_id' => 1,
+            'site_id' => 2,
+            'content'    => '留言9',
+            'rating' => 5,
+        ]);
+
+        DB::table('taiwan_messages')->insert([
+            'user_id' => 1,
+            'site_id' => 2,
+            'content'    => '留言10',
+            'rating' => 5,
+        ]);
+
+        DB::table('taiwan_messages')->insert([
+            'user_id' => 1,
+            'site_id' => 2,
+            'content'    => '留言11',
+            'rating' => 5,
+        ]);
+
+        DB::table('taiwan_messages')->insert([
+            'user_id' => 1,
+            'site_id' => 2,
+            'content'    => '留言12',
+            'rating' => 5,
+        ]);
+
+        DB::table('taiwan_messages')->insert([
+            'user_id' => 1,
+            'site_id' => 2,
+            'content'    => '留言13',
+            'rating' => 5,
+        ]);
+
+        DB::table('taiwan_messages')->insert([
+            'user_id' => 1,
+            'site_id' => 2,
+            'content'    => '留言14',
+            'rating' => 5,
+        ]);
+
+        DB::table('taiwan_messages')->insert([
             'user_id' => 2,
             'site_id' => 2,
             'content'    => '留言A',
