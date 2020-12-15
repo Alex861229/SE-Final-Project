@@ -72,7 +72,7 @@
 <div id="header-wrapper">
     <div id="header" class="container">
         <div id="logo">
-            <img src="{{ asset('/member/'.$user->avatar) }}" width="200px" height="200px">
+            <img src="{{ asset($user->avatar) }}" width="200px" height="200px">
         </div>    
         <div id="name_edit" style="text-align:center; ">    
             <li class="uname" value="name" style="list-style-type: none; ">{{ $user->name }}</li> 
@@ -98,6 +98,13 @@
         <div class="title2" style="padding: 3px; margin: 3px">
             <h2 style="color:#000000;" >歷史留言紀錄</h2>
         </div>
+</div>
+<!-- Cheng 留言分頁 -->
+<div class="tab-head" style="font-family: 微軟正黑體; padding-top: 20px;">
+  <ul class="nav nav-tabs welcome-tab-ul">
+    <li class="{{ Request::is('user/tw') ? 'active' : '' }}"><a href="{{ url('/user/tw') }}"><b>台灣</b></a></li>
+    <li class="{{ Request::is('user/kr') ? 'active' : '' }}"><a href="{{ url('/user/kr') }}"><b>韓國</b></a></li>
+  </ul>
 </div>
 
 <div id="wrapper2">
@@ -135,20 +142,7 @@
             </tbody>
         </table>
         <div align="center" id="page" style="font-weight: bold; padding: 20px">
-             <div class="page-icon">
-    <span class="page-disabled"><i></i>上一頁</span>
-    <span class="page-current">1</span>
-    <a href="#">2</a>
-    <a href="#">3</a>
-    <a href="#">4</a>
-    <a href="#">5</a>
-    <a href="#">6</a>
-    <a href="#">7</a>
-    ……
-    <a href="#">199</a>
-    <a href="#">200</a>
-    <a class="page-next" href="#">下一頁<i></i></a>
-</div>
+            {{ $messages->links() }}
         </div>
     </div>
 </div>

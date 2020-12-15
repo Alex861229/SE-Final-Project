@@ -19,7 +19,8 @@
 
 //  Cheng
 Route::get('/', 'UserController@welcome');
-Route::get('/user', 'UserController@user');
+Route::get('/user', 'UserController@show');
+Route::get('/user/{country}', 'UserController@show');
 Route::get('/search', 'SiteController@index');
 Route::get('/search/result', 'SiteController@search');
 Route::get('/search/{country}/{site_id}/message', 'SiteController@siteAllMsg');

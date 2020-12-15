@@ -44,7 +44,7 @@ class User extends Authenticatable
 
     public static function getAllMemberInfo () {
 
-        return User::select('id','name','account','email')->get();
+        return User::select('id','name','account','email')->orderBy('isAdmin','desc')->paginate(10);
     }
 
     public static function getOneMemberInfo ($user_id) {

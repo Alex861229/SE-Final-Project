@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Exception;
 use App\User;
+use App\KoreaMessage;
+use App\TaiwanMessage;
 use Log;
 use Auth;
 
@@ -25,17 +27,26 @@ class UserController extends Controller
 
 		return view('welcome');
 	}
-    public function user()
-    {
-        if (Auth::check()) {
 
-            $user = Auth::user(); 
-            $id = Auth::id();
-            $TwMessages = TaiwanMessage::where('user_id', $id)->with('user')->with('site')->get();
-            $KrMessages = KoreaMessage::where('user_id', $id)->with('user')->with('site')->get();;
-            return view('user', compact('user'));
-        
+    public function show($country = "tw")
+    {
+        // dd($country);
+
+        // if (Auth::check()) {
+            
+        $user = Auth::user();
+        if ($country == "kr") {
+
+            $messages = KoreaMessage::where('user_id', $user->id)->paginate(10);
+
+        } else if ($country == "tw") {
+
+            $messages = TaiwanMessage::where('user_id', $user->id)->paginate(10);
         }
+        return view('user', compact('messages','user')); 
+        // return view('user', compact('TwMessages','KrMessages','user')); 
+            
+        // }
 
         return view('welcome');
     }
@@ -106,7 +117,7 @@ class UserController extends Controller
             
             } else {
 
-                return redirect('/login');
+                return 'failed';
             }
         }
     }
@@ -125,7 +136,6 @@ class UserController extends Controller
 		$user = User::find($user_id);
 
 		if ($user) {
-			// 判斷是否為Admin
 
 			if (User::isAdmin()) {
 				$users = User::getAllMemberInfo();
