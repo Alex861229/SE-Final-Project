@@ -17,10 +17,10 @@
 // Google地圖API
 // Route::get('/getSite', 'SiteController@test');
 
-//  Cheng
+
 Route::get('/', 'UserController@welcome');
-Route::get('/user', 'UserController@show');
-Route::get('/user/{country}', 'UserController@show');
+
+// 搜尋景點
 Route::get('/search', 'SiteController@index');
 Route::get('/search/result', 'SiteController@search');
 Route::get('/search/{country}/{site_id}/message', 'SiteController@siteAllMsg');
@@ -48,8 +48,13 @@ Route::group(['middleware' => 'guest'], function() {
 Route::group(['middleware' => 'auth'], function() {
 	// 登出
 	Route::get('/logout', 'UserController@logout');
-	// 顯示個人資料
-	Route::get('/admin/{user_id}', 'UserController@showInfo');
+	// 管理員頁面顯示所有帳號
+	Route::get('/admin', 'UserController@showAllMemberInfo');
+	// 管理員搜尋帳號
+	Route::get('/admin/search/account', 'UserController@searchAcount');
+	// 管理員顯示所有留言
+	Route::get('/admin/message/', 'UserController@showAllMessage');
+	Route::get('/admin/message/{country}', 'UserController@showAllMessage');
 	// 修改個人資料
 	Route::get('/updateInfo/{user_id}', 'UserController@updateInfoModal');
 	// 修改個人資料
@@ -60,6 +65,11 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::put('/updatePassword/{user_id}', 'UserController@updatePassword');
 	// 刪除帳戶
 	Route::delete('/{user_id}/deleteAccount', 'UserController@deleteAccount');
+
+	// 顯示用戶頁面，顯示個人資料和留言
+	Route::get('/user', 'UserController@show_member_message');
+	Route::get('/user/{country}', 'UserController@show_member_message');
+
 });
 
 // 需登入：留言功能

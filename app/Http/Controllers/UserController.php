@@ -28,27 +28,27 @@ class UserController extends Controller
 		return view('welcome');
 	}
 
-    public function show($country = "tw")
+    public function show_member_message($country = "tw")
     {
-        // dd($country);
-
-        // if (Auth::check()) {
             
         $user = Auth::user();
+
         if ($country == "kr") {
 
-            $messages = KoreaMessage::where('user_id', $user->id)->paginate(10);
+            $messages = KoreaMessage::where('user_id', $user->id)
+                        ->with('site')
+                        ->paginate(10);
 
         } else if ($country == "tw") {
 
-            $messages = TaiwanMessage::where('user_id', $user->id)->paginate(10);
-        }
-        return view('user', compact('messages','user')); 
-        // return view('user', compact('TwMessages','KrMessages','user')); 
-            
-        // }
+            $messages = TaiwanMessage::where('user_id', $user->id)
+                        ->with('site')
+                        ->paginate(10);
 
-        return view('welcome');
+        }
+
+        dd($messages);
+        return view('user', compact('messages','user')); 
     }
 
 
@@ -130,10 +130,13 @@ class UserController extends Controller
 
 	}
 
-	public function showInfo($user_id) {
+// ------------------------------------- Admin -------------------------------------
+
+    // 顯示所有會員帳號
+	public function showAllMemberInfo() {
 
 		// 判斷User是否存在
-		$user = User::find($user_id);
+		$user = Auth::user();
 
 		if ($user) {
 
@@ -141,7 +144,8 @@ class UserController extends Controller
 				$users = User::getAllMemberInfo();
 			
 			} else {
-				$users = User::getOneMemberInfo($user_id);
+
+				return redirect()->back();
 			} 
 
 			return view('admin', compact('users'));
@@ -151,6 +155,79 @@ class UserController extends Controller
 			return redirect()->back();
 		}
 	}
+
+    // 管理員搜尋帳號
+    public function searchAcount(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'search' => ['required', 'string'],
+        ]);
+
+        if ($validator->fails()) {
+
+            return redirect()->back()->withErrors($validator);
+
+        } else {
+
+            $users = User::where('account', 'like', '%'.$request->search.'%')->paginate(10);
+            
+            return view('admin', compact('users'));
+        }
+    }
+
+    // 顯示所有留言
+    public function showAllMessage()
+    {
+        $user = Auth::user();
+
+        if (User::isAdmin()) {
+            
+            $KoreaMessage = KoreaMessage::paginate(10);
+
+            $TaiwanMessage = TaiwanMessage::paginate(10);
+
+            // $KoreaMessage = DB::table('korea_messages')->get();
+
+            // $messages = DB::table('taiwan_messages')->unionAll($KoreaMessage)->orderBy('created_at','desc')->paginate(10);
+
+            // dd($messages);
+
+            $messages = $KoreaMessage->union($TaiwanMessage)->all();
+
+            // dd($messages);
+            
+            // $messages = collect($messages);
+
+            dd($messages);
+        
+
+            return view('admin_message', compact('messages'));
+
+        } else {
+
+            return redirect()->back();
+        }
+    }
+
+    public function searchMessages(Request $request)
+    {
+        $user = Auth::user();
+
+        if ($country == "kr") {
+
+            $messages = KoreaMessage::where('user_id', $user->id)
+                        ->with('site')
+                        ->paginate(10);
+
+        } else if ($country == "tw") {
+
+            $messages = TaiwanMessage::where('user_id', $user->id)
+                        ->with('site')
+                        ->paginate(10);
+
+        }
+        return view('admin_message', compact('messages'));
+    }
 
     public function updateInfo(Request $request, $user_id)
     {        

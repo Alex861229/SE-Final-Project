@@ -72,10 +72,19 @@
 <div id="header-wrapper">
     <h2 style="color: #ffffff; text-align: center;font-size: 56px ">會員帳號管理</h2>
 </div>
+
+<!-- 顯示所有會員留言 -->
+<div id="wrapper1" align = "center">
+    <br><a href="{{ url('admin/message') }}">顯示所有會員留言</a><br>
+</div>
+<!-- END -->
+
 <div id="wrapper1">
-        <div id="search" style="text-align:center;  padding: 15px ">    
-            <span class="icon"><i class="fa fa-search"></i></span>
-            <input type="search" id="search" placeholder="Search..." / style="width: 400px; height: 30px; border-radius:15px;"> 
+        <div id="search" style="text-align:center;  padding: 15px "> 
+            <form action="{{ url('admin/search/account') }}" method="get">
+                <span class="icon"><i class="fa fa-search"></i></span>
+                <input type="search" id="search" name="search" placeholder="Search account..." / style="width: 400px; height: 30px; border-radius:15px;"> 
+            </form>  
         </div>
 </div>
 
