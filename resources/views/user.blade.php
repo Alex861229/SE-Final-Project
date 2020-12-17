@@ -112,7 +112,7 @@
         <table class="comment" style="border:3px #cccccc solid; text-align:center; width: 100%; border-radius: 5px; " align="center" cellpadding="10" border='1'>
             <thead>
                 <tr style="background-color: #BEBEBE">
-                    <td style="width: 20%">標題</td>
+                    <td style="width: 20%">景點</td>
                     <td style="width: 10%;">評分</td>
                     <td width="40%">
                         評論                      
@@ -125,7 +125,7 @@
             <tbody>
                 @foreach ($messages as $message)    
                 <tr>
-                    <td style="width: 10%">{{ $message -> title }}</td>
+                    <td style="width: 10%">{{ $message -> site -> name }}</td>
                     <td style="width: 20%;">{{ $message -> content }}</td>
                     <td width="50%">
                         {{ $message -> rating }}
