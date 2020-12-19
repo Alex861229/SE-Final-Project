@@ -49,7 +49,7 @@ class SiteController extends Controller
 
         		$sites = $sites->take(10);
 
-        		return view('message', compact('sites','country'));
+        		return view('welcome', compact('sites','country'));
 
         	} elseif ($country == 'kr')  {
 
@@ -63,7 +63,7 @@ class SiteController extends Controller
 
                 $sites = $sites->take(10);
 
-                return view('test_search_result', compact('sites','country'));
+                return view('welcome', compact('sites','country'));
         		
         	} else {
 
@@ -85,7 +85,7 @@ class SiteController extends Controller
                                 ->orderBy('created_at', 'desc')
                                 ->get();
 
-                return view('test_search_result_message', compact('user','messages','country','site'));
+                return view('message', compact('user','messages','country','site'));
             
             } else {
 
@@ -107,7 +107,7 @@ class SiteController extends Controller
                                 ->orderBy('created_at', 'desc')
                                 ->get();
 
-                return view('test_search_result_message', compact('messages','country','site'));
+                return view('message', compact('messages','country','site'));
             
             } else {
 
@@ -116,7 +116,7 @@ class SiteController extends Controller
                                 ->orderBy('created_at', 'desc')
                                 ->get();
 
-                return view('test_search_result_message', compact('messages','country','site'));
+                return view('message', compact('messages','country','site'));
             }
         }
     }

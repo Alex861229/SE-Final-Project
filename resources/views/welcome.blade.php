@@ -155,45 +155,12 @@ Released   : 20131203
                 <td width="200px" style="padding: 5px">編號</td>
                 <td width="1400px" style="padding: 5px">景點</td>
             </tr>
+            @foreach ($sites as $site)
             <tr>
-                <td width="200px" style="padding: 5px">1</td>
-                <td width="1400px" style="padding: 5px">中央大學</td>
+                <td width="200px" style="padding: 5px"><a href = '{{ url('search/'.$country.'/'.$site->id.'/message') }}'>{{$site->name}}</a></td>
+                <td width="1400px" style="padding: 5px">{{$site->address}}</td>
             </tr>
-            <tr>
-                <td width="200px" style="padding: 5px">2</td>
-                <td width="1400px" style="padding: 5px">台灣大學</td>
-            <tr>
-                <td width="200px" style="padding: 5px">3</td>
-                <td width="1400px" style="padding: 5px">清華大學</td>
-            </tr>
-            <tr>
-                <td width="200px" style="padding: 5px">4</td>
-                <td width="1400px" style="padding: 5px">交通大學</td>
-            </tr>
-            <tr>
-                <td width="200px" style="padding: 5px">5</td>
-                <td width="1400px" style="padding: 5px">政治大學</td>
-            </tr>
-            <tr>
-                <td width="200px" style="padding: 5px">6</td>
-                <td width="1400px" style="padding: 5px">成功大學</td>
-            </tr>
-            <tr>
-                <td width="200px" style="padding: 5px">7</td>
-                <td width="1400px" style="padding: 5px">中山大學</td>
-            </tr>
-            <tr>
-                <td width="200px" style="padding: 5px">8</td>
-                <td width="1400px" style="padding: 5px">中興大學</td>
-            </tr>
-            <tr>
-                <td width="200px" style="padding: 5px">9</td>
-                <td width="1400px" style="padding: 5px">中正大學</td>
-            </tr>
-            <tr>
-                <td width="200px" style="padding: 5px">10</td>
-                <td width="1400px" style="padding: 5px">總統府</td>
-            </tr>       
+            @endforeach
         </table>
     </div>
 </div>
