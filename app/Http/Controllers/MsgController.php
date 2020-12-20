@@ -68,12 +68,12 @@ class MsgController extends Controller
         $messages = TaiwanMessage::where('user_id', $id)
                         ->with('user')
                         ->with('site')
-                        ->get();
+                        ->paginate(10);
 
         $messages = KoreaMessage::where('user_id', $id)
                         ->with('user')
                         ->with('site')
-                        ->get();
+                        ->paginate(10);
 
         return view('message', compact('messages')); 
     }

@@ -195,21 +195,8 @@
             <button type="button" class="register" data-toggle="modal" data-target="#addModal" style="background: #ff6816; border-radius: 5px;color: white;">新增留言</button>
         </div> 
         @endcan   
-        <div align="center" id="page" style="font-weight: bold; padding: 20px;border-radius: 5px;font-color: #000000">
-             <div class="page-icon">
-    <span class="page-disabled"><i></i>上一頁</span>
-    <span class="page-current">1</span>
-    <a href="#">2</a>
-    <a href="#">3</a>
-    <a href="#">4</a>
-    <a href="#">5</a>
-    <a href="#">6</a>
-    <a href="#">7</a>
-    ……
-    <a href="#">199</a>
-    <a href="#">200</a>
-    <a class="page-next" href="#">下一頁<i></i></a>
-</div>
+        <div align="center" id="page" style="font-weight: bold; padding: 20px">
+            {{ $messages->links() }}
         </div>
     </div>
 </div>
