@@ -52,7 +52,7 @@ class UserController extends Controller
 
         }
 
-        return view('user', compact('messages','user')); 
+        return view('user', compact('messages','user','country')); 
     }
 
 
