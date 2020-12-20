@@ -107,7 +107,7 @@ class MsgController extends Controller
             $messages = KoreaMessage::where('id', $msg_id)->with('site')->first();    
 
         }
-        return view('msg_edit', compact('messages','country', 'msg_id', 'site'));
+        return view('msg_edit', compact('messages','country', 'msg_id'));
     }
     public function update(Request $request, $country, $msg_id) 
     {
@@ -138,7 +138,7 @@ class MsgController extends Controller
             
             // 更新留言的平均評分和評分個數
             $messages = DB::table($messages_table)->where('id', $msg_id)->first();
-            $site_id = $message->site_id;
+            $site_id = $messages->site_id;
             $this->updateRating($request, $country, $site_id); 
             
             return redirect('/message');
