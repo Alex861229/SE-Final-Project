@@ -13,10 +13,6 @@ use Illuminate\Support\Facades\Validator;
 
 class SiteController extends Controller
 {
-    public function test () {
-        return TaiwanSite::all();
-    }
-
     public function index (){
 
     	return view('test_search');
@@ -94,7 +90,7 @@ class SiteController extends Controller
                                 ->orderBy('created_at', 'desc')
                                 ->get();
 
-                return view('message', compact('user','messages','country','site'));
+                return view('test_search_result_message', compact('user','messages','country','site'));
             }
 			
 		

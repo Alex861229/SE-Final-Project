@@ -14,8 +14,8 @@ use Log;
 use Auth;
 
 class UserController extends Controller
-{
-	public function welcome()
+{    
+    public function welcome()
 	{
 		if (Auth::check()) {
 
@@ -47,7 +47,6 @@ class UserController extends Controller
 
         }
 
-        dd($messages);
         return view('user', compact('messages','user')); 
     }
 
@@ -70,7 +69,7 @@ class UserController extends Controller
             return redirect()->back()->withErrors($validator);
 
         } else {
-
+            
             $user = User::create([
                 'name' => $request['name'],
                 'account' => $request['account'],
@@ -198,7 +197,7 @@ class UserController extends Controller
             
             // $messages = collect($messages);
 
-            dd($messages);
+            // dd($messages);
         
 
             return view('admin_message', compact('messages'));
@@ -246,7 +245,7 @@ class UserController extends Controller
 
         } else {
 
-	        $input = array_filter(request()->except(['_token','_method']));
+            $input = array_filter(request()->except(['_token','_method']));
 
             $user = User::find($user_id);
 
@@ -295,7 +294,7 @@ class UserController extends Controller
             $user = User::find($user_id);
             
             $user->update([
-                'password'=> $request->new_password
+                'password' => $request->new_password,
             ]);
 
             $user->save();
@@ -305,7 +304,7 @@ class UserController extends Controller
     }
 
     public function updatePassword(Request $request, $user_id)
-    {
+    {   
         $this->validate($request, [
             'old_password' => ['required', 'string'],
             'new_password' => ['required', 'string'],
@@ -314,7 +313,7 @@ class UserController extends Controller
 
         $user = User::where('id', $user_id)
                 ->first();
-
+        
         if ($user && password_verify($request->input('old_password'), $user->password)) {
             $user->password = Hash::make($request->input('new_password'));
             $user->save();
