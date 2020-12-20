@@ -17,15 +17,20 @@ class UserController extends Controller
 {    
     public function welcome()
 	{
+        $sites = [];
+        $messages = [];
+
 		if (Auth::check()) {
 
 			$user = Auth::user(); 
+            $sites = [];
+            $messages = [];
 
-			return view('welcome', compact('user'));
+			return view('welcome', compact('user', 'sites','messages'));
 		
 		}
 
-		return view('welcome');
+		return view('welcome', compact('messages','sites'));
 	}
 
     public function show_member_message($country = "tw")
@@ -199,7 +204,6 @@ class UserController extends Controller
 
             // dd($messages);
         
-
             return view('admin_message', compact('messages'));
 
         } else {
