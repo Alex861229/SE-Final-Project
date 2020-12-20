@@ -79,7 +79,7 @@ class SiteController extends Controller
                 $site = TaiwanSite::find($site_id);
                 $messages = TaiwanMessage::where('site_id', $site_id)
                                 ->orderBy('created_at', 'desc')
-                                ->get();
+                                ->paginate(10);
 
                 return view('message', compact('user','messages','country','site'));
             
@@ -88,7 +88,7 @@ class SiteController extends Controller
                 $site = KoreaSite::find($site_id);
                 $messages = KoreaMessage::where('site_id', $site_id)
                                 ->orderBy('created_at', 'desc')
-                                ->get();
+                                ->paginate(10);
 
                 return view('message', compact('user','messages','country','site'));
             }
@@ -101,7 +101,7 @@ class SiteController extends Controller
                 $site = TaiwanSite::find($site_id);
                 $messages = TaiwanMessage::where('site_id', $site_id)
                                 ->orderBy('created_at', 'desc')
-                                ->get();
+                                ->paginate(10);
 
                 return view('message', compact('messages','country','site'));
             
@@ -110,7 +110,7 @@ class SiteController extends Controller
                 $site = KoreaSite::find($site_id);
                 $messages = KoreaMessage::where('site_id', $site_id)
                                 ->orderBy('created_at', 'desc')
-                                ->get();
+                                ->paginate(10);
 
                 return view('message', compact('messages','country','site'));
             }

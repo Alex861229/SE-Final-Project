@@ -136,12 +136,8 @@
                     <td style="width: 10%;">{{ $message -> created_at }}</td>
                     <td style="width: 10%;">{{ $message -> updated_at }}</td>
                     <td style="width: 10%">
-                        <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
-                        <button type="button" class="delete_button">刪除</button>                       
-                    </td>
-
-                    <td>
-                        <div class="modal fade" id="addModal" role="dialog" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+                        <button type="button" class="edit_button" data-toggle="modal" data-target="{{'#addModal'.$message->id}}" id="edit-Info-{{$message->id}}">編輯</button>
+                        <div class="modal fade" id="{{'addModal'.$message->id}}" role="dialog" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <!-- 編輯Modal content-->
                                 <div class="modal-content">                                                    
@@ -149,7 +145,7 @@
                                         <table>
                                             <tr>
                                                 <td style="text-align: center">
-                                                    <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px; font-size: 24px" >新增留言</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px; font-size: 24px" >編輯留言</h5>
                                                 </td>
                                                 <td style="width: 500px">
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modal_close1">
@@ -164,31 +160,82 @@
                                     <form method="POST" action="{{ url('message/tw/'.$message->id) }}">
                                     {{ csrf_field() }}
                                     {{ method_field('PATCH') }}
-                                    Country:{{ $country }}<br><br>
-
-                                    Content:<textarea name="content">{{ $message->content }}</textarea><br><br>
-                                    Rating:<textarea name="rating">{{ $message->rating }}</textarea><br><br>
-                                    <button type="submit">Update</button>
+                                    <table align="center" id="add_table">
+                                        <div class = "modal-body-body">   
+                                        <br>        
+                                            <tr>
+                                                <td style="padding-right: 50px " required="required">評論</td>
+                                                <td>
+                                                    <textarea class="add_word" name='content'>{{ $message->content }}</textarea> 
+                                                </td>  
+                                            </tr>
+                                            <tr>
+                                            <tr>
+                                                <td style="padding-right: 50px " required="required">評分</td>
+                                                <td>
+                                                    <input type="radio" name="rating" value="1" {{ $message->rating=="1" ? "checked" : " " }}>1<br>
+                                                    <input type="radio" name="rating" value="2" {{ $message->rating=="2" ? "checked" : " " }}>2<br>
+                                                    <input type="radio" name="rating" value="3" {{ $message->rating=="3" ? "checked" : " " }}>3<br>
+                                                    <input type="radio" name="rating" value="4" {{ $message->rating=="4" ? "checked" : " " }}>4<br>
+                                                    <input type="radio" name="rating" value="5" {{ $message->rating=="5" ? "checked" : " " }}>5<br>
+                                                </td>
+                                            </tr>
+                                        </div>    
+                                    </table>
                                     </form>
                                 @endif
                                 @if ($country == 'kr')
                                     <form method="POST" action="{{ url('message/kr/'.$message->id) }}">
                                     {{ csrf_field() }}
                                     {{ method_field('PATCH') }}
-                                    Country:{{ $country }}<br><br>
-
-                                    Content:<textarea name="content">{{ $message->content }}</textarea><br><br>
-                                    Rating:<textarea name="rating">{{ $message->rating }}</textarea><br><br>
-                                    <button type="submit">Update</button>
+                                    <table align="center" id="add_table">
+                                        <div class = "modal-body-body">   
+                                        <br>        
+                                            <tr>
+                                                <td style="padding-right: 50px " required="required">評論</td>
+                                                <td>
+                                                    <textarea class="add_word" name='content'>{{ $message->content }}</textarea> 
+                                                </td>  
+                                            </tr>
+                                            <tr>
+                                            <tr>
+                                                <td style="padding-right: 50px " required="required">評分</td>
+                                                <td>
+                                                    <input type="radio" name="rating" value="1" {{ $message->rating=="1" ? "checked" : " " }}>1<br>
+                                                    <input type="radio" name="rating" value="2" {{ $message->rating=="2" ? "checked" : " " }}>2<br>
+                                                    <input type="radio" name="rating" value="3" {{ $message->rating=="3" ? "checked" : " " }}>3<br>
+                                                    <input type="radio" name="rating" value="4" {{ $message->rating=="4" ? "checked" : " " }}>4<br>
+                                                    <input type="radio" name="rating" value="5" {{ $message->rating=="5" ? "checked" : " " }}>5<br>
+                                                </td>
+                                            </tr>
+                                        </div>    
+                                    </table>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <input type="submit" value="送出" class="btn btn-primary" >
+                                        </div>
                                     </form>
                                 @endif
                             </div>
                             </div>
                         </div>
                         </div>
-                    </td>    
+                    @if ($country == 'tw') 
+                    <form action="{{ url('message/tw/'.$message->id) }}" method="POST">
+                        {!! csrf_field() !!}
+                        {!! method_field('DELETE') !!}
+                        <button type="submit" id="delete-message-{{ $message->id }}">刪除</button>
+                    </form>
+                    @endif
+                    @if ($country == 'kr')
+                    <form action="{{ url('message/kr/'.$message->id)}}" method="POST">
+                        {!! csrf_field() !!}
+                        {!! method_field('DELETE') !!}
+                        <button type="submit" id="delete-message-{{ $message->id }}">刪除</button>
+                    </form> 
+                    @endif                      
+                    </td>  
                 </tr>
-
                 @endforeach
             </tbody>
         </table>
