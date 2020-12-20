@@ -75,7 +75,7 @@ class MsgController extends Controller
                         ->with('site')
                         ->get();
 
-        return view('msg_test', compact('messages')); 
+        return view('message', compact('messages')); 
     }
     // 刪除留言
     public function destroy(Request $request, $country, $msg_id)
@@ -141,7 +141,7 @@ class MsgController extends Controller
             $site_id = $messages->site_id;
             $this->updateRating($request, $country, $site_id); 
             
-            return redirect('/message');
+            return redirect('/user');
         }      
     }
     // 更新留言的平均評分和評分個數
