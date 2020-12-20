@@ -86,7 +86,7 @@
                     </td>
                     <td>    
                         @can('admin')
-                        <li class="adm_bt" style="list-style-type: none; "><button type="button" onclick="location.href='{{ url('admin/'.$user->id) }}'" >管理員頁面</button></li>
+                        <li class="adm_bt" style="list-style-type: none; "><button type="button" onclick="location.href='{{ url('admin') }}'" >管理員頁面</button></li>
                         @endcan
                     </td>
                 </tr>
@@ -99,16 +99,18 @@
             <h2 style="color:#000000;" >歷史留言紀錄</h2>
         </div>
 </div>
-<!-- Cheng 留言分頁 -->
-<div class="tab-head" style="font-family: 微軟正黑體; padding-top: 20px;">
-  <ul class="nav nav-tabs welcome-tab-ul">
-    <li class="{{ Request::is('user/tw') ? 'active' : '' }}"><a href="{{ url('/user/tw') }}"><b>台灣</b></a></li>
-    <li class="{{ Request::is('user/kr') ? 'active' : '' }}"><a href="{{ url('/user/kr') }}"><b>韓國</b></a></li>
-  </ul>
-</div>
+
 
 <div id="wrapper2">
+
     <div id="portfolio" class="container" style="padding: 5px">
+        <!-- Cheng 留言分頁 -->
+        <div class="tab-head" style="font-family: 微軟正黑體; padding-top: 20px;">
+          <ul class="nav nav-tabs welcome-tab-ul">
+            <li class="{{ Request::is('user/tw') ? 'active' : '' }}"><a href="{{ url('/user/tw') }}"><b>台灣</b></a></li>
+            <li class="{{ Request::is('user/kr') ? 'active' : '' }}"><a href="{{ url('/user/kr') }}"><b>韓國</b></a></li>
+          </ul>
+        </div>  
         <table class="comment" style="border:3px #cccccc solid; text-align:center; width: 100%; border-radius: 5px; " align="center" cellpadding="10" border='1'>
             <thead>
                 <tr style="background-color: #BEBEBE">
