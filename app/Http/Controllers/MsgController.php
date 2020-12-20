@@ -107,7 +107,7 @@ class MsgController extends Controller
             $messages = KoreaMessage::where('id', $msg_id)->with('site')->first();    
 
         }
-        return view('msg_edit', compact('messages','country', 'msg_id'));
+        return view('user', compact('messages','country', 'msg_id', 'site'));
     }
     public function update(Request $request, $country, $msg_id) 
     {
