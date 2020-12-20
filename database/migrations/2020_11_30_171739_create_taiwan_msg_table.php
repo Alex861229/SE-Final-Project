@@ -19,7 +19,6 @@ class CreateTaiwanMsgTable extends Migration
             $table->unsignedBigInteger('site_id');
             $table->string('content', 500);
             $table->bigInteger('rating');
-            $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('site_id')->references('id')->on('taiwan_site');
         });

@@ -104,7 +104,7 @@ class MsgController extends Controller
 
         } else {
 
-            $messages = KoreaMessage::where('id', $msg_id)->with('site')->first();    
+            $messages = KoreaMessage::where('id', $msg_id)->with('site')->first(); 
 
         }
         return view('user', compact('messages','country', 'msg_id', 'site'));
