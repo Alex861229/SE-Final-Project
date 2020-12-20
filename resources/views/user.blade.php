@@ -139,7 +139,56 @@
                         <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
                         <button type="button" class="delete_button">刪除</button>                       
                     </td>
+
+                    <td>
+                        <div class="modal fade" id="addModal" role="dialog" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <!-- 編輯Modal content-->
+                                <div class="modal-content">                                                    
+                                    <div class="modal-header">
+                                        <table>
+                                            <tr>
+                                                <td style="text-align: center">
+                                                    <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px; font-size: 24px" >新增留言</h5>
+                                                </td>
+                                                <td style="width: 500px">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modal_close1">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                <div class="modal-body">
+                                @if ($country == 'tw')
+                                    <form method="POST" action="{{ url('message/tw/'.$message->id) }}">
+                                    {{ csrf_field() }}
+                                    {{ method_field('PATCH') }}
+                                    Country:{{ $country }}<br><br>
+
+                                    Content:<textarea name="content">{{ $message->content }}</textarea><br><br>
+                                    Rating:<textarea name="rating">{{ $message->rating }}</textarea><br><br>
+                                    <button type="submit">Update</button>
+                                    </form>
+                                @endif
+                                @if ($country == 'kr')
+                                    <form method="POST" action="{{ url('message/kr/'.$message->id) }}">
+                                    {{ csrf_field() }}
+                                    {{ method_field('PATCH') }}
+                                    Country:{{ $country }}<br><br>
+
+                                    Content:<textarea name="content">{{ $message->content }}</textarea><br><br>
+                                    Rating:<textarea name="rating">{{ $message->rating }}</textarea><br><br>
+                                    <button type="submit">Update</button>
+                                    </form>
+                                @endif
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </td>    
                 </tr>
+
                 @endforeach
             </tbody>
         </table>
@@ -290,57 +339,7 @@
 </div>
 </div>
 
-<div class="modal fade" id="addModal" role="dialog" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <!-- 編輯Modal content-->
-        <div class="modal-content">                                                    
-            <div class="modal-header">
-                <table>
-                    <tr>
-                        <td style="text-align: center">
-                            <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px; font-size: 24px" >新增留言</h5>
-                        </td>
-                        <td style="width: 500px">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modal_close1">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        <div class="modal-body">
-            <form id="activity-form-edit" enctype="multipart/form-data">
-                <table align="center" id="add_table">
-                        <div class = "modal-body-body">   
-                            <br>        
-                            <tr>
-                                <td style="padding-right: 50px " required="required">評論</td>
-                                <td>
-                                    <textarea class="add_word" name='introduce' id="introduce-edit"></textarea> 
-                                </td>  
-                            </tr>
-                            <tr>
-                            <tr>
-                                <td style="padding-right: 50px " required="required">評分</td>
-                                <td>
-                                    <input type="radio" name="class" >1<br>
-                                    <input type="radio" name="class" >2<br>
-                                    <input type="radio" name="class" >3<br>
-                                    <input type="radio" name="class" >4<br>
-                                    <input type="radio" name="class" >5<br>
-                                </td>
-                            </tr>
-                        </div>    
-                </table>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <input type="submit" value="送出" class="btn btn-primary" >
-        </div>                                        
-        </form>
-    </div>
-    </div>
-</div>
-</div>
+
 @endsection 
 
 @section('js')
