@@ -86,7 +86,7 @@
                     </td>
                     <td>    
                         @can('admin')
-                        <li class="adm_bt" style="list-style-type: none; "><button type="button" onclick="location.href='{{ url('admin/'.$user->id) }}'" >管理員頁面</button></li>
+                        <li class="adm_bt" style="list-style-type: none; "><button type="button" onclick="location.href='{{ url('admin') }}'" >管理員頁面</button></li>
                         @endcan
                     </td>
                 </tr>
@@ -99,16 +99,18 @@
             <h2 style="color:#000000;" >歷史留言紀錄</h2>
         </div>
 </div>
-<!-- Cheng 留言分頁 -->
-<div class="tab-head" style="font-family: 微軟正黑體; padding-top: 20px;">
-  <ul class="nav nav-tabs welcome-tab-ul">
-    <li class="{{ Request::is('user/tw') ? 'active' : '' }}"><a href="{{ url('/user/tw') }}"><b>台灣</b></a></li>
-    <li class="{{ Request::is('user/kr') ? 'active' : '' }}"><a href="{{ url('/user/kr') }}"><b>韓國</b></a></li>
-  </ul>
-</div>
+
 
 <div id="wrapper2">
+
     <div id="portfolio" class="container" style="padding: 5px">
+        <!-- Cheng 留言分頁 -->
+        <div class="tab-head" style="font-family: 微軟正黑體; padding-top: 20px;">
+          <ul class="nav nav-tabs welcome-tab-ul">
+            <li class="{{ Request::is('user/tw') ? 'active' : '' }}"><a href="{{ url('/user/tw') }}"><b>台灣</b></a></li>
+            <li class="{{ Request::is('user/kr') ? 'active' : '' }}"><a href="{{ url('/user/kr') }}"><b>韓國</b></a></li>
+          </ul>
+        </div>  
         <table class="comment" style="border:3px #cccccc solid; text-align:center; width: 100%; border-radius: 5px; " align="center" cellpadding="10" border='1'>
             <thead>
                 <tr style="background-color: #BEBEBE">
@@ -134,9 +136,109 @@
                     <td style="width: 10%;">{{ $message -> created_at }}</td>
                     <td style="width: 10%;">{{ $message -> updated_at }}</td>
                     <td style="width: 10%">
-                        <button type="button" class="add" data-toggle="modal" data-target="#addModal">編輯</button>
-                        <button type="button" class="delete_button">刪除</button>                       
-                    </td>
+                        <button type="button" class="edit_button" data-toggle="modal" data-target="{{'#addModal'.$message->id}}" id="edit-Info-{{$message->id}}">編輯</button>
+                        <div class="modal fade" id="{{'addModal'.$message->id}}" role="dialog" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <!-- 編輯Modal content-->
+                                <div class="modal-content">                                                    
+                                    <div class="modal-header">
+                                        <table>
+                                            <tr>
+                                                <td style="text-align: center">
+                                                    <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px; font-size: 24px" >編輯留言</h5>
+                                                </td>
+                                                <td style="width: 500px">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modal_close1">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                <div class="modal-body">
+                                @if ($country == 'tw')
+                                    <form method="POST" action="{{ url('message/tw/'.$message->id) }}">
+                                    @csrf
+                                    <input type="hidden" name="_method" id="method" value="PUT">
+                                    <table align="center" id="add_table">
+                                        <div class = "modal-body-body">   
+                                        <br>        
+                                            <tr>
+                                                <td style="padding-right: 50px " required="required">評論</td>
+                                                <td>
+                                                    <textarea class="add_word" name='content'>{{ $message->content }}</textarea> 
+                                                </td>  
+                                            </tr>
+                                            <tr>
+                                            <tr>
+                                                <td style="padding-right: 50px " required="required">評分</td>
+                                                <td>
+                                                    <input type="radio" name="rating" value="1" {{ $message->rating=="1" ? "checked" : " " }}>1<br>
+                                                    <input type="radio" name="rating" value="2" {{ $message->rating=="2" ? "checked" : " " }}>2<br>
+                                                    <input type="radio" name="rating" value="3" {{ $message->rating=="3" ? "checked" : " " }}>3<br>
+                                                    <input type="radio" name="rating" value="4" {{ $message->rating=="4" ? "checked" : " " }}>4<br>
+                                                    <input type="radio" name="rating" value="5" {{ $message->rating=="5" ? "checked" : " " }}>5<br>
+                                                </td>
+                                            </tr>
+                                        </div>    
+                                    </table>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <input type="submit" value="送出" class="btn btn-primary" >
+                                    </div>
+                                    </form>
+                                @endif
+                                @if ($country == 'kr')
+                                    <form method="POST" action="{{ url('message/kr/'.$message->id) }}">
+                                    @csrf
+                                    <input type="hidden" name="_method" id="method" value="PUT">
+                                    <table align="center" id="add_table">
+                                        <div class = "modal-body-body">   
+                                        <br>        
+                                            <tr>
+                                                <td style="padding-right: 50px " required="required">評論</td>
+                                                <td>
+                                                    <textarea class="add_word" name='content'>{{ $message->content }}</textarea> 
+                                                </td>  
+                                            </tr>
+                                            <tr>
+                                            <tr>
+                                                <td style="padding-right: 50px " required="required">評分</td>
+                                                <td>
+                                                    <input type="radio" name="rating" value="1" {{ $message->rating=="1" ? "checked" : " " }}>1<br>
+                                                    <input type="radio" name="rating" value="2" {{ $message->rating=="2" ? "checked" : " " }}>2<br>
+                                                    <input type="radio" name="rating" value="3" {{ $message->rating=="3" ? "checked" : " " }}>3<br>
+                                                    <input type="radio" name="rating" value="4" {{ $message->rating=="4" ? "checked" : " " }}>4<br>
+                                                    <input type="radio" name="rating" value="5" {{ $message->rating=="5" ? "checked" : " " }}>5<br>
+                                                </td>
+                                            </tr>
+                                        </div>    
+                                    </table>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <input type="submit" value="送出" class="btn btn-primary" >
+                                        </div>
+                                    </form>
+                                @endif
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    @if ($country == 'tw') 
+                    <form action="{{ url('message/tw/'.$message->id) }}" method="POST">
+                        {!! csrf_field() !!}
+                        {!! method_field('DELETE') !!}
+                        <button type="submit" id="delete-message-{{ $message->id }}">刪除</button>
+                    </form>
+                    @endif
+                    @if ($country == 'kr')
+                    <form action="{{ url('message/kr/'.$message->id)}}" method="POST">
+                        {!! csrf_field() !!}
+                        {!! method_field('DELETE') !!}
+                        <button type="submit" id="delete-message-{{ $message->id }}">刪除</button>
+                    </form> 
+                    @endif                      
+                    </td>  
                 </tr>
                 @endforeach
             </tbody>
@@ -288,57 +390,7 @@
 </div>
 </div>
 
-<div class="modal fade" id="addModal" role="dialog" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <!-- 編輯Modal content-->
-        <div class="modal-content">                                                    
-            <div class="modal-header">
-                <table>
-                    <tr>
-                        <td style="text-align: center">
-                            <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px; font-size: 24px" >新增留言</h5>
-                        </td>
-                        <td style="width: 500px">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modal_close1">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        <div class="modal-body">
-            <form id="activity-form-edit" enctype="multipart/form-data">
-                <table align="center" id="add_table">
-                        <div class = "modal-body-body">   
-                            <br>        
-                            <tr>
-                                <td style="padding-right: 50px " required="required">評論</td>
-                                <td>
-                                    <textarea class="add_word" name='introduce' id="introduce-edit"></textarea> 
-                                </td>  
-                            </tr>
-                            <tr>
-                            <tr>
-                                <td style="padding-right: 50px " required="required">評分</td>
-                                <td>
-                                    <input type="radio" name="class" >1<br>
-                                    <input type="radio" name="class" >2<br>
-                                    <input type="radio" name="class" >3<br>
-                                    <input type="radio" name="class" >4<br>
-                                    <input type="radio" name="class" >5<br>
-                                </td>
-                            </tr>
-                        </div>    
-                </table>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <input type="submit" value="送出" class="btn btn-primary" >
-        </div>                                        
-        </form>
-    </div>
-    </div>
-</div>
-</div>
+
 @endsection 
 
 @section('js')

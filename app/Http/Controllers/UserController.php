@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use Exception;
 use App\User;
 use App\KoreaMessage;
@@ -14,18 +15,23 @@ use Log;
 use Auth;
 
 class UserController extends Controller
-{
-	public function welcome()
+{    
+    public function welcome()
 	{
+        $sites = [];
+        $messages = [];
+
 		if (Auth::check()) {
 
 			$user = Auth::user(); 
+            $sites = [];
+            $messages = [];
 
-			return view('welcome', compact('user'));
+			return view('welcome', compact('user', 'sites','messages'));
 		
 		}
 
-		return view('welcome');
+		return view('welcome', compact('messages','sites'));
 	}
 
     public function show_member_message($country = "tw")
@@ -47,8 +53,8 @@ class UserController extends Controller
 
         }
 
-        dd($messages);
-        return view('user', compact('messages','user')); 
+        return view('user', compact('messages','user','country')); 
+
     }
 
 
@@ -70,7 +76,7 @@ class UserController extends Controller
             return redirect()->back()->withErrors($validator);
 
         } else {
-
+            
             $user = User::create([
                 'name' => $request['name'],
                 'account' => $request['account'],
@@ -89,7 +95,7 @@ class UserController extends Controller
             }
             $user->save();
 
-            return view('welcome');
+            return redirect('/');
         }
     }
 
@@ -176,57 +182,70 @@ class UserController extends Controller
     }
 
     // 顯示所有留言
-    public function showAllMessage()
+    public function showAllMessage($country = "tw")
     {
+            
         $user = Auth::user();
 
         if (User::isAdmin()) {
-            
-            $KoreaMessage = KoreaMessage::paginate(10);
 
-            $TaiwanMessage = TaiwanMessage::paginate(10);
+            if ($country == "kr") {
 
-            // $KoreaMessage = DB::table('korea_messages')->get();
+                $messages = KoreaMessage::latest()
+                            ->paginate(10);
 
-            // $messages = DB::table('taiwan_messages')->unionAll($KoreaMessage)->orderBy('created_at','desc')->paginate(10);
+            } else if ($country == "tw") {
 
-            // dd($messages);
+                $messages = TaiwanMessage::latest()
+                            ->paginate(10);
 
-            $messages = $KoreaMessage->union($TaiwanMessage)->all();
+            }
 
-            // dd($messages);
-            
-            // $messages = collect($messages);
-
-            dd($messages);
+            return view('admin_message', compact('messages','country')); 
         
-
-            return view('admin_message', compact('messages'));
-
         } else {
 
             return redirect()->back();
         }
     }
 
-    public function searchMessages(Request $request)
+    // 管理員搜尋留言
+    public function searchMessages(Request $request, $country)
     {
         $user = Auth::user();
 
-        if ($country == "kr") {
+        if (User::isAdmin()) {
 
-            $messages = KoreaMessage::where('user_id', $user->id)
-                        ->with('site')
-                        ->paginate(10);
+            $validator = Validator::make($request->all(),[
+                'search' => ['required', 'string'],
+            ]);
 
-        } else if ($country == "tw") {
+            if ($validator->fails()) {
 
-            $messages = TaiwanMessage::where('user_id', $user->id)
-                        ->with('site')
-                        ->paginate(10);
+                return redirect()->back()->withErrors($validator);
 
+            } else {
+
+                if ($country == "kr") {
+
+                    $messages = KoreaMessage::where('content', 'like', '%'.$request->search.'%')
+                                ->with('site')
+                                ->paginate(10);
+
+                } else if ($country == "tw") {
+
+                    $messages = TaiwanMessage::where('content', 'like', '%'.$request->search.'%')
+                                ->with('site')
+                                ->paginate(10);
+
+                }
+                return view('admin_message', compact('messages', 'country'));
+            }
+
+        } else {
+
+            return redirect()->back();
         }
-        return view('admin_message', compact('messages'));
     }
 
     public function updateInfo(Request $request, $user_id)
@@ -246,7 +265,7 @@ class UserController extends Controller
 
         } else {
 
-	        $input = array_filter(request()->except(['_token','_method']));
+            $input = array_filter(request()->except(['_token','_method']));
 
             $user = User::find($user_id);
 
@@ -295,7 +314,7 @@ class UserController extends Controller
             $user = User::find($user_id);
             
             $user->update([
-                'password'=> $request->new_password
+                'password' => $request->new_password,
             ]);
 
             $user->save();
@@ -305,7 +324,7 @@ class UserController extends Controller
     }
 
     public function updatePassword(Request $request, $user_id)
-    {
+    {   
         $this->validate($request, [
             'old_password' => ['required', 'string'],
             'new_password' => ['required', 'string'],
@@ -314,7 +333,7 @@ class UserController extends Controller
 
         $user = User::where('id', $user_id)
                 ->first();
-
+        
         if ($user && password_verify($request->input('old_password'), $user->password)) {
             $user->password = Hash::make($request->input('new_password'));
             $user->save();

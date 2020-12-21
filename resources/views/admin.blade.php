@@ -82,8 +82,13 @@
 <div id="wrapper1">
         <div id="search" style="text-align:center;  padding: 15px "> 
             <form action="{{ url('admin/search/account') }}" method="get">
-                <span class="icon"><i class="fa fa-search"></i></span>
-                <input type="search" id="search" name="search" placeholder="Search account..." / style="width: 400px; height: 30px; border-radius:15px;"> 
+                <table align="center">
+                    <tr>
+                        <td>
+                        <span class="icon"><i class="fa fa-search"></i></span>
+                        <input type="search" id="search" name="search" placeholder="Search account..." / style="width: 400px; height: 30px; border-radius:15px;">
+                        </td>
+                    </tr>    
             </form>  
         </div>
 </div>

@@ -55,6 +55,8 @@ Route::group(['middleware' => 'auth'], function() {
 	// 管理員顯示所有留言
 	Route::get('/admin/message/', 'UserController@showAllMessage');
 	Route::get('/admin/message/{country}', 'UserController@showAllMessage');
+	// 管理員搜尋留言
+	Route::get('/admin/message/{country}/search', 'UserController@searchMessages');
 	// 修改個人資料
 	Route::get('/updateInfo/{user_id}', 'UserController@updateInfoModal');
 	// 修改個人資料
@@ -80,7 +82,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('/search/{country}/{site_id}/message', 'MsgController@store');
     // 刪除留言
 	Route::delete('/message/{country}/{msg_id}', 'MsgController@destroy');
-    // 編輯留言
-    Route::get('/message/{country}/{msg_id}/edit','MsgController@edit');
-	Route::patch('/message/{country}/{msg_id}', 'MsgController@update');
+	// 編輯留言
+	Route::get('/message/{country}/{msg_id}/edit','MsgController@edit');
+	Route::put('/message/{country}/{msg_id}','MsgController@update');
 });

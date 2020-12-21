@@ -122,12 +122,53 @@
     </div>
 </div>
 <div id="wrapper1">
-        <div class="title2" style="padding: 3px; margin: 3px">
-            <h2 style="color:#000000">留言評分</h2>
-        </div>
+<div id="SIDE" >
+    <div class="map" id="app">
+        
+        <p>顯示搜尋結果地圖</p>
+        <!-- 顯示搜尋結果地圖 -->
+        <gmap-map 
+        ref="mapRef"
+        :center="mapCenter"
+        :zoom="10"
+        style="width: 100%; height:440px;"
+        >
+            <gmap-info-window
+                :options="infoWindowOptions"
+                :position="infoWindowPosition"
+                :opened="infoWindowOpened"
+                @closeclick="handleInfoWindowClose"
+            >
+                <div class="info-window">
+                    <h2 v-text="activeRestaurent.latitude"></h2>
+                    <h2 v-text="activeRestaurent.longitude"></h2>
+                    <h2 v-text="activeRestaurent.name"></h2>
+                    <p v-text="activeRestaurent.address"></p>
+                </div>
+            </gmap-info-window>
+            <gmap-marker
+            v-for="(r, index) in restaurents"
+            :key="r.id"
+            :position="getPosition(r)"
+            :clickable="true"
+            :draggable="false"
+            @click="handleMarkerClicked(r);handleNearby(r)"
+            >                        
+            </gmap-marker>                   
+        </gmap-map>
+        
+    </div>
+    <!-- Google API -->
+        <script src="{{ mix('js/app.js') }}"></script>
+    
+</div>
 </div>
 
+
 <div id="wrapper2">
+    <div class="title2" style="padding: 3px; margin: 3px">
+            <h2 style="color:#000000">留言評分</h2>
+        </div>
     <div id="portfolio" class="container">
         <table class="comment" style="border:3px #cccccc solid; text-align:center; " align="center" cellpadding="10" border='1'>
             <thead>
@@ -142,8 +183,8 @@
             @foreach ($messages as $message)
             <tr>
                 <td style="width: 10%">{{ $message->user->name }}</td>
-                <td style="width: 60%;">{{ $message->content }}</td>
-                <td style="width: 10%;">{{ $message->rating }}</td>
+                <td style="width: 60%;">{{ $message->rating }}</td>
+                <td style="width: 10%;">{{ $message->content }}</td>
                 <td style="width: 20%;">{{ $message->created_at }}</td>
             </tr>
             @endforeach
@@ -154,21 +195,8 @@
             <button type="button" class="register" data-toggle="modal" data-target="#addModal" style="background: #ff6816; border-radius: 5px;color: white;">新增留言</button>
         </div> 
         @endcan   
-        <div align="center" id="page" style="font-weight: bold; padding: 20px;border-radius: 5px;font-color: #000000">
-             <div class="page-icon">
-    <span class="page-disabled"><i></i>上一頁</span>
-    <span class="page-current">1</span>
-    <a href="#">2</a>
-    <a href="#">3</a>
-    <a href="#">4</a>
-    <a href="#">5</a>
-    <a href="#">6</a>
-    <a href="#">7</a>
-    ……
-    <a href="#">199</a>
-    <a href="#">200</a>
-    <a class="page-next" href="#">下一頁<i></i></a>
-</div>
+        <div align="center" id="page" style="font-weight: bold; padding: 20px">
+            {{ $messages->links() }}
         </div>
     </div>
 </div>
