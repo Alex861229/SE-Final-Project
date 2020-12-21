@@ -82,7 +82,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('/search/{country}/{site_id}/message', 'MsgController@store');
     // 刪除留言
 	Route::delete('/message/{country}/{msg_id}', 'MsgController@destroy');
-    // 編輯留言
-    Route::get('/message/{country}/{msg_id}/edit','MsgController@edit');
-	Route::patch('/message/{country}/{msg_id}', 'MsgController@update');
+	// 編輯留言
+	Route::get('/message/{country}/{msg_id}/edit','MsgController@edit');
+	Route::put('/message/{country}/{msg_id}','MsgController@update');
 });
