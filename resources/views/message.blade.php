@@ -121,7 +121,7 @@
         </table>    
     </div>
 </div>
-<div id="map1">
+<div id="wrapper1">
 <div id="SIDE" >
     <div class="map" id="app">
         
@@ -196,7 +196,7 @@
         </div> 
         @endcan   
         <div align="center" id="page" style="font-weight: bold; padding: 20px">
-            
+            {{ $messages->links() }}
         </div>
     </div>
 </div>
