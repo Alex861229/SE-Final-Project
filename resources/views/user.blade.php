@@ -158,8 +158,8 @@
                                 <div class="modal-body">
                                 @if ($country == 'tw')
                                     <form method="POST" action="{{ url('message/tw/'.$message->id) }}">
-                                    {{ csrf_field() }}
-                                    {{ method_field('PATCH') }}
+                                    @csrf
+                                    <input type="hidden" name="_method" id="method" value="PUT">
                                     <table align="center" id="add_table">
                                         <div class = "modal-body-body">   
                                         <br>        
@@ -182,12 +182,16 @@
                                             </tr>
                                         </div>    
                                     </table>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <input type="submit" value="送出" class="btn btn-primary" >
+                                    </div>
                                     </form>
                                 @endif
                                 @if ($country == 'kr')
                                     <form method="POST" action="{{ url('message/kr/'.$message->id) }}">
-                                    {{ csrf_field() }}
-                                    {{ method_field('PATCH') }}
+                                    @csrf
+                                    <input type="hidden" name="_method" id="method" value="PUT">
                                     <table align="center" id="add_table">
                                         <div class = "modal-body-body">   
                                         <br>        

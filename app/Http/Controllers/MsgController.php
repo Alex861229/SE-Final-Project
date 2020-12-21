@@ -121,23 +121,18 @@ class MsgController extends Controller
             return redirect()->back()->withErrors($validator);
 
         } else {
+            $input = array_filter(request()->except(['_token','_method']));
+            
             if ($country == 'tw') {
-                $messages_table = 'taiwan_messages';
+                $messages = TaiwanMessage::find($msg_id);
                     
             } else { 
-                $messages_table = 'korea_messages';
+                $messages = KoreaMessage::find($msg_id);
 
             }
-            // 更新Message
-            $messages = DB::table($messages_table)
-                ->where('id', $msg_id)
-                ->update([
-                    'content' => $request->content,
-                    'rating' => $request->rating,
-                ]); 
+            $messages->update($input);
             
             // 更新留言的平均評分和評分個數
-            $messages = DB::table($messages_table)->where('id', $msg_id)->first();
             $site_id = $messages->site_id;
             $this->updateRating($request, $country, $site_id); 
             
