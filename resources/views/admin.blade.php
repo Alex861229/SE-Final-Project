@@ -88,13 +88,6 @@
                         <span class="icon"><i class="fa fa-search"></i></span>
                         <input type="search" id="search" name="search" placeholder="Search account..." / style="width: 400px; height: 30px; border-radius:15px;">
                         </td>
-                        <td>
-                        <select>
-                            <option value="account">帳號名稱</option>
-                            <option value="name">使用者名稱</option>
-                            <option value="email">email</option>
-                        </select> 
-                        </td>
                     </tr>    
             </form>  
         </div>

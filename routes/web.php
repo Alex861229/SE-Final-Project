@@ -55,6 +55,8 @@ Route::group(['middleware' => 'auth'], function() {
 	// 管理員顯示所有留言
 	Route::get('/admin/message/', 'UserController@showAllMessage');
 	Route::get('/admin/message/{country}', 'UserController@showAllMessage');
+	// 管理員搜尋留言
+	Route::get('/admin/message/{country}/search', 'UserController@searchMessages');
 	// 修改個人資料
 	Route::get('/updateInfo/{user_id}', 'UserController@updateInfoModal');
 	// 修改個人資料

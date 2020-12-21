@@ -183,8 +183,8 @@
             @foreach ($messages as $message)
             <tr>
                 <td style="width: 10%">{{ $message->user->name }}</td>
-                <td style="width: 60%;">{{ $message->content }}</td>
-                <td style="width: 10%;">{{ $message->rating }}</td>
+                <td style="width: 60%;">{{ $message->rating }}</td>
+                <td style="width: 10%;">{{ $message->content }}</td>
                 <td style="width: 20%;">{{ $message->created_at }}</td>
             </tr>
             @endforeach
