@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use Exception;
 use App\User;
 use App\KoreaMessage;
@@ -47,7 +48,6 @@ class UserController extends Controller
 
         }
 
-        dd($messages);
         return view('user', compact('messages','user')); 
     }
 
@@ -181,10 +181,22 @@ class UserController extends Controller
         $user = Auth::user();
 
         if (User::isAdmin()) {
-            
-            $KoreaMessage = KoreaMessage::paginate(10);
 
-            $TaiwanMessage = TaiwanMessage::paginate(10);
+            // $KoreaMessage = KoreaMessage::latest()->paginate(10);
+            // $TaiwanMessage = TaiwanMessage::latest()->paginate(10);
+            // $messages = Paginator::merge($KoreaMessage, $TaiwanMessage)->sortByDesc('created_at')->get();
+
+
+            // $KoreaMessage = KoreaMessage::latest()->get();
+            // $messages = TaiwanMessage::latest()->union($KoreaMessage)->all();
+
+            // $KoreaMessage = KoreaMessage::get();
+            // $TaiwanMessage = TaiwanMessage::get();
+            // $messages = $KoreaMessage->merge($TaiwanMessage);
+            // $messages = $KoreaMessage->merge($TaiwanMessage)->paginate(10);
+            
+            // $KoreaMessage = KoreaMessage::paginate(10);
+            // $TaiwanMessage = TaiwanMessage::paginate(10);
 
             // $KoreaMessage = DB::table('korea_messages')->get();
 
@@ -192,11 +204,24 @@ class UserController extends Controller
 
             // dd($messages);
 
-            $messages = $KoreaMessage->union($TaiwanMessage)->all();
+            // $messages = $KoreaMessage->merge($TaiwanMessage);
+            // $collected = $KoreaMessage->union($TaiwanMessage)->sortByDesc('created_at');
+
+            // $messages = $paginator->make($messages, count($messages), $perPage);
+            // $messages = (collect($collected))->paginate(10);
 
             // dd($messages);
             
-            // $messages = collect($messages);
+            // $collection = collect($messages);
+
+            // $messages = $collection->get('data');
+
+            $data = DB::select('
+                    SELECT * FROM korea_messages
+                    UNION ALL
+                    SELECT * FROM taiwan_messages
+                    ORDER BY created_at desc;
+                ');
 
             dd($messages);
         

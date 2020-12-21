@@ -11,7 +11,20 @@
                 <th scope="col">時間</th>
             </tr>
         </thead>
-        {{ $messages }}
+
+        <tbody>
+            @foreach($messages as $message)
+            <tr>
+                <td>{{ $message->site_id }}</td>
+                <td>{{ $message->content }}</td>
+                <td></td>
+                <td></td>
+            </tr>
+            @endforeach
+        </tbody>
+        
+        {{ $messages->links() }}
         
     </table><br>
 </body>
+

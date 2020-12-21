@@ -10,7 +10,7 @@ class TaiwanMessage extends Model
 {
     protected $table = 'taiwan_messages';
     protected $fillable = [
-        'user_id', 'site_id', 'content', 'rating'
+        'user_id', 'site_id', 'content', 'rating', 'created_at', 'updated_at'
     ];
 
     // 取得此篇message撰寫之user
