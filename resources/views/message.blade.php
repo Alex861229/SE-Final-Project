@@ -121,13 +121,13 @@
         </table>    
     </div>
 </div>
-<!-- <div id="wrapper1">
+<div id="wrapper1">
 <div id="SIDE" >
     <div class="map" id="app">
         
-        <p>顯示搜尋結果地圖</p> -->
+        <p>顯示搜尋結果地圖</p>
         <!-- 顯示搜尋結果地圖 -->
-        <!-- <gmap-map 
+        <gmap-map 
         ref="mapRef"
         :center="mapCenter"
         :zoom="10"
@@ -157,12 +157,12 @@
             </gmap-marker>                   
         </gmap-map>
         
-    </div> -->
+    </div>
     <!-- Google API -->
-        <!-- <script src="{{ mix('js/app.js') }}"></script>
+        <script src="{{ mix('js/app.js') }}"></script>
     
 </div>
-</div> -->
+</div>
 
 
 <div id="wrapper2">
