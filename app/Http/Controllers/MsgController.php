@@ -38,7 +38,7 @@ class MsgController extends Controller
 
         	if ($country == 'tw') {
        
-                $messages = DB::table('taiwan_messages')->insert([
+                $messages = TaiwanMessage::create([
                     'user_id' => $id,
                     'site_id' => $site_id,
                     'content' => $request->content,
@@ -47,13 +47,14 @@ class MsgController extends Controller
 
         	} else {
 
-                $messages = DB::table('korea_messages')->insert([
+                $messages = KoreaMessage::create([
                     'user_id' => $id,
                     'site_id' => $site_id,
                     'content' => $request->content,
                     'rating' => $request->rating,
                 ]);
             }
+            $messages->save();
             
             // 更新留言的平均評分和評分個數
             $this->updateRating($request, $country, $site_id); 
