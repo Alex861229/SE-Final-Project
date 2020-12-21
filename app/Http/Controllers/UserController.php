@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use Exception;
 use App\User;
 use App\KoreaMessage;
@@ -53,6 +54,7 @@ class UserController extends Controller
         }
 
         return view('user', compact('messages','user','country')); 
+
     }
 
 
@@ -93,7 +95,7 @@ class UserController extends Controller
             }
             $user->save();
 
-            return view('welcome');
+            return redirect('/');
         }
     }
 
@@ -180,56 +182,70 @@ class UserController extends Controller
     }
 
     // 顯示所有留言
-    public function showAllMessage()
+    public function showAllMessage($country = "tw")
     {
+            
         $user = Auth::user();
 
         if (User::isAdmin()) {
-            
-            $KoreaMessage = KoreaMessage::paginate(10);
 
-            $TaiwanMessage = TaiwanMessage::paginate(10);
+            if ($country == "kr") {
 
-            // $KoreaMessage = DB::table('korea_messages')->get();
+                $messages = KoreaMessage::latest()
+                            ->paginate(10);
 
-            // $messages = DB::table('taiwan_messages')->unionAll($KoreaMessage)->orderBy('created_at','desc')->paginate(10);
+            } else if ($country == "tw") {
 
-            // dd($messages);
+                $messages = TaiwanMessage::latest()
+                            ->paginate(10);
 
-            $messages = $KoreaMessage->union($TaiwanMessage)->all();
+            }
 
-            // dd($messages);
-            
-            // $messages = collect($messages);
-
-            // dd($messages);
+            return view('admin_message', compact('messages','country')); 
         
-            return view('admin_message', compact('messages'));
-
         } else {
 
             return redirect()->back();
         }
     }
 
-    public function searchMessages(Request $request)
+    // 管理員搜尋留言
+    public function searchMessages(Request $request, $country)
     {
         $user = Auth::user();
 
-        if ($country == "kr") {
+        if (User::isAdmin()) {
 
-            $messages = KoreaMessage::where('user_id', $user->id)
-                        ->with('site')
-                        ->paginate(10);
+            $validator = Validator::make($request->all(),[
+                'search' => ['required', 'string'],
+            ]);
 
-        } else if ($country == "tw") {
+            if ($validator->fails()) {
 
-            $messages = TaiwanMessage::where('user_id', $user->id)
-                        ->with('site')
-                        ->paginate(10);
+                return redirect()->back()->withErrors($validator);
 
+            } else {
+
+                if ($country == "kr") {
+
+                    $messages = KoreaMessage::where('content', 'like', '%'.$request->search.'%')
+                                ->with('site')
+                                ->paginate(10);
+
+                } else if ($country == "tw") {
+
+                    $messages = TaiwanMessage::where('content', 'like', '%'.$request->search.'%')
+                                ->with('site')
+                                ->paginate(10);
+
+                }
+                return view('admin_message', compact('messages', 'country'));
+            }
+
+        } else {
+
+            return redirect()->back();
         }
-        return view('admin_message', compact('messages'));
     }
 
     public function updateInfo(Request $request, $user_id)

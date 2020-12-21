@@ -121,7 +121,7 @@
         </table>    
     </div>
 </div>
-<div id="wrapper1">
+<div id="map1">
 <div id="SIDE" >
     <div class="map" id="app">
         
@@ -183,8 +183,8 @@
             @foreach ($messages as $message)
             <tr>
                 <td style="width: 10%">{{ $message->user->name }}</td>
-                <td style="width: 60%;">{{ $message->content }}</td>
-                <td style="width: 10%;">{{ $message->rating }}</td>
+                <td style="width: 60%;">{{ $message->rating }}</td>
+                <td style="width: 10%;">{{ $message->content }}</td>
                 <td style="width: 20%;">{{ $message->created_at }}</td>
             </tr>
             @endforeach
@@ -196,7 +196,7 @@
         </div> 
         @endcan   
         <div align="center" id="page" style="font-weight: bold; padding: 20px">
-            {{ $messages->links() }}
+            
         </div>
     </div>
 </div>

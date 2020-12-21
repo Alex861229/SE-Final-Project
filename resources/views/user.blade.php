@@ -182,6 +182,10 @@
                                             </tr>
                                         </div>    
                                     </table>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <input type="submit" value="送出" class="btn btn-primary" >
+                                    </div>
                                     </form>
                                 @endif
                                 @if ($country == 'kr')
