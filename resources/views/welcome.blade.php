@@ -117,7 +117,8 @@ Released   : 20131203
         
     </div>
     <!-- Google API -->
-        <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
+    
     <div class="t" style="font-size: 48px; text-align: center; padding-right: 50px">
         搜尋附近
     </div>    
@@ -143,6 +144,11 @@ Released   : 20131203
         </table>        
     </div>
 </div>
+</div>
+
+<div id="wrapper3">
+    <h1><a href="{{ route('download', ['country' => 'tw']) }}">台灣資料下載</a></h1><br>
+    <h1><a href="{{ route('download', ['country' => 'kr']) }}">韓國資料下載</a></h1>
 </div>
 
 <div id="wrapper3">
@@ -176,11 +182,6 @@ Released   : 20131203
         </div>
     </div>
 </div>
-
-
-
-
-
 
 </body>
 <div class="modal fade" id="myModal" role="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
