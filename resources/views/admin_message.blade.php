@@ -72,11 +72,11 @@
 <div id="wrapper1">
         <div id="search" style="text-align:center;  padding: 15px "> 
             <form action="{{ url('admin/message/'.$country.'/search') }}" method="get">
-                <table align="center">
+                <table align="center" style="padding: 25px">
                     <tr>
-                        <td>
+                        <td style="padding-bottom: 10px">
                         <span class="icon"><i class="fa fa-search"></i></span>
-                        <input type="search" id="search" name="search" placeholder="Search Content..." / style="width: 400px; height: 30px; border-radius:15px;">
+                        <input type="search" id="search" name="search" placeholder="Search Content..." / style="width: 400px; height: 30px; border-radius:15px; pa">
                         </td>
                     </tr>    
             </form>  
@@ -85,7 +85,7 @@
 
 <div id="wrapper2">
 
-    <div id="portfolio" class="container" style="padding: 5px">
+    <div id="portfolio" class="container" style="padding: 15px">
         <!-- Cheng 留言分頁 -->
         <div class="tab-head" style="font-family: 微軟正黑體; padding-top: 20px;">
           <ul class="nav nav-tabs welcome-tab-ul">
@@ -97,8 +97,8 @@
             <thead>
                 <tr style="background-color: #BEBEBE">
                     <td style="width: 20%">景點</td>
-                    <td style="width: 10%;">評分</td>
-                    <td width="40%">
+                    <td style="width: 5%;">評分</td>
+                    <td width="35%">
                         評論                      
                     </td>
                     <td style="width: 10%;">評論日期</td>
@@ -109,9 +109,9 @@
             <tbody>
                 @foreach ($messages as $message)    
                 <tr>
-                    <td style="width: 10%">{{ $message -> site -> name }}</td>
-                    <td style="width: 20%;">{{ $message -> rating }}</td>
-                    <td width="50%">
+                    <td style="width: 20%">{{ $message -> site -> name }}</td>
+                    <td style="width: 5%;">{{ $message -> rating }}</td>
+                    <td width="35%">
                         {{ $message -> content }}
                         <br>
                     </td>    
