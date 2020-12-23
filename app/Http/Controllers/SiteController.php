@@ -11,6 +11,7 @@ use App\KoreaMessage;
 use App\Restaurent;
 use Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Response;
 
 class SiteController extends Controller
 {
@@ -120,5 +121,40 @@ class SiteController extends Controller
                 return view('message', compact('messages','country','site'));
             }
         }
+    }
+
+    public function download($country) {
+
+        if ($country == 'tw') {
+
+            $TaiwanSite = TaiwanSite::get(); 
+            
+            $filename = "TaiwanSites.csv";
+            $handle = fopen($filename, 'w+');
+            fputcsv($handle, array('name', 'description', 'address', 'parking info', 'ticket info'));
+
+            foreach($TaiwanSite as $row) {
+                fputcsv($handle, array($row['name'], $row['description'], $row['address'], $row['parkinginfo'], $row['ticketinfo']));
+            }    
+
+        } else if ($country == 'kr') {
+
+            $KoreaSite = KoreaSite::get(); 
+            
+            $filename = "TaiwanSites.csv";
+            $handle = fopen($filename, 'w+');
+            fputcsv($handle, array('name', 'description', 'address', 'parking info', 'public facility', 'accomodation', 'sports facility', 'entertainment facility', 'support facility'));
+
+            foreach($KoreaSite as $row) {
+                fputcsv($handle, array($row['name'], $row['description'], $row['address'], $row['parkinginfo'], $row['public_facility'], $row['accomodation'], $row['sports_facility'], $row['entertainment_facility'], $row['support_facility']));
+            } 
+        }
+        fclose($handle);
+
+        $headers = array(
+            'Content-Type' => 'text/csv',
+        );
+
+        return Response::download($filename, 'sites.csv', $headers);
     }
 }

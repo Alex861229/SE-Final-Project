@@ -19,6 +19,7 @@
 
 
 Route::get('/', 'UserController@welcome');
+Route::get('download/{country}', 'SiteController@download')->name('download');
 
 // 搜尋景點
 Route::get('/search', 'SiteController@index');

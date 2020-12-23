@@ -77,12 +77,12 @@ Released   : 20131203
             <span style="display:block">Design by <a href="https://www.facebook.com/AlexHsu19971229/" rel="nofollow">Alex Hsu</a></span>
             <span>今天想來點...</span>
         </div>    
-        <div id="search" style="text-align:center; ">    
+        <div id="search" style="text-align:center; color: #ffffff">    
             <span class="icon"><i class="fa fa-search"></i></span>
-            <form action="{{ url('search/result') }}" method="get">
-                <input type="radio" name="country" value="tw" checked>台灣
-                <input type="radio" name="country" value="kr">韓國
-                <input type="text" class="form-controller" id="search" name="search"></input>
+            <form action="{{ url('search/result') }}" method="get" >
+                <input type="radio" style="border-radius:10px" name="country" value="tw" checked>台灣
+                <input type="radio" style="border-radius:10px" name="country" value="kr">韓國
+                <input type="text" class="form-controller" style="color: #000000" id="search" name="search"></input>
             </form> 
         </div>
     </div>
@@ -153,8 +153,9 @@ Released   : 20131203
         </gmap-map-->
         
     </div>
-    <!-- Google API >
-        <script src="{{ mix('js/app.js') }}"></script-->
+    <!-- Google API -->
+    <script src="{{ mix('js/app.js') }}"></script>
+
     <div class="t" style="font-size: 48px; text-align: center; padding-right: 50px">
         搜尋附近
     </div>    
@@ -180,6 +181,11 @@ Released   : 20131203
         </table>        
     </div>
 </div>
+</div>
+
+<div id="dl" align="center" style="background-color: #ffffff; padding-top: 10px">
+    <button type="button" class="register" style="height: 80%; width: 20%; border-radius:15px; font-size: 24px" onclick="location.href = '{{ route('download', ['country' => 'tw'])}}'">台灣資料下載</a></h1><br>
+    <button type="button" class="register" style="height: 80%; width: 20%; border-radius:15px; font-size: 24px" onclick="location.href = '{{ route('download', ['country' => 'kr'])}}'">韓國資料下載</a></h1><br>
 </div>
 
 <div id="wrapper3">
@@ -214,11 +220,6 @@ Released   : 20131203
         </div>
     </div>
 </div>
-
-
-
-
-
 
 </body>
 <div class="modal fade" id="myModal" role="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -259,31 +260,63 @@ Released   : 20131203
                 <input type="password" name="password"><br><br>
                 <font face="monospace" size="5">Confirm Password</font>
                 <input type="password" name="password_confirmation"><br><br>
-                <input type="submit" value="註冊" class="btn btn-primary">
+                <input type="submit" value="註冊" class="btn btn-primary"s>
             </form> 
         </div>
     </div>
 </div>
 </div>
-<div class="modal fade" id="loginModal" role="dialog" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="loginModal" role="dialog" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" role="document" >
         <!-- 編輯Modal content-->
-        <div class="loginmodal-container">
-            <h1>Login to Your Account</h1><br>
+        <div class="modal-content">                                                    
+            <div class="modal-header">
+                <table>
+                    <tr>
+                        <td style="text-align: center">
+                            <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px; font-size: 24px" >新增留言</h5>
+                        </td>
+                        <td style="width: 500px">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modal_close1">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
 
             @if (count($errors) > 0)
                 <div class="alert alert-danger" id="errordiv">
                     {!! implode('<br>', $errors->all()) !!}
                 </div>
             @endif
-                <form action="{{ url('login') }}" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <font face="monospace" size="5">Account</font>
-                    <input type="account" name="account"><br><br>
-                    <font face="monospace" size="5">Password</font>
-                    <input type="password" name="password"><br><br>
-                    <input type="submit" value="登入" class="btn btn-primary">
-                </form> 
+        <div class="modal-body">
+            <form action="{{ url('login') }}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <table align="center" id="add_table">
+                        <div class = "modal-body-body">   
+                            <br>        
+                            <tr>
+                                <td style="padding-right: 50px " required="required">帳號</td>
+                                <td>
+                                    <input type="account" name="account"> 
+                                </td>  
+                            </tr>
+                            <tr>
+                            <tr>
+                                <td style="padding-right: 50px " required="required">密碼</td>
+                                <td>
+                                    <input type="password" name="password">
+                                </td>
+                            </tr>
+                        </div>    
+                </table>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="submit" value="登入" class="btn btn-primary" >
+        </div>                                        
+        </form>
+        </div>
         </div>
     </div>
 </div>

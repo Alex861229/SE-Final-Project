@@ -91,80 +91,36 @@
            <tr>
                 <td style="width: 10%">地址</td>
                 <td width="70%">
-                    <span style="color:#4F4F4F;" >{{ $site->address }}</span>                       
+                    <span style="color:#ffffff;" >{{ $site->address }}</span>                       
                 </td>
             </tr>
             <tr>
                 <td style="width: 10%">描述</td>
                 <td width="70%">
-                    <span style="color:#4F4F4F;" >{{ $site->description }}</span>                     
+                    <span style="color:#ffffff;" >{{ $site->description }}</span>                     
                 </td>
             </tr>
             <tr>
                 <td style="width: 10%">停車資訊</td>
                 <td width="70%">
-                    <span style="color:#4F4F4F;" >{{ $site->parkinginfo }}</span>                     
+                    <span style="color:#ffffff;" >{{ $site->parkinginfo }}</span>                     
                 </td>
             </tr>
             <tr>
                 <td style="width: 10%">總留言數</td>
                 <td width="70%">
-                    <span style="color:#4F4F4F;" >{{ $site->total_comments }}</span>                     
+                    <span style="color:#ffffff;" >{{ $site->total_comments }}</span>                     
                 </td>
             </tr>
             <tr>
                 <td style="width: 10%">平均評分</td>
                 <td width="70%">
-                    <span style="color:#4F4F4F;" >{{ $site->avg_rating }}</span>                     
+                    <span style="color:#ffffff;" >{{ $site->avg_rating }}</span>                     
                 </td>
             </tr>
         </table>    
     </div>
 </div>
-<div id="wrapper1">
-<div id="SIDE" >
-    <div class="map" id="app">
-        
-        <p>顯示搜尋結果地圖</p>
-        <!-- 顯示搜尋結果地圖 -->
-        <gmap-map 
-        ref="mapRef"
-        :center="mapCenter"
-        :zoom="10"
-        style="width: 100%; height:440px;"
-        >
-            <gmap-info-window
-                :options="infoWindowOptions"
-                :position="infoWindowPosition"
-                :opened="infoWindowOpened"
-                @closeclick="handleInfoWindowClose"
-            >
-                <div class="info-window">
-                    <h2 v-text="activeRestaurent.latitude"></h2>
-                    <h2 v-text="activeRestaurent.longitude"></h2>
-                    <h2 v-text="activeRestaurent.name"></h2>
-                    <p v-text="activeRestaurent.address"></p>
-                </div>
-            </gmap-info-window>
-            <gmap-marker
-            v-for="(r, index) in restaurents"
-            :key="r.id"
-            :position="getPosition(r)"
-            :clickable="true"
-            :draggable="false"
-            @click="handleMarkerClicked(r);handleNearby(r)"
-            >                        
-            </gmap-marker>                   
-        </gmap-map>
-        
-    </div>
-    <!-- Google API -->
-        <script src="{{ mix('js/app.js') }}"></script>
-    
-</div>
-</div>
-
-
 <div id="wrapper2">
     <div class="title2" style="padding: 3px; margin: 3px">
             <h2 style="color:#000000">留言評分</h2>
