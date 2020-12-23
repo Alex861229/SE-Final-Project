@@ -314,12 +314,12 @@ class UserController extends Controller
             $user = User::find($user_id);
             
             $user->update([
-                'password' => $request->new_password,
+                'password' => Hash::make($request['new_password']),
             ]);
 
             $user->save();
 
-            return redirect('test');
+            return redirect('/');
         }
     }
 
