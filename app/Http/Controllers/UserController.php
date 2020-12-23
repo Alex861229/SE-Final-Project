@@ -232,12 +232,14 @@ class UserController extends Controller
 
                     $messages = KoreaMessage::where('content', 'like', '%'.$request->search.'%')
                                 ->with('site')
+                                ->orderBy('created_at','desc')
                                 ->paginate(10);
 
                 } else if ($country == "tw") {
 
                     $messages = TaiwanMessage::where('content', 'like', '%'.$request->search.'%')
                                 ->with('site')
+                                ->orderBy('created_at','desc')
                                 ->paginate(10);
 
                 }
