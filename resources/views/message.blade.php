@@ -77,6 +77,14 @@
         font-size: 18px;
     }    
 </style>
+<style>
+    #map{
+        width: 100%;
+        height: 440px;
+    }
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtM3X8domwSOC9JQBfy1NoP02mUy6RnHQ&sensor=false"
+  type="text/javascript"></script>
 
 
 @stop
@@ -156,7 +164,28 @@
         </div>
     </div>
 </div>
-
+<div id="map"></div>
+    <script>
+        var LatLng = new google.maps.LatLng(
+            {{$site->latitude}},{{$site->longitude}
+        });
+        var map = new google.maps.Map(document.getElementById('map'),{
+            center:{
+                lat: {{$site->latitude}},
+                lng: {{$site->longitude}}
+            },zoom:10
+        });
+        var marker = new google.maps.Marker({
+            map: map,
+            position: LatLng,
+        });
+        var infowindow = new google.maps.InfoWindow
+        google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setPosition(LatLng);
+            infowindow.setContent('{{$site->name}}');
+            infowindow.open(map,marker);
+        });
+    </script>
 <div class="modal fade" id="addModal" role="dialog" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <!-- 編輯Modal content-->

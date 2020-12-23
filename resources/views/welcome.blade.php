@@ -29,7 +29,7 @@ Released   : 20131203
         height: 440px;
     }
 </style>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtM3X8domwSOC9JQBfy1NoP02mUy6RnHQ&libraries=places"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtM3X8domwSOC9JQBfy1NoP02mUy6RnHQ&sensor=false"
   type="text/javascript"></script>
 <!-- Test -->
 <script src=//code.jquery.com/jquery-3.5.1.slim.min.js integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin=anonymous></script>
@@ -94,29 +94,29 @@ Released   : 20131203
         
         <p>顯示搜尋結果地圖</p>
             <div id="map"></div>
-
             <script>
                 var map = new google.maps.Map(document.getElementById('map'),{
                     center:{
                         lat: 23.58,
                         lng: 120.58
-                    },
-                    zoom:7
+                    },zoom:7
                 });
                 @foreach ($sites as $site)
-                var LatLng = { lat: {{$site->latitude}}, lng:{{$site->longitude}} }
+                var LatLng = new google.maps.LatLng(
+                    {lat: {{$site->latitude}}, lng: {{$site->longitude}}
+                });
+                map.setCenter(LatLng);
+                map.setZoom(10);
                 var marker = new google.maps.Marker({
-                map: map,
-                position: LatLng,
-              });
+                    map: map,
+                    position: LatLng,
+                });
                 var infowindow = new google.maps.InfoWindow({
                     content: '{{$site->name}}',
-                    
-              });
-                marker.addListener("click", () => {
-                    infowindow.setPosition( {{$site->latitude}},{{$site->longitude}} );
-                    infowindow.setContent('{{$site->name}}');
-                    infowindow.open(map,marker);
+                });
+                google.maps.event.addListener(this.marker, 'click', function() {
+                    infowindow.setContent('{{$site->name}}'+'\n'+'{{$site->address}}');
+                    infowindow.open(this.map,this);
                 });
                 @endforeach
         </script>
@@ -154,8 +154,7 @@ Released   : 20131203
         
     </div>
     <!-- Google API -->
-    <script src="{{ mix('js/app.js') }}"></script>
-
+   
     <div class="t" style="font-size: 48px; text-align: center; padding-right: 50px">
         搜尋附近
     </div>    
