@@ -22,7 +22,14 @@ Released   : 20131203
 <link href="{{asset('css/fonts.css')}}" rel="stylesheet">
 <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,500' rel='stylesheet' type='text/css'>
 <script src="{{ URL::asset('js/jquery-2.1.4.min.js') }}"></script>
-
+<style>
+    #map{
+        width: 100%;
+        height: 440px;
+    }
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtM3X8domwSOC9JQBfy1NoP02mUy6RnHQ&libraries=places"
+  type="text/javascript"></script>
 <!-- Test -->
 <script src=//code.jquery.com/jquery-3.5.1.slim.min.js integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin=anonymous></script>
 <!-- Test End -->
@@ -85,40 +92,112 @@ Released   : 20131203
         
         <p>顯示搜尋結果地圖</p>
         <!-- 顯示搜尋結果地圖 -->
-        <gmap-map 
-        ref="mapRef"
-        :center="mapCenter"
-        :zoom="10"
-        style="width: 100%; height:440px;"
-        >
-            <gmap-info-window
-                :options="infoWindowOptions"
-                :position="infoWindowPosition"
-                :opened="infoWindowOpened"
-                @closeclick="handleInfoWindowClose"
-            >
-                <div class="info-window">
-                    <h2 v-text="activeRestaurent.latitude"></h2>
-                    <h2 v-text="activeRestaurent.longitude"></h2>
-                    <h2 v-text="activeRestaurent.name"></h2>
-                    <p v-text="activeRestaurent.address"></p>
-                </div>
-            </gmap-info-window>
-            <gmap-marker
-            v-for="(r, index) in restaurents"
-            :key="r.id"
-            :position="getPosition(r)"
-            :clickable="true"
-            :draggable="false"
-            @click="handleMarkerClicked(r);handleNearby(r)"
-            >                        
-            </gmap-marker>                   
-        </gmap-map>
+        <div id="map">
+            <script>
+               var activeMarkerPos = {};
+               var currentInfoWindow;
+               var placetype = 'cafe';
+               var map = new google.maps.Map(document.getElementById('map'),{
+                    center:{
+                        lat: 23.58,
+                        lng: 120.58
+                    },
+                    zoom:7
+                });
+                @foreach ($sites as $site)
+                var LatLng = { lat: {{$site->latitude}}, lng:{{$site->longitude}} };
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: LatLng,
+                });
+                var infowindow = new google.maps.InfoWindow({});
+
+                currentInfoWindow = infowindow;
+
+                google.maps.event.addListener(this.marker, 'click', function() { 
+                    activeMarkerPos = {lat: {{$site->latitude}},lng: {{$site->longitude}}};
+                    infowindow.setContent('{{$site->name}}');
+                    infowindow.open(this.map,this);
+                    }
+                );
+                @endforeach
+
+                function implementNearbySearch(myObj){
+                    if(activeMarkerPos.lat != null && activeMarkerPos.lng != null){
+                        placetype = myObj.className;
+                        getNearbyPlaces(activeMarkerPos,placetype);
+                    }
+                    else {
+                        alert("請選擇一個地點!");
+                    }
+               }
+
+                function getNearbyPlaces(position,keyword) {
+                    let request = {
+                        location: position,
+                        radius :500,
+                        keyword: keyword,
+                    };
+
+                    service = new google.maps.places.PlacesService(map);
+                    service.nearbySearch(request, nearbyCallback);
+                }
+
+                function nearbyCallback(results, status) {
+                    if (status == google.maps.places.PlacesServiceStatus.OK) {
+                        createMarkers(results);
+                    }
+                    else{
+                        alert("附近沒有" + placetype);
+                    }
+                }
+
+                function createMarkers(places) {
+                    places.forEach(place => {
+                        let marker = new google.maps.Marker({
+                            position: place.geometry.location,
+                            map: map,
+                            title: place.name,
+                            icon: { 
+                                        url: 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png'                             
+                                  }, 
+                        });
+
+                        google.maps.event.addListener(marker, 'click', () => {
+                            let request = {
+                                placeId: place.place_id,
+                                fields: ['name', 'formatted_address', 'geometry', 'rating',
+                                  'website', 'photos']
+                            };
+
+                            service.getDetails(request, (placeResult, status) => {
+                                showDetails(placeResult, marker, status)
+                            });
+                        });
+                    });                  
+                }
+
+                function showDetails(placeResult, marker, status) {
+                    if (status == google.maps.places.PlacesServiceStatus.OK) {
+                        let placeInfowindow = new google.maps.InfoWindow();
+                        let rating = "None";
+                        if (placeResult.rating) rating = placeResult.rating;
+                        placeInfowindow.setContent('<div><strong>' + placeResult.name +
+                          '</strong><br>' + 'Rating: ' + rating + '</div>');
+                        placeInfowindow.open(marker.map, marker);
+                        currentInfoWindow.close();
+                        currentInfoWindow = placeInfowindow;
+                    } 
+                    else {
+                        console.log('showDetails failed: ' + status);
+                    }
+                }                                   
+            </script>
+        </div>
+
         
     </div>
-    <!-- Google API -->
-    <script src="{{ mix('js/app.js') }}"></script>
-    
+      
     <div class="t" style="font-size: 48px; text-align: center; padding-right: 50px">
         搜尋附近
     </div>    
@@ -127,17 +206,17 @@ Released   : 20131203
             <tr>
                 <td style="height: 100px; width: 300px">
                     <div id="button1" align="center" style="height: 80%; width: 80%">
-                        <button type="button" class="coffee" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">咖啡廳</button>
+                        <button type="button" class="cafe" onclick="implementNearbySearch(this)" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">咖啡廳</button>
                     </div>
                 </td>
                 <td style="height: 100px; width: 300px">    
                     <div id="button2"  align="center" style="height: 80%; width: 80%">
-                        <button type="button" class="restaurant" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">餐廳</button> 
+                        <button type="button" class="restaurant" onclick="implementNearbySearch(this)" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">餐廳</button> 
                     </div>  
                 </td>
                 <td style="height: 100px; width: 300px">    
                     <div id="button2"  align="center" style="height: 80%; width: 80%">
-                        <button type="button" class="gas" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">加油站</button> 
+                        <button type="button" class="gas_station" onclick="implementNearbySearch(this)" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">加油站</button> 
                     </div>  
                 </td>                
             </tr>          
