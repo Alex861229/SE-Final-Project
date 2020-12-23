@@ -53312,8 +53312,8 @@ var app = new Vue({
     mapCenter: function mapCenter() {
       if (!this.restaurents.length) {
         return {
-          lat: 10,
-          lng: 10
+          lat: 25,
+          lng: 121
         };
       }
 
@@ -53465,8 +53465,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Alex\SE\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Alex\SE\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\USER\desktop\new\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\USER\desktop\new\resources\sass\app.scss */"./resources/sass/app.scss");
+
 
 /***/ })
 

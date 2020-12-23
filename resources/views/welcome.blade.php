@@ -22,7 +22,15 @@ Released   : 20131203
 <link href="{{asset('css/fonts.css')}}" rel="stylesheet">
 <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,500' rel='stylesheet' type='text/css'>
 <script src="{{ URL::asset('js/jquery-2.1.4.min.js') }}"></script>
-
+<!-- Googlemapstyle -->
+<style>
+    #map{
+        width: 100%;
+        height: 440px;
+    }
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtM3X8domwSOC9JQBfy1NoP02mUy6RnHQ&libraries=places"
+  type="text/javascript"></script>
 <!-- Test -->
 <script src=//code.jquery.com/jquery-3.5.1.slim.min.js integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin=anonymous></script>
 <!-- Test End -->
@@ -81,11 +89,40 @@ Released   : 20131203
 </div>
 <div id="wrapper1">
 <div id="SIDE" >
-    <div class="map" id="app">
+    <div class="map">
+        <!--div class="map" id="app"-->
         
         <p>顯示搜尋結果地圖</p>
+            <div id="map"></div>
+
+            <script>
+                var map = new google.maps.Map(document.getElementById('map'),{
+                    center:{
+                        lat: 23.58,
+                        lng: 120.58
+                    },
+                    zoom:7
+                });
+                @foreach ($sites as $site)
+                var LatLng = { lat: {{$site->latitude}}, lng:{{$site->longitude}} }
+                var marker = new google.maps.Marker({
+                map: map,
+                position: LatLng,
+              });
+                var infowindow = new google.maps.InfoWindow({
+                    content: '{{$site->name}}',
+                    
+              });
+                marker.addListener("click", () => {
+                    infowindow.setPosition( {{$site->latitude}},{{$site->longitude}} );
+                    infowindow.setContent('{{$site->name}}');
+                    infowindow.open(map,marker);
+                });
+                @endforeach
+        </script>
+
         <!-- 顯示搜尋結果地圖 -->
-        <gmap-map 
+        <!--gmap-map 
         ref="mapRef"
         :center="mapCenter"
         :zoom="10"
@@ -113,11 +150,11 @@ Released   : 20131203
             @click="handleMarkerClicked(r);handleNearby(r)"
             >                        
             </gmap-marker>                   
-        </gmap-map>
+        </gmap-map-->
         
     </div>
-    <!-- Google API -->
-        <script src="{{ mix('js/app.js') }}"></script>
+    <!-- Google API >
+        <script src="{{ mix('js/app.js') }}"></script-->
     <div class="t" style="font-size: 48px; text-align: center; padding-right: 50px">
         搜尋附近
     </div>    
@@ -148,6 +185,7 @@ Released   : 20131203
 <div id="wrapper3">
     <div id="portfolio" class="container">
         <div class="title">
+
             <h2 style="font-size: 48px; text-align: center; padding-right: 50px">附近景點</h2>
         </div>
         <table class="comment" style="border:3px #cccccc solid; text-align:center; width: 100%; border-radius: 5px; font-size: 18px " align="center" cellpadding="10" border='1'>
