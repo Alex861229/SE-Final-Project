@@ -91,31 +91,31 @@
            <tr>
                 <td style="width: 10%">地址</td>
                 <td width="70%">
-                    <span style="color:#4F4F4F;" >{{ $site->address }}</span>                       
+                    <span style="color:#ffffff;" >{{ $site->address }}</span>                       
                 </td>
             </tr>
             <tr>
                 <td style="width: 10%">描述</td>
                 <td width="70%">
-                    <span style="color:#4F4F4F;" >{{ $site->description }}</span>                     
+                    <span style="color:#ffffff;" >{{ $site->description }}</span>                     
                 </td>
             </tr>
             <tr>
                 <td style="width: 10%">停車資訊</td>
                 <td width="70%">
-                    <span style="color:#4F4F4F;" >{{ $site->parkinginfo }}</span>                     
+                    <span style="color:#ffffff;" >{{ $site->parkinginfo }}</span>                     
                 </td>
             </tr>
             <tr>
                 <td style="width: 10%">總留言數</td>
                 <td width="70%">
-                    <span style="color:#4F4F4F;" >{{ $site->total_comments }}</span>                     
+                    <span style="color:#ffffff;" >{{ $site->total_comments }}</span>                     
                 </td>
             </tr>
             <tr>
                 <td style="width: 10%">平均評分</td>
                 <td width="70%">
-                    <span style="color:#4F4F4F;" >{{ $site->avg_rating }}</span>                     
+                    <span style="color:#ffffff;" >{{ $site->avg_rating }}</span>                     
                 </td>
             </tr>
         </table>    
