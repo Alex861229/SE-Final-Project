@@ -141,7 +141,7 @@ class SiteController extends Controller
 
             $KoreaSite = KoreaSite::get(); 
             
-            $filename = "TaiwanSites.csv";
+            $filename = "KoreaSites.csv";
             $handle = fopen($filename, 'w+');
             fputcsv($handle, array('name', 'description', 'address', 'parking info', 'public facility', 'accomodation', 'sports facility', 'entertainment facility', 'support facility'));
 

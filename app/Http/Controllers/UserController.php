@@ -43,12 +43,14 @@ class UserController extends Controller
 
             $messages = KoreaMessage::where('user_id', $user->id)
                         ->with('site')
+                        ->orderBy('created_at','desc')
                         ->paginate(10);
 
         } else if ($country == "tw") {
 
             $messages = TaiwanMessage::where('user_id', $user->id)
                         ->with('site')
+                        ->orderBy('created_at','desc')
                         ->paginate(10);
 
         }
@@ -123,7 +125,7 @@ class UserController extends Controller
             
             } else {
 
-                return 'failed';
+                return redirect()->back();
             }
         }
     }
@@ -230,12 +232,14 @@ class UserController extends Controller
 
                     $messages = KoreaMessage::where('content', 'like', '%'.$request->search.'%')
                                 ->with('site')
+                                ->orderBy('created_at','desc')
                                 ->paginate(10);
 
                 } else if ($country == "tw") {
 
                     $messages = TaiwanMessage::where('content', 'like', '%'.$request->search.'%')
                                 ->with('site')
+                                ->orderBy('created_at','desc')
                                 ->paginate(10);
 
                 }
@@ -314,12 +318,12 @@ class UserController extends Controller
             $user = User::find($user_id);
             
             $user->update([
-                'password' => $request->new_password,
+                'password' => Hash::make($request['new_password']),
             ]);
 
             $user->save();
 
-            return redirect('test');
+            return redirect('/');
         }
     }
 

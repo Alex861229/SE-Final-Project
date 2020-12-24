@@ -83,7 +83,11 @@
         height: 440px;
     }
 </style>
+<<<<<<< HEAD
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtM3X8domwSOC9JQBfy1NoP02mUy6RnHQ&sensor=false"
+=======
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtM3X8domwSOC9JQBfy1NoP02mUy6RnHQ&libraries=places"
+>>>>>>> origin/master
   type="text/javascript"></script>
 
 
@@ -129,6 +133,128 @@
         </table>    
     </div>
 </div>
+<div id="map">
+    <script>
+       var activeMarkerPos = {};
+       var currentInfoWindow;
+       var placetype = 'cafe';
+       var map = new google.maps.Map(document.getElementById('map'),{
+            center:{
+                lat: 23.58,
+                lng: 120.58
+            },
+            zoom:7
+        });
+        
+        var LatLng = { lat: {{$site->latitude}}, lng:{{$site->longitude}} };
+        var marker = new google.maps.Marker({
+            map: map,
+            position: LatLng,
+        });
+        var infowindow = new google.maps.InfoWindow({});
+
+        currentInfoWindow = infowindow;
+
+        google.maps.event.addListener(this.marker, 'click', function() { 
+            activeMarkerPos = {lat: {{$site->latitude}},lng: {{$site->longitude}}};
+            infowindow.setContent('{{$site->name}}');
+            infowindow.open(this.map,this);
+            }
+        );
+        
+
+        function implementNearbySearch(myObj){
+            activeMarkerPos = { lat: {{$site->latitude}}, lng:{{$site->longitude}} };
+            placetype = myObj.className;
+            getNearbyPlaces(activeMarkerPos,placetype);
+        }
+
+        function getNearbyPlaces(position,keyword) {
+            let request = {
+                location: position,
+                radius :500,
+                keyword: keyword,
+            };
+
+            service = new google.maps.places.PlacesService(map);
+            service.nearbySearch(request, nearbyCallback);
+        }
+
+        function nearbyCallback(results, status) {
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+                createMarkers(results);
+            }
+            else{
+                alert("附近沒有" + placetype);
+            }
+        }
+
+        function createMarkers(places) {
+            places.forEach(place => {
+                let marker = new google.maps.Marker({
+                    position: place.geometry.location,
+                    map: map,
+                    title: place.name,
+                    icon: { 
+                                url: 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png'                             
+                          }, 
+                });
+
+                google.maps.event.addListener(marker, 'click', () => {
+                    let request = {
+                        placeId: place.place_id,
+                        fields: ['name', 'formatted_address', 'geometry', 'rating',
+                          'website', 'photos']
+                    };
+
+                    service.getDetails(request, (placeResult, status) => {
+                        showDetails(placeResult, marker, status)
+                    });
+                });
+            });                  
+        }
+
+        function showDetails(placeResult, marker, status) {
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+                let placeInfowindow = new google.maps.InfoWindow();
+                let rating = "None";
+                if (placeResult.rating) rating = placeResult.rating;
+                placeInfowindow.setContent('<div><strong>' + placeResult.name +
+                  '</strong><br>' + 'Rating: ' + rating + '</div>');
+                placeInfowindow.open(marker.map, marker);
+                currentInfoWindow.close();
+                currentInfoWindow = placeInfowindow;
+            } 
+            else {
+                console.log('showDetails failed: ' + status);
+            }
+        }                                   
+    </script>
+</div>
+<div class="t" style="font-size: 48px; text-align: center; padding-right: 50px">
+        搜尋附近
+    </div>    
+    <div id="tablel" align="center">
+        <table>
+            <tr>
+                <td style="height: 100px; width: 300px">
+                    <div id="button1" align="center" style="height: 80%; width: 80%">
+                        <button type="button" class="cafe" onclick="implementNearbySearch(this)" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">咖啡廳</button>
+                    </div>
+                </td>
+                <td style="height: 100px; width: 300px">    
+                    <div id="button2"  align="center" style="height: 80%; width: 80%">
+                        <button type="button" class="restaurant" onclick="implementNearbySearch(this)" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">餐廳</button> 
+                    </div>  
+                </td>
+                <td style="height: 100px; width: 300px">    
+                    <div id="button2"  align="center" style="height: 80%; width: 80%">
+                        <button type="button" class="gas_station" onclick="implementNearbySearch(this)" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">加油站</button> 
+                    </div>  
+                </td>                
+            </tr>          
+        </table>        
+    </div>
 <div id="wrapper2">
     <div class="title2" style="padding: 3px; margin: 3px">
             <h2 style="color:#000000">留言評分</h2>
