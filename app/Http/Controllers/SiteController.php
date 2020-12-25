@@ -8,22 +8,12 @@ use App\KoreaSite;
 use App\User;
 use App\TaiwanMessage;
 use App\KoreaMessage;
-use App\Restaurent;
 use Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
 
 class SiteController extends Controller
 {
-    public function index (){
-
-        return view('test_search');
-    }
-    public function test (){
-
-            return $sites;
-        }
-
     public function search(Request $request)
     {
     	$validator = Validator::make($request->all(),[
