@@ -53312,8 +53312,8 @@ var app = new Vue({
     mapCenter: function mapCenter() {
       if (!this.restaurents.length) {
         return {
-          lat: 10,
-          lng: 10
+          lat: 25,
+          lng: 121
         };
       }
 

@@ -96,6 +96,7 @@ Released   : 20131203
             <script>
                var activeMarkerPos = {};
                var currentInfoWindow;
+               var markers = [];
                var placetype = 'cafe';
                var map = new google.maps.Map(document.getElementById('map'),{
                     center:{
@@ -104,12 +105,15 @@ Released   : 20131203
                     },
                     zoom:7
                 });
+               
                 @foreach ($sites as $site)
+                
                 var LatLng = { lat: {{$site->latitude}}, lng:{{$site->longitude}} };
                 var marker = new google.maps.Marker({
-                    map: map,
+                    map: map.setCenter({{$site->latitude}}, {{$site->longitude}}),
                     position: LatLng,
                 });
+                
                 var infowindow = new google.maps.InfoWindow({});
 
                 currentInfoWindow = infowindow;
@@ -135,7 +139,7 @@ Released   : 20131203
                 function getNearbyPlaces(position,keyword) {
                     let request = {
                         location: position,
-                        radius :50000,
+                        radius : 5000,
                         keyword: keyword,
                     };
 
@@ -154,6 +158,7 @@ Released   : 20131203
 
                 function createMarkers(places) {
                     places.forEach(place => {
+
                         let marker = new google.maps.Marker({
                             position: place.geometry.location,
                             map: map,
@@ -162,7 +167,8 @@ Released   : 20131203
                                         url: 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png'                             
                                   }, 
                         });
-
+                        markers.push(marker);
+                        
                         google.maps.event.addListener(marker, 'click', () => {
                             let request = {
                                 placeId: place.place_id,
@@ -175,6 +181,17 @@ Released   : 20131203
                             });
                         });
                     });                  
+                }
+
+                function setMapOnAll(map){
+                    for (var i = 0; i< markers.length; i++) {
+                        markers[i].setMap(map);
+                    }
+                }       
+
+                function deleteMarkers(){
+                    setMapOnAll();
+                    markers = [];
                 }
 
                 function showDetails(placeResult, marker, status) {
@@ -206,17 +223,17 @@ Released   : 20131203
             <tr>
                 <td style="height: 100px; width: 300px">
                     <div id="button1" align="center" style="height: 80%; width: 80%">
-                        <button type="button" class="cafe" onclick="implementNearbySearch(this)" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">咖啡廳</button>
+                        <button type="button" class="cafe" onclick="implementNearbySearch(this),deleteMarkers()" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">咖啡廳</button>
                     </div>
                 </td>
                 <td style="height: 100px; width: 300px">    
                     <div id="button2"  align="center" style="height: 80%; width: 80%">
-                        <button type="button" class="restaurant" onclick="implementNearbySearch(this)" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">餐廳</button> 
+                        <button type="button" class="restaurant" onclick="implementNearbySearch(this),deleteMarkers()" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">餐廳</button> 
                     </div>  
                 </td>
                 <td style="height: 100px; width: 300px">    
                     <div id="button2"  align="center" style="height: 80%; width: 80%">
-                        <button type="button" class="gas_station" onclick="implementNearbySearch(this)" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">加油站</button> 
+                        <button type="button" class="gas_station" onclick="implementNearbySearch(this),deleteMarkers()" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">加油站</button> 
                     </div>  
                 </td>                
             </tr>          
