@@ -143,14 +143,14 @@
         });
         
         var LatLng = { lat: {{$site->latitude}}, lng:{{$site->longitude}} };
+        map.setCenter(LatLng);
+        map.setZoom(9);
         var marker = new google.maps.Marker({
             map: map,
             position: LatLng,
         });
         var infowindow = new google.maps.InfoWindow({});
-
         currentInfoWindow = infowindow;
-
         google.maps.event.addListener(this.marker, 'click', function() { 
             activeMarkerPos = {lat: {{$site->latitude}},lng: {{$site->longitude}}};
             infowindow.setContent('{{$site->name}}');
@@ -158,7 +158,6 @@
             }
         );
         
-
         function implementNearbySearch(myObj){
             activeMarkerPos = { lat: {{$site->latitude}}, lng:{{$site->longitude}} };
             placetype = myObj.className;
@@ -168,7 +167,7 @@
         function getNearbyPlaces(position,keyword) {
             let request = {
                 location: position,
-                radius :500,
+                radius : 5000,
                 keyword: keyword,
             };
 
@@ -203,8 +202,8 @@
                           'website', 'photos']
                     };
 
-                    service.getDetails(request, (placeResult, status) => {
-                        showDetails(placeResult, marker, status)
+                service.getDetails(request, (placeResult, status) => {
+                    showDetails(placeResult, marker, status)
                     });
                 });
             });                  
@@ -216,7 +215,7 @@
                 let rating = "None";
                 if (placeResult.rating) rating = placeResult.rating;
                 placeInfowindow.setContent('<div><strong>' + placeResult.name +
-                  '</strong><br>' + 'Rating: ' + rating + '</div>');
+                '</strong><br>' + '地址 : ' + placeResult.formatted_address + '<br>Rating : ' + rating + '</div>');
                 placeInfowindow.open(marker.map, marker);
                 currentInfoWindow.close();
                 currentInfoWindow = placeInfowindow;
