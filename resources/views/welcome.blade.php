@@ -107,20 +107,19 @@ Released   : 20131203
                 });
                
                 @foreach ($sites as $site)
-                
                 var LatLng = { lat: {{$site->latitude}}, lng:{{$site->longitude}} };
+                map.setCenter(LatLng);
+                map.setZoom(9);
                 var marker = new google.maps.Marker({
-                    map: map.setCenter({{$site->latitude}}, {{$site->longitude}}),
+                    map: map,
                     position: LatLng,
                 });
-                
                 var infowindow = new google.maps.InfoWindow({});
-
                 currentInfoWindow = infowindow;
-
                 google.maps.event.addListener(this.marker, 'click', function() { 
                     activeMarkerPos = {lat: {{$site->latitude}},lng: {{$site->longitude}}};
-                    infowindow.setContent('{{$site->name}}');
+                    infowindow.setContent('<div><strong>' + '{{$site->name}}' +
+                          '</strong><br>' + '地址 : ' + '{{$site->address}}' + '</div>');
                     infowindow.open(this.map,this);
                     }
                 );
@@ -200,7 +199,7 @@ Released   : 20131203
                         let rating = "None";
                         if (placeResult.rating) rating = placeResult.rating;
                         placeInfowindow.setContent('<div><strong>' + placeResult.name +
-                          '</strong><br>' + 'Rating: ' + rating + '</div>');
+                          '</strong><br>' + '地址 : ' + placeResult.formatted_address + '<br>Rating : ' + rating + '</div>');
                         placeInfowindow.open(marker.map, marker);
                         currentInfoWindow.close();
                         currentInfoWindow = placeInfowindow;
