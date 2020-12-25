@@ -135,7 +135,7 @@ Released   : 20131203
                 function getNearbyPlaces(position,keyword) {
                     let request = {
                         location: position,
-                        radius :500,
+                        radius :50000,
                         keyword: keyword,
                     };
 
