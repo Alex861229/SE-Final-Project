@@ -100,12 +100,15 @@ Released   : 20131203
                var placetype = 'cafe';
                var map = new google.maps.Map(document.getElementById('map'),{
                     center:{
-                        lat: 23.58,
-                        lng: 120.58
+                        lat: 23.858987,
+                        lng: 120.917631
                     },
                     zoom:7
                 });
-               
+
+                //新增多點坐標顯示的矩形
+                var bounds = new google.maps.LatLngBounds();
+
                 @foreach ($sites as $site)
                 var LatLng = { lat: {{$site->latitude}}, lng:{{$site->longitude}} };
                 map.setCenter(LatLng);
@@ -114,6 +117,10 @@ Released   : 20131203
                     map: map,
                     position: LatLng,
                 });
+
+                //將所有座標加到可視地圖裡
+                bounds.extend(new google.maps.LatLng(parseFloat(LatLng.lat), parseFloat(LatLng.lng)));
+
                 var infowindow = new google.maps.InfoWindow({});
                 currentInfoWindow = infowindow;
                 google.maps.event.addListener(this.marker, 'click', function() { 
@@ -124,6 +131,11 @@ Released   : 20131203
                     }
                 );
                 @endforeach
+
+                //繪製到地圖
+                map.fitBounds(bounds);
+
+                
 
                 function implementNearbySearch(myObj){
                     if(activeMarkerPos.lat != null && activeMarkerPos.lng != null){
@@ -139,7 +151,7 @@ Released   : 20131203
                     let request = {
                         location: position,
                         radius : 5000,
-                        keyword: keyword,
+                        type: keyword,
                     };
 
                     service = new google.maps.places.PlacesService(map);
@@ -151,13 +163,27 @@ Released   : 20131203
                         createMarkers(results);
                     }
                     else{
-                        alert("附近沒有" + placetype);
+                        switch(placetype){
+                            case "cafe" :
+                                alert("附近沒有咖啡廳");
+                                break;
+
+                            case "restaurant" :
+                                alert("附近沒有餐廳");
+                                break;
+
+                            case "gas_station" :
+                                alert("附近沒有加油站");
+                                break;
+                        }                        
                     }
                 }
 
                 function createMarkers(places) {
+                    //新增多點坐標顯示的矩形
+                    var bounds = new google.maps.LatLngBounds();
+                    
                     places.forEach(place => {
-
                         let marker = new google.maps.Marker({
                             position: place.geometry.location,
                             map: map,
@@ -167,6 +193,9 @@ Released   : 20131203
                                   }, 
                         });
                         markers.push(marker);
+
+                        //將所有座標加到可視地圖裡                        
+                        bounds.extend(marker.position);
                         
                         google.maps.event.addListener(marker, 'click', () => {
                             let request = {
@@ -179,7 +208,12 @@ Released   : 20131203
                                 showDetails(placeResult, marker, status)
                             });
                         });
-                    });                  
+                    });
+
+                    //將參考點也加入bounds
+                    bounds.extend(new google.maps.LatLng(parseFloat(activeMarkerPos.lat), parseFloat(activeMarkerPos.lng)));
+                    //繪製到地圖
+                    map.fitBounds(bounds);                
                 }
 
                 function setMapOnAll(map){
