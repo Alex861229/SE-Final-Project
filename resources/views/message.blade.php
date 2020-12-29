@@ -133,6 +133,7 @@
     <script>
        var activeMarkerPos = {};
        var currentInfoWindow;
+       var markers = [];
        var placetype = 'cafe';
        var map = new google.maps.Map(document.getElementById('map'),{
             center:{
@@ -141,14 +142,15 @@
             },
             zoom:7
         });
-        
+             
         var LatLng = { lat: {{$site->latitude}}, lng:{{$site->longitude}} };
         map.setCenter(LatLng);
-        map.setZoom(9);
+        map.setZoom(15);
         var marker = new google.maps.Marker({
             map: map,
             position: LatLng,
         });
+
         var infowindow = new google.maps.InfoWindow({});
         currentInfoWindow = infowindow;
         google.maps.event.addListener(this.marker, 'click', function() { 
@@ -157,18 +159,19 @@
             infowindow.open(this.map,this);
             }
         );
-        
+      
         function implementNearbySearch(myObj){
             activeMarkerPos = { lat: {{$site->latitude}}, lng:{{$site->longitude}} };
             placetype = myObj.className;
             getNearbyPlaces(activeMarkerPos,placetype);
+            alert(placetype);
         }
 
         function getNearbyPlaces(position,keyword) {
             let request = {
                 location: position,
                 radius : 5000,
-                keyword: keyword,
+                type: keyword,
             };
 
             service = new google.maps.places.PlacesService(map);
@@ -180,11 +183,26 @@
                 createMarkers(results);
             }
             else{
-                alert("附近沒有" + placetype);
+                switch(placetype){
+                            case "cafe" :
+                                alert("附近沒有咖啡廳");
+                                break;
+
+                            case "restaurant" :
+                                alert("附近沒有餐廳");
+                                break;
+
+                            case "gas_station" :
+                                alert("附近沒有加油站");
+                                break;
+                }
             }
         }
 
         function createMarkers(places) {
+            //新增多點坐標顯示的矩形
+            var bounds = new google.maps.LatLngBounds();
+
             places.forEach(place => {
                 let marker = new google.maps.Marker({
                     position: place.geometry.location,
@@ -194,6 +212,12 @@
                                 url: 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png'                             
                           }, 
                 });
+
+                markers.push(marker);
+
+                //將所有座標加到可視地圖裡                        
+                bounds.extend(marker.position);
+                        
 
                 google.maps.event.addListener(marker, 'click', () => {
                     let request = {
@@ -206,7 +230,23 @@
                     showDetails(placeResult, marker, status)
                     });
                 });
-            });                  
+            });
+
+            //將參考點也加入bounds
+            bounds.extend(new google.maps.LatLng(parseFloat(activeMarkerPos.lat), parseFloat(activeMarkerPos.lng)));
+            //繪製到地圖
+            map.fitBounds(bounds);               
+        }
+
+        function setMapOnAll(map){
+            for (var i = 0; i< markers.length; i++) {
+                markers[i].setMap(map);
+            }
+        }       
+
+        function deleteMarkers(){
+            setMapOnAll();
+            markers = [];
         }
 
         function showDetails(placeResult, marker, status) {
@@ -234,17 +274,17 @@
             <tr>
                 <td style="height: 100px; width: 300px">
                     <div id="button1" align="center" style="height: 80%; width: 80%">
-                        <button type="button" class="cafe" onclick="implementNearbySearch(this)" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">咖啡廳</button>
+                        <button type="button" class="cafe" onclick="implementNearbySearch(this),deleteMarkers()" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">咖啡廳</button>
                     </div>
                 </td>
                 <td style="height: 100px; width: 300px">    
                     <div id="button2"  align="center" style="height: 80%; width: 80%">
-                        <button type="button" class="restaurant" onclick="implementNearbySearch(this)" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">餐廳</button> 
+                        <button type="button" class="restaurant" onclick="implementNearbySearch(this),deleteMarkers()" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">餐廳</button> 
                     </div>  
                 </td>
                 <td style="height: 100px; width: 300px">    
-                    <div id="button2"  align="center" style="height: 80%; width: 80%">
-                        <button type="button" class="gas_station" onclick="implementNearbySearch(this)" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">加油站</button> 
+                    <div id="button3"  align="center" style="height: 80%; width: 80%">
+                        <button type="button" class="gas_station" onclick="implementNearbySearch(this),deleteMarkers()" style="height: 80%; width: 80%; border-radius:15px; font-size: 24px">加油站</button> 
                     </div>  
                 </td>                
             </tr>          
