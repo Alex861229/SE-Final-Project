@@ -69,12 +69,20 @@
 @stop
 @section('content')
 <!-- 主畫面 -->
+<div id="header-wrapper">
+    <h2 style="color: #ffffff; text-align: center;font-size: 56px ">會員留言管理</h2>
+</div>
+
+<!-- 顯示所有會員留言 -->
+<div id="wrapper1" align = "center">
+    <br><a href="{{ url('admin') }}">顯示所有會員資料</a><br>
+</div>
 <div id="wrapper1">
-        <div id="search" style="text-align:center;  padding: 15px "> 
+        <div id="search" style="text-align:center;  padding: 15px;padding-right: 200px;padding-left: 200px "> 
             <form action="{{ url('admin/message/'.$country.'/search') }}" method="get">
                 <table align="center" style="padding: 25px">
                     <tr>
-                        <td style="padding-bottom: 10px">
+                        <td style="padding-bottom: 15px">
                         <span class="icon"><i class="fa fa-search"></i></span>
                         <input type="search" id="search" name="search" placeholder="Search Content..." / style="width: 400px; height: 30px; border-radius:15px; pa">
                         </td>
@@ -85,16 +93,17 @@
 
 <div id="wrapper2">
 
-    <div id="portfolio" class="container" style="padding: 15px">
+    <div id="portfolio" class="container">
         <!-- Cheng 留言分頁 -->
+    <table class="comment" style="border:3px #cccccc solid; text-align:center; width: 100%; border-radius: 5px;" align="center" cellpadding="10" border='1'>
+        <tr>
         <div class="tab-head" style="font-family: 微軟正黑體; padding-top: 20px;">
           <ul class="nav nav-tabs welcome-tab-ul">
             <li class="{{ Request::is('admin/message/tw') ? 'active' : '' }}"><a href="{{ url('admin/message/tw') }}"><b>台灣</b></a></li>
             <li class="{{ Request::is('admin/message/kr') ? 'active' : '' }}"><a href="{{ url('admin/message/kr') }}"><b>韓國</b></a></li>
           </ul>
-        </div>  
-        <table class="comment" style="border:3px #cccccc solid; text-align:center; width: 100%; border-radius: 5px; " align="center" cellpadding="10" border='1'>
-            <thead>
+        </div>
+        </tr>  
                 <tr style="background-color: #BEBEBE">
                     <td style="width: 20%">景點</td>
                     <td style="width: 5%;">評分</td>
@@ -105,8 +114,6 @@
                     <td style="width: 10%">修改日期</td>
                     <td style="width: 10%"></td>
                 </tr>
-            </thead>
-            <tbody>
                 @foreach ($messages as $message)    
                 <tr>
                     <td style="width: 20%">{{ $message -> site -> name }}</td>
@@ -223,7 +230,6 @@
                     </td>  
                 </tr>
                 @endforeach
-            </tbody>
         </table>
         <div align="center" id="page" style="font-weight: bold; padding: 20px">
             {{ $messages->links() }}

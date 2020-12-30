@@ -71,11 +71,12 @@
 <!-- 主畫面 -->
 <div id="header-wrapper">
     <div id="header" class="container">
-        <div id="logo">
-            <img src="{{ asset($user->avatar) }}" width="200px" height="200px">
+        <div id="logo" style="padding-bottom: 20px">
+            <img src="{{ asset($user->avatar) }}" width="250px" height="250px">
         </div>    
         <div id="name_edit" style="text-align:center; ">    
-            <li class="uname" value="name" style="list-style-type: none; ">{{ $user->name }}</li> 
+            <li class="uname" value="name" style="list-style-type: none; ">{{ $user->name }}</li>
+            <li class="uemail" value="email" style="list-style-type: none; color: #ffffff; padding-bottom: 10px">{{ $user->email }}</li> 
             <table align="center">
                 <tr >
                     <td>        
@@ -294,7 +295,7 @@
                         <tr>
                             <td style="padding-right: 50px " >信箱</td>
                             <td>
-                                <input class="add_bar" name='email'>
+                                <input type="email" class="add_bar" name='email'>
                             </td>  
                         </tr>
                         <tr>
