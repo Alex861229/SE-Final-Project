@@ -58,13 +58,13 @@ class SiteController extends Controller
                 return redirect()->back();
             }
 
-            if (!empty($sites)) {
+            if ($sites->isEmpty()) {
 
                 $error_message = "查無相似景點";
                 return view('welcome', compact('sites','country','error_message'));
             }
-
             else {
+
                 return view('welcome', compact('sites','country'));
             }
     	}
