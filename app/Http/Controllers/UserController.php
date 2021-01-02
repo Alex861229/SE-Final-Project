@@ -69,6 +69,7 @@ class UserController extends Controller
             'name' => ['required', 'string'],
             'account' => ['required', 'string', 'unique:users,account'],
             'password' => ['required', 'string', 'min:6'],
+            'password_confirmation' => ['required', 'same:password', 'string', 'min:6'],
             'email' => ['required', 'email'],
             'avatar' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ]);
