@@ -70,6 +70,15 @@
 @section('content')
 <!-- 主畫面 -->
 <div id="header-wrapper">
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div id="header" class="container">
         <div id="logo" style="padding-bottom: 20px">
             <img src="{{ asset($user->avatar) }}" width="250px" height="250px">
