@@ -293,7 +293,16 @@
 <div id="wrapper2">
     <div class="title2" style="padding: 3px; margin: 3px">
             <h2 style="color:#000000">留言評分</h2>
+    </div>
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
+    @endif
     <div id="portfolio" class="container">
         <table class="comment" style="border:3px #cccccc solid; text-align:center; " align="center" cellpadding="10" border='1'>
             <thead>
