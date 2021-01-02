@@ -80,21 +80,21 @@
 <!-- END -->
 
 <div id="wrapper1">
-        <div id="search" style="text-align:center;  padding: 15px "> 
+        <div id="search" style="text-align:center;  padding: 15px ; padding-right: 200px;padding-left: 200px"> 
             <form action="{{ url('admin/search/account') }}" method="get">
                 <table align="center">
                     <tr>
-                        <td>
+                        <td style="padding-bottom: 15px">
                         <span class="icon"><i class="fa fa-search"></i></span>
-                        <input type="search" id="search" name="search" placeholder="Search account..." / style="width: 400px; height: 30px; border-radius:15px;">
+                        <input type="search" id="search" name="search" placeholder="Search account..." / style="width: 400px; height: 30px; border-radius:15px; ">
                         </td>
                     </tr>    
             </form>  
         </div>
 </div>
 
-<div id="wrapper2">
-    <div id="portfolio" class="container">
+<div id="wrapper2" style="padding-left: 30px; padding-right: 30px">
+    <div id="portfolio" class="container" >
         <table class="comment" style="border:3px #cccccc solid; text-align:center; width: 100%; border-radius: 5px; " align="center" cellpadding="10" border='1'>
             <tr style="background-color: #BEBEBE">
                 <td style="width: 20%;">帳號名稱</td>
@@ -215,7 +215,7 @@
                                                 <tr>
                                                     <td style="padding-right: 50px " >信箱</td>
                                                     <td>
-                                                        <input class="add_bar" name='email'>
+                                                        <input type="email" class="add_bar" name='email' value = "{{$user->email}}">
                                                     </td>  
                                                 </tr>
                                                 <tr>
