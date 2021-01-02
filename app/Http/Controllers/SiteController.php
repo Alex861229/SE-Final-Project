@@ -41,8 +41,6 @@ class SiteController extends Controller
 
         		$sites = $sites->take(10);
 
-        		return view('welcome', compact('sites','country'));
-
         	} elseif ($country == 'kr')  {
 
                 $search_address = KoreaSite::
@@ -54,12 +52,20 @@ class SiteController extends Controller
                 $sites = $search_address->merge($search_name);
 
                 $sites = $sites->take(10);
-
-                return view('welcome', compact('sites','country'));
         		
         	} else {
 
                 return redirect()->back();
+            }
+
+            if (!empty($sites)) {
+
+                $error_message = "查無相似景點";
+                return view('welcome', compact('sites','country','error_message'));
+            }
+
+            else {
+                return view('welcome', compact('sites','country'));
             }
     	}
     }
