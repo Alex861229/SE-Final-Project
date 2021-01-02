@@ -308,8 +308,8 @@
             @foreach ($messages as $message)
             <tr>
                 <td style="width: 10%">{{ $message->user->name }}</td>
-                <td style="width: 60%;">{{ $message->rating }}</td>
-                <td style="width: 10%;">{{ $message->content }}</td>
+                <td style="width: 60%;">{!! $message->content !!}</td>
+                <td style="width: 10%;">{{ $message->rating }}</td>
                 <td style="width: 20%;">{{ $message->created_at }}</td>
             </tr>
             @endforeach
@@ -345,7 +345,7 @@
                 </table>
             </div>
         <div class="modal-body">
-            <form action="{{ url('search/'.$country.'/'.$site->id.'/message') }}" method="POST">
+            <form action="{{ url('search/'.$country.'/'.$site->id.'/message') }}" method="POST" id="message-form-new">
                 {{ csrf_field() }}
                 <table align="center" id="add_table">
                         <div class = "modal-body-body">   
@@ -353,7 +353,7 @@
                             <tr>
                                 <td style="padding-right: 50px " required="required">評論</td>
                                 <td>
-                                    <textarea class="add_word" name='content'></textarea> 
+                                    <textarea class="add_word" name='content' id="content-new"></textarea> 
                                 </td>  
                             </tr>
                             <tr>
@@ -395,6 +395,11 @@
 
 @section('js')
 <!-- 放js -->
+<script>
+$("#message-form-new").submit(function(){
+  $("#content-new").val($("#content-new").val().replace(/\r\n|\r|\n/g,"<br />"));
+});
 
+</script>
 
 @stop

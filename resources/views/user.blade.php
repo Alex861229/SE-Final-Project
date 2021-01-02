@@ -71,11 +71,12 @@
 <!-- 主畫面 -->
 <div id="header-wrapper">
     <div id="header" class="container">
-        <div id="logo">
-            <img src="{{ asset($user->avatar) }}" width="200px" height="200px">
+        <div id="logo" style="padding-bottom: 20px">
+            <img src="{{ asset($user->avatar) }}" width="250px" height="250px">
         </div>    
         <div id="name_edit" style="text-align:center; ">    
-            <li class="uname" value="name" style="list-style-type: none; ">{{ $user->name }}</li> 
+            <li class="uname" value="name" style="list-style-type: none; ">{{ $user->name }}</li>
+            <li class="uemail" value="email" style="list-style-type: none; color: #ffffff; padding-bottom: 10px">{{ $user->email }}</li> 
             <table align="center">
                 <tr >
                     <td>        
@@ -128,16 +129,16 @@
                 @foreach ($messages as $message)    
                 <tr>
                     <td style="width: 10%">{{ $message -> site -> name }}</td>
-                    <td style="width: 20%;">{{ $message -> content }}</td>
+                    <td style="width: 20%;">{{ $message -> rating }}</td>
                     <td width="50%">
-                        {{ $message -> rating }}
+                        {!! $message -> content !!}
                         <br>
                     </td>    
                     <td style="width: 10%;">{{ $message -> created_at }}</td>
                     <td style="width: 10%;">{{ $message -> updated_at }}</td>
                     <td style="width: 10%">
                         <button type="button" class="edit_button" data-toggle="modal" data-target="{{'#addModal'.$message->id}}" id="edit-Info-{{$message->id}}">編輯</button>
-                        <div class="modal fade" id="{{'addModal'.$message->id}}" role="dialog" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+                        <div class="modal fade message-edit-modal" id="{{'addModal'.$message->id}}" role="dialog" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <!-- 編輯Modal content-->
                                 <div class="modal-content">                                                    
@@ -157,7 +158,7 @@
                                     </div>
                                 <div class="modal-body">
                                 @if ($country == 'tw')
-                                    <form method="POST" action="{{ url('message/tw/'.$message->id) }}">
+                                    <form method="POST" id="message-form-edit" action="{{ url('message/tw/'.$message->id) }}">
                                     @csrf
                                     <input type="hidden" name="_method" id="method" value="PUT">
                                     <table align="center" id="add_table">
@@ -166,7 +167,7 @@
                                             <tr>
                                                 <td style="padding-right: 50px " required="required">評論</td>
                                                 <td>
-                                                    <textarea class="add_word" name='content'>{{ $message->content }}</textarea> 
+                                                    <textarea class="add_word" name='content' id="content-edit">{{ $message->content }}</textarea> 
                                                 </td>  
                                             </tr>
                                             <tr>
@@ -189,7 +190,7 @@
                                     </form>
                                 @endif
                                 @if ($country == 'kr')
-                                    <form method="POST" action="{{ url('message/kr/'.$message->id) }}">
+                                    <form method="POST" id="message-form-edit" action="{{ url('message/kr/'.$message->id) }}">
                                     @csrf
                                     <input type="hidden" name="_method" id="method" value="PUT">
                                     <table align="center" id="add_table">
@@ -198,7 +199,7 @@
                                             <tr>
                                                 <td style="padding-right: 50px " required="required">評論</td>
                                                 <td>
-                                                    <textarea class="add_word" name='content'>{{ $message->content }}</textarea> 
+                                                    <textarea class="add_word" name='content' id="content-edit">{{ $message->content }}</textarea> 
                                                 </td>  
                                             </tr>
                                             <tr>
@@ -294,7 +295,7 @@
                         <tr>
                             <td style="padding-right: 50px " >信箱</td>
                             <td>
-                                <input class="add_bar" name='email'>
+                                <input type="email" class="add_bar" name='email'>
                             </td>  
                         </tr>
                         <tr>
@@ -395,6 +396,20 @@
 
 @section('js')
 <!-- 放js -->
+<script>
+// var text = $("textarea").text(); 
+// var des = text.replace(/\r\n/g, '<br/>').replace(/\n/g, '<br/>').replace(/\s/g, ' ');
+
+// on modal show
+$('.message-edit-modal').on('show.bs.modal', function() {
+  // prevent modal appear under background
+  $("#content-edit").val($("#content-edit").val().replace(/\<br \/\>/g,"\n"));
+});
+$("#message-form-edit").submit(function(){
+  $("#content-edit").val($("#content-edit").val().replace(/\r\n|\r|\n/g,"<br />"));
+});
+
+</script>
 
 
 @stop
