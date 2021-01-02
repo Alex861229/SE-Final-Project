@@ -119,14 +119,14 @@
                     <td style="width: 20%">{{ $message -> site -> name }}</td>
                     <td style="width: 5%;">{{ $message -> rating }}</td>
                     <td width="35%">
-                        {{ $message -> content }}
+                        {!! $message -> content !!}
                         <br>
                     </td>    
                     <td style="width: 10%;">{{ $message -> created_at }}</td>
                     <td style="width: 10%;">{{ $message -> updated_at }}</td>
                     <td style="width: 10%">
                         <button type="button" class="edit_button" data-toggle="modal" data-target="{{'#addModal'.$message->id}}" id="edit-Info-{{$message->id}}">編輯</button>
-                        <div class="modal fade" id="{{'addModal'.$message->id}}" role="dialog" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+                        <div class="modal fade message-edit-modal" id="{{'addModal'.$message->id}}" role="dialog" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <!-- 編輯Modal content-->
                                 <div class="modal-content">                                                    
@@ -146,7 +146,7 @@
                                     </div>
                                 <div class="modal-body">
                                 @if ($country == 'tw')
-                                    <form method="POST" action="{{ url('message/tw/'.$message->id) }}">
+                                    <form method="POST" id="message-form-edit" action="{{ url('message/tw/'.$message->id) }}">
                                     {{ csrf_field() }}
                                     {{ method_field('PATCH') }}
                                     <table align="center" id="add_table">
@@ -155,7 +155,7 @@
                                             <tr>
                                                 <td style="padding-right: 50px " required="required">評論</td>
                                                 <td>
-                                                    <textarea class="add_word" name='content'>{{ $message->content }}</textarea> 
+                                                    <textarea class="add_word" name='content' id="content-edit">{{ $message->content }}</textarea> 
                                                 </td>  
                                             </tr>
                                             <tr>
@@ -178,7 +178,7 @@
                                     </form>
                                 @endif
                                 @if ($country == 'kr')
-                                    <form method="POST" action="{{ url('message/kr/'.$message->id) }}">
+                                    <form method="POST" id="message-form-edit" action="{{ url('message/kr/'.$message->id) }}">
                                     {{ csrf_field() }}
                                     {{ method_field('PATCH') }}
                                     <table align="center" id="add_table">
@@ -187,7 +187,7 @@
                                             <tr>
                                                 <td style="padding-right: 50px " required="required">評論</td>
                                                 <td>
-                                                    <textarea class="add_word" name='content'>{{ $message->content }}</textarea> 
+                                                    <textarea class="add_word" name='content' id="content-edit">{{ $message->content }}</textarea> 
                                                 </td>  
                                             </tr>
                                             <tr>
@@ -252,6 +252,7 @@
 
 @section('js')
 <!-- 放js -->
+
 
 
 @stop
