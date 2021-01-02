@@ -68,16 +68,7 @@ Released   : 20131203
 </div>
 </div>
 <body style="font-family: 'Source Sans Pro', sans-serif;font-size: 12pt;font-weight: 400;
-    background-color: #333333;"> 
-    @if (count($errors) > 0)
-        <div class="alert alert-danger">
-            <ul class="mb-0">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif   
+    background-color: #333333;">    
 <div id="header-wrapper">
     <div id="header" class="container">
         <div id="logo">
