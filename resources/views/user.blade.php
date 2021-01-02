@@ -294,7 +294,7 @@
                         <tr>
                             <td style="padding-right: 50px " >信箱</td>
                             <td>
-                                <input class="add_bar" name='email'>
+                                <input type= "email" class="add_bar" name='email'>
                             </td>  
                         </tr>
                         <tr>
