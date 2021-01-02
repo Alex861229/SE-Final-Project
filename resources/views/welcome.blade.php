@@ -77,7 +77,17 @@ Released   : 20131203
                 @endforeach
             </ul>
         </div>
-    @endif   
+    @endif
+
+    @if(empty($error_message))       
+    @else
+    <div class="alert alert-danger" style="text-align: center">
+            <ul class="mb-0">
+                {{$error_message}}
+            </ul>
+    </div>        
+    @endif
+
 <div id="header-wrapper">
     <div id="header" class="container">
         <div id="logo">
@@ -91,7 +101,7 @@ Released   : 20131203
                 <input type="radio" style="border-radius:10px" name="country" value="tw" checked>台灣
                 <input type="radio" style="border-radius:10px" name="country" value="kr">韓國
                 <input type="text" class="form-controller" style="color: #000000" id="search" name="search"></input>
-            </form> 
+            </form>
         </div>
     </div>
 </div>
@@ -341,28 +351,57 @@ Released   : 20131203
                 </table>
             </div>
         <div class="modal-body">
-            @if (count($errors) > 0)
-                <div class="alert alert-danger" id="errordiv">
-                    {!! implode('<br>', $errors->all()) !!}
-                </div>
-            @endif
-            <form action="{{ url('register') }}" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <font face="monospace" size="5">Name</font>
-                <input type="name" name="name"><br><br>
-                <font face="monospace" size="5">Avatar</font>
-                <input type="file" name="avatar"><br><br>
-                <font face="monospace" size="5">Email</font>
-                <input type="email" name="email"><br><br>
-                <font face="monospace" size="5">Account</font>
-                <input type="account" name="account"><br><br>
-                <font face="monospace" size="5">Password</font>
-                <input type="password" name="password"><br><br>
-                <font face="monospace" size="5">Confirm Password</font>
-                <input type="password" name="password_confirmation"><br><br>
-                <input type="submit" value="註冊" class="btn btn-primary"s>
-            </form> 
-        </div>
+            <form id="activity-form-edit" enctype="multipart/form-data">
+                <table align="center" id="add_table">
+                        <div class = "modal-body-body">   
+                            <br>        
+                            <div style="padding-left: 50px"><h3><b>輸入資訊</b></h3></div>
+                            <tr>
+                                <td style="padding-right: 50px " required="required">帳號</td>
+                                <td>
+                                    <input class="add_bar" name='account' required="required">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-right: 50px " required="required">密碼</td>
+                                <td>
+                                    <input class="add_bar" name='password' required="required">
+                                </td>  
+                            </tr>
+                            <tr>
+                                <td style="padding-right: 50px " required="required">密碼確認</td>
+                                <td>
+                                    <input class="add_bar" name='password2' required="required">
+                                </td>  
+                            </tr>
+                            <tr>
+                                <td style="padding-right: 50px " required="required">使用者名稱</td>
+                                <td>
+                                    <input class="add_bar" name='name' required="required">
+                                </td>  
+                            </tr>
+                            <tr>
+                                <td style="padding-right: 50px " required="required">信箱</td>
+                                <td>
+                                    <input class="add_bar" name='email' required="required">
+                                </td>  
+                            </tr>
+                        </div>    
+                </table>
+                <table align="center" id="pic_table">
+                    <tr>
+                        <td>
+                            <div class="addpic">上傳個人照片</div>
+                                <input type="file" id="progressbarTWInput" name = "picture" accept="image/*" / >
+                        </td>    
+                    </tr>
+                </table>  
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="submit" value="送出" class="btn btn-primary" >
+        </div>                                        
+        </form>
+    </div>
     </div>
 </div>
 </div>
@@ -374,7 +413,7 @@ Released   : 20131203
                 <table>
                     <tr>
                         <td style="text-align: center">
-                            <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px; font-size: 24px" >新增留言</h5>
+                            <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px; font-size: 24px" >登入</h5>
                         </td>
                         <td style="width: 500px">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modal_close1">
