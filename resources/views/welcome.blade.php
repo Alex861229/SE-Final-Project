@@ -372,7 +372,7 @@ Released   : 20131203
                             <tr>
                                 <td style="padding-right: 50px " required="required">密碼確認</td>
                                 <td>
-                                    <input type="password" class="add_bar" name='password2' required="required">
+                                    <input type="password" class="add_bar" name='password_confirmation' required="required">
                                 </td>  
                             </tr>
                             <tr>
