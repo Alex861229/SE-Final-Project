@@ -126,7 +126,8 @@ class UserController extends Controller
             
             } else {
 
-                return redirect()->back();
+                $error_message = "帳號或密碼錯誤";
+                return redirect('/')->withErrors($error_message);
             }
         }
     }
