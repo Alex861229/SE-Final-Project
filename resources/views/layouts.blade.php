@@ -66,7 +66,8 @@
                 </table>
             </div>
         <div class="modal-body">
-            <form id="activity-form-edit" enctype="multipart/form-data">
+            <form id="activity-form-edit" action="{{ url('register') }}" method="post" enctype="multipart/form-data" name="new">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <table align="center" id="add_table">
                         <div class = "modal-body-body">   
                             <br>        
@@ -80,13 +81,13 @@
                             <tr>
                                 <td style="padding-right: 50px " required="required">密碼</td>
                                 <td>
-                                    <input class="add_bar" name='password' required="required">
+                                    <input type="password" class="add_bar" name='password' required="required">
                                 </td>  
                             </tr>
                             <tr>
                                 <td style="padding-right: 50px " required="required">密碼確認</td>
                                 <td>
-                                    <input class="add_bar" name='password2' required="required">
+                                    <input type="password" class="add_bar" name='password2' required="required">
                                 </td>  
                             </tr>
                             <tr>
@@ -98,7 +99,7 @@
                             <tr>
                                 <td style="padding-right: 50px " required="required">信箱</td>
                                 <td>
-                                    <input class="add_bar" name='email' required="required">
+                                    <input type="email" class="add_bar" name='email' required="required">
                                 </td>  
                             </tr>
                         </div>    

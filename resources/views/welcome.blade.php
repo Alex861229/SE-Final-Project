@@ -351,7 +351,8 @@ Released   : 20131203
                 </table>
             </div>
         <div class="modal-body">
-            <form id="activity-form-edit" enctype="multipart/form-data">
+            <form id="activity-form-edit" action="{{ url('register') }}" method="post" enctype="multipart/form-data" name="new">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <table align="center" id="add_table">
                         <div class = "modal-body-body">   
                             <br>        
@@ -365,13 +366,13 @@ Released   : 20131203
                             <tr>
                                 <td style="padding-right: 50px " required="required">密碼</td>
                                 <td>
-                                    <input class="add_bar" name='password' required="required">
+                                    <input type="password" class="add_bar" name='password' required="required">
                                 </td>  
                             </tr>
                             <tr>
                                 <td style="padding-right: 50px " required="required">密碼確認</td>
                                 <td>
-                                    <input class="add_bar" name='password2' required="required">
+                                    <input type="password" class="add_bar" name='password2' required="required">
                                 </td>  
                             </tr>
                             <tr>
@@ -383,7 +384,7 @@ Released   : 20131203
                             <tr>
                                 <td style="padding-right: 50px " required="required">信箱</td>
                                 <td>
-                                    <input class="add_bar" name='email' required="required">
+                                    <input type="email" class="add_bar" name='email' required="required">
                                 </td>  
                             </tr>
                         </div>    
@@ -413,7 +414,7 @@ Released   : 20131203
                 <table>
                     <tr>
                         <td style="text-align: center">
-                            <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px; font-size: 24px" >登入</h5>
+                            <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px; font-size: 24px" >新增留言</h5>
                         </td>
                         <td style="width: 500px">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modal_close1">
