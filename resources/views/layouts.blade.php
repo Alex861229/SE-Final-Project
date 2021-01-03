@@ -75,7 +75,7 @@
                             <tr>
                                 <td style="padding-right: 50px " required="required">帳號</td>
                                 <td>
-                                    <input class="add_bar" name='account' required="required">
+                                    <input type="account" class="add_bar" name='account' required="required">
                                 </td>
                             </tr>
                             <tr>
@@ -87,7 +87,7 @@
                             <tr>
                                 <td style="padding-right: 50px " required="required">密碼確認</td>
                                 <td>
-                                    <input type="password" class="add_bar" name='password2' required="required">
+                                    <input type="password" class="add_bar" name='password_confirmation' required="required">
                                 </td>  
                             </tr>
                             <tr>
@@ -108,7 +108,7 @@
                     <tr>
                         <td>
                             <div class="addpic">上傳個人照片</div>
-                                <input type="file" id="progressbarTWInput" name = "picture" accept="image/*" / >
+                                <input type="file" id="progressbarTWInput" name = "avatar" accept="image/*" / >
                         </td>    
                     </tr>
                 </table>  
