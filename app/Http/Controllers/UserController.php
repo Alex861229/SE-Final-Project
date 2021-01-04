@@ -299,7 +299,9 @@ class UserController extends Controller
     {   
         $user = User::findOrFail($user_id);
 
-    	$user->delete();
+        KoreaMessage::where('user_id', $user_id)->delete();
+        TaiwanMessage::where('user_id', $user_id)->delete();
+        $user->delete();
 
         return redirect()->back();
     }
