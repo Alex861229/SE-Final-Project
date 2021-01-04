@@ -131,7 +131,7 @@
                 <table>
                     <tr>
                         <td style="text-align: center">
-                            <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px; font-size: 24px" >新增留言</h5>
+                            <h5 class="modal-title" id="exampleModalLabel" align="left" style="width: 100px; font-size: 24px" >Login</h5>
                         </td>
                         <td style="width: 500px">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modal_close1">
