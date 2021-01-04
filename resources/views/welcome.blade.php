@@ -306,8 +306,8 @@ Released   : 20131203
         </div>
         <table class="comment" style="border:3px #cccccc solid; text-align:center; width: 100%; border-radius: 5px; font-size: 18px " align="center" cellpadding="10" border='1'>
             <tr style="background-color: #BEBEBE;">
-                <td width="200px" style="padding: 5px">編號</td>
-                <td width="1400px" style="padding: 5px">景點</td>
+                <td width="200px" style="padding: 5px">景點名稱</td>
+                <td width="1400px" style="padding: 5px">地址</td>
             </tr>
             @foreach ($sites as $site)
             <tr>
