@@ -118,7 +118,7 @@
                 <tr>
                     <td style="width: 20%">{{ $message -> site -> name }}</td>
                     <td style="width: 5%;">{{ $message -> rating }}</td>
-                    <td width="35%">
+                    <td width="35%" style="word-break: break-all;">
                         {!! $message -> content !!}
                         <br>
                     </td>    
@@ -129,14 +129,14 @@
                     <form action="{{ url('message/tw/'.$message->id) }}" method="POST">
                         {!! csrf_field() !!}
                         {!! method_field('DELETE') !!}
-                        <button type="submit" id="delete-message-{{ $message->id }}">刪除</button>
+                        <button type="submit" id="delete-message-{{ $message->id }}" onClick="return confirm('確定要刪除嗎？');">刪除</button>
                     </form>
                     @endif
                     @if ($country == 'kr')
                     <form action="{{ url('message/kr/'.$message->id)}}" method="POST">
                         {!! csrf_field() !!}
                         {!! method_field('DELETE') !!}
-                        <button type="submit" id="delete-message-{{ $message->id }}">刪除</button>
+                        <button type="submit" id="delete-message-{{ $message->id }}" onClick="return confirm('確定要刪除嗎？');">刪除</button>
                     </form> 
                     @endif                      
                     </td>  

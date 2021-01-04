@@ -24,7 +24,7 @@ class MsgController extends Controller
     public function store(Request $request, $country, $site_id) 
     {
         $validator = Validator::make($request->all(),[
-            'content' => 'nullable|string|max:191',
+            'content' => 'nullable|string|max:500',
             'rating' => 'required|integer',
         ]);
 
@@ -113,7 +113,7 @@ class MsgController extends Controller
     public function update(Request $request, $country, $msg_id) 
     {
         $validator = Validator::make($request->all(), [
-            'content' => 'nullable|string',
+            'content' => 'nullable|string|max:500',
             'rating' => 'nullable|integer',
         ]);
 
