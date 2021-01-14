@@ -16,4 +16,10 @@ class KoreaSite extends Model
 
         return $this->hasMany('App\KoreaMessage');
     }
+
+    public static function getSites() {
+
+    	return KoreaSite::select('name', 'description', 'address', 'parkinginfo', 'public_facility', 'accommodation', 'sports_facility', 'entertainment_facility', 'support_facility')->get();
+
+    }
 }

@@ -8,6 +8,9 @@ use App\KoreaSite;
 use App\User;
 use App\TaiwanMessage;
 use App\KoreaMessage;
+use App\Exports\TaiwanSitesExport;
+use App\Exports\KoreaSitesExport;
+use Excel;
 use Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
@@ -120,37 +123,16 @@ class SiteController extends Controller
     }
 
     public function download($country) {
-
+        
         if ($country == 'tw') {
 
-            $TaiwanSite = TaiwanSite::get(); 
-            
-            $filename = "TaiwanSites.csv";
-            $handle = fopen($filename, 'w+');
-            fputcsv($handle, array('name', 'description', 'address', 'parking info', 'ticket info'));
+            return Excel::download(new TaiwanSitesExport, 'TaiwanSites.xlsx');
+        } 
 
-            foreach($TaiwanSite as $row) {
-                fputcsv($handle, array($row['name'], $row['description'], $row['address'], $row['parkinginfo'], $row['ticketinfo']));
-            }    
+        else if ($country == 'kr'){
 
-        } else if ($country == 'kr') {
 
-            $KoreaSite = KoreaSite::get(); 
-            
-            $filename = "KoreaSites.csv";
-            $handle = fopen($filename, 'w+');
-            fputcsv($handle, array('name', 'description', 'address', 'parking info', 'public facility', 'accomodation', 'sports facility', 'entertainment facility', 'support facility'));
-
-            foreach($KoreaSite as $row) {
-                fputcsv($handle, array($row['name'], $row['description'], $row['address'], $row['parkinginfo'], $row['public_facility'], $row['accomodation'], $row['sports_facility'], $row['entertainment_facility'], $row['support_facility']));
-            } 
+            return Excel::download(new KoreaSitesExport, 'KoreaSites.xlsx');
         }
-        fclose($handle);
-
-        $headers = array(
-            'Content-Type' => 'text/csv',
-        );
-
-        return Response::download($filename, 'sites.csv', $headers);
     }
 }

@@ -16,4 +16,9 @@ class TaiwanSite extends Model
 
         return $this->hasMany('App\TaiwanMessage');
     }
+
+    public static function getSites() {
+
+    	return TaiwanSite::select('name', 'description', 'address', 'parkinginfo', 'ticketinfo')->get();
+    }
 }
