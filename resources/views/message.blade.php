@@ -142,6 +142,7 @@
             },
             zoom:7
         });
+
              
         var LatLng = { lat: {{$site->latitude}}, lng:{{$site->longitude}} };
         map.setCenter(LatLng);
@@ -164,13 +165,12 @@
             activeMarkerPos = { lat: {{$site->latitude}}, lng:{{$site->longitude}} };
             placetype = myObj.className;
             getNearbyPlaces(activeMarkerPos,placetype);
-            alert(placetype);
         }
 
         function getNearbyPlaces(position,keyword) {
             let request = {
                 location: position,
-                radius : 5000,
+                radius : 500,
                 type: keyword,
             };
 
@@ -202,7 +202,7 @@
         function createMarkers(places) {
             //新增多點坐標顯示的矩形
             var bounds = new google.maps.LatLngBounds();
-
+            
             places.forEach(place => {
                 let marker = new google.maps.Marker({
                     position: place.geometry.location,

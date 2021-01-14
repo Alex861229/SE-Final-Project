@@ -119,18 +119,18 @@ Released   : 20131203
                var placetype = 'cafe';
                var map = new google.maps.Map(document.getElementById('map'),{
                     center:{
-                        lat: 23.858987,
-                        lng: 120.917631
+                        lat: 23.58,
+                        lng: 120.58
                     },
                     zoom:7
                 });
-
+                
                 //新增多點坐標顯示的矩形
                 var bounds = new google.maps.LatLngBounds();
 
                 @foreach ($sites as $site)
                 var LatLng = { lat: {{$site->latitude}}, lng:{{$site->longitude}} };
-                map.setCenter(LatLng);
+                
                 map.setZoom(9);
                 var marker = new google.maps.Marker({
                     map: map,
@@ -139,7 +139,7 @@ Released   : 20131203
 
                 //將所有座標加到可視地圖裡
                 bounds.extend(new google.maps.LatLng(parseFloat(LatLng.lat), parseFloat(LatLng.lng)));
-
+                map.setCenter(LatLng);
                 var infowindow = new google.maps.InfoWindow({});
                 currentInfoWindow = infowindow;
                 google.maps.event.addListener(this.marker, 'click', function() { 
@@ -150,7 +150,7 @@ Released   : 20131203
                     }
                 );
                 @endforeach
-
+                map.setCenter(LatLng);
                 //繪製到地圖
                 map.fitBounds(bounds);
 
@@ -169,7 +169,7 @@ Released   : 20131203
                 function getNearbyPlaces(position,keyword) {
                     let request = {
                         location: position,
-                        radius : 5000,
+                        radius : 500,
                         type: keyword,
                     };
 
