@@ -20,18 +20,20 @@ class UserController extends Controller
 	{
         $sites = [];
         $messages = [];
+        $country = [];
 
 		if (Auth::check()) {
 
 			$user = Auth::user(); 
             $sites = [];
             $messages = [];
+            $country = [];
 
-			return view('welcome', compact('user', 'sites','messages'));
+			return view('welcome', compact('user', 'sites','messages','country'));
 		
 		}
 
-		return view('welcome', compact('messages','sites'));
+		return view('welcome', compact('messages','sites','country'));
 	}
 
     public function show_member_message($country = "tw")

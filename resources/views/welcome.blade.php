@@ -14,7 +14,7 @@ Released   : 20131203
 <div class="bootstrap-iso">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>台韓景點地圖</title>
+<title>SKTWO台韓旅遊景點地圖</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
@@ -54,8 +54,7 @@ Released   : 20131203
 <div class="row" style="margin-left: 5px; margin-right: 5px">
 <div id="menu" style="position: relative; text-align: right; margin: 3px;padding: 0;">
         <ul style="display: block;list-style-type: disc;">
-            <li style="float:left;" ><img class="l_img" src="{{ asset('css/images/logo.jpg') }}"  style="  width: 48px; height: 48px; float:left; margin-top: 5px" ></a></li>
-            <li style="float:left;  height: 48px; line-height: 48px; color: #ffffff" >台韓景點地圖</a></li>
+            <li style="float:left;" ><img class="l_img" src="{{ asset('css/images/logo.jpg') }}"  style="  width: 160px; height: 48px; float:left; margin-top: 5px; border:3px #ff6816 solid;" ></a></li>
             <li class="current_page_item"><a href="#" title="">主頁</a></li>
             @canany(['admin', 'member'])
             <li class="mem_bt"><button type="button" class="register" onclick="location.href='{{ url('/user') }}'">個人資料</button></li>
@@ -91,9 +90,9 @@ Released   : 20131203
 <div id="header-wrapper">
     <div id="header" class="container">
         <div id="logo">
-            <h1><a href="#">台韓景點地圖</a></h1>
-            <span style="display:block">Design by <a href="https://www.facebook.com/AlexHsu19971229/" rel="nofollow">Alex Hsu</a></span>
-            <span>今天想來點...</span>
+            <h1><a href="#">SKTWO台韓旅遊景點地圖</a></h1>
+            <span style="display:block; color: #ffffff">新年快樂 새해복많이받으세요. </span>
+            <span>親 今天想去...</span>
         </div>    
         <div id="search" style="text-align:center; color: #ffffff">    
             <span class="icon"><i class="fa fa-search"></i></span>
@@ -304,18 +303,36 @@ Released   : 20131203
         <div class="title">
             <h2 style="font-size: 48px; text-align: center; padding-right: 50px">附近景點</h2>
         </div>
+        @if ($country == 'tw')
         <table class="comment" style="border:3px #cccccc solid; text-align:center; width: 100%; border-radius: 5px; font-size: 18px " align="center" cellpadding="10" border='1'>
             <tr style="background-color: #BEBEBE;">
-                <td width="200px" style="padding: 5px">景點名稱</td>
+                <td width="200px" style="padding: 5px">景點名稱</td>            
                 <td width="1400px" style="padding: 5px">地址</td>
             </tr>
             @foreach ($sites as $site)
             <tr>
-                <td width="200px" style="padding: 5px"><a href = '{{ url('search/'.$country.'/'.$site->id.'/message') }}'>{{$site->name}}</a></td>
+                <td width="200px" style="padding: 5px"><a href = '{{ url('search/'.$country.'/'.$site->id.'/message') }}'>{{$site->name}}</a></td>    
                 <td width="1400px" style="padding: 5px">{{$site->address}}</td>
             </tr>
             @endforeach
-        </table>
+        </table> 
+        @endif
+        @if ($country == 'kr') 
+        <table class="comment" style="border:3px #cccccc solid; text-align:center; width: 100%; border-radius: 5px; font-size: 18px " align="center" cellpadding="10" border='1'>
+            <tr style="background-color: #BEBEBE;">
+                <td width="200px" style="padding: 5px">景點名稱</td>            
+                <td width="200px" style="padding: 5px">景點韓文名稱</td>
+                <td width="1200px" style="padding: 5px">地址</td>
+            </tr>
+            @foreach ($sites as $site)
+            <tr>
+                <td width="200px" style="padding: 5px"><a href = '{{ url('search/'.$country.'/'.$site->id.'/message') }}'>{{$site->name}}</a></td>    
+                <td width="200px" style="padding: 5px"><a href = '{{ url('search/'.$country.'/'.$site->id.'/message') }}'>{{$site->name_kr}}</a></td>
+                <td width="1200px" style="padding: 5px">{{$site->address}}</td>
+            </tr>
+            @endforeach
+        </table> 
+        @endif       
     </div>
 </div>
 <div id="copyright">
@@ -439,10 +456,9 @@ Released   : 20131203
                             <tr>
                                 <td style="padding-right: 50px " required="required">帳號</td>
                                 <td>
-                                    <input type="account" name="account"> 
+                                    <input type="account" name="account"><br> 
                                 </td>
-                            </tr>
-                            <tr>
+                            </tr> 
                             <tr>
                                 <td style="padding-right: 50px " required="required">密碼</td>
                                 <td>

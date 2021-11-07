@@ -208,7 +208,7 @@
                                             <tr>
                                                 <td style="padding-right: 50px " required="required">評論</td>
                                                 <td>
-                                                    <textarea class="add_word" name='content' id="content-edit">{{ $message->content }}</textarea> 
+                                                    <textarea class="add_word" name='content' id="content-edit">{!! $message->content !!}</textarea> 
                                                 </td>  
                                             </tr>
                                             <tr>
@@ -310,7 +310,7 @@
                         <tr>
                             <td style="padding-right: 50px " >上傳個人照片</td>
                             <td>
-                                <input type="file" name="avatar">
+                                <input type="file" name="avatar" accept="image/*" />
                             </td>  
                         </tr>
                     </div>    
@@ -406,8 +406,6 @@
 @section('js')
 <!-- 放js -->
 <script>
-// var text = $("textarea").text(); 
-// var des = text.replace(/\r\n/g, '<br/>').replace(/\n/g, '<br/>').replace(/\s/g, ' ');
 
 // on modal show
 $('.message-edit-modal').on('show.bs.modal', function() {

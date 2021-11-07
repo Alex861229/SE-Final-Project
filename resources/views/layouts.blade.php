@@ -34,8 +34,7 @@
 <div class="row" style="margin-left: 5px; margin-right: 5px">
 <div id="menu" style="position: relative; text-align: right; margin: 3px;padding: 0;">
         <ul style="display: block;list-style-type: disc;">
-            <li style="float:left;" ><img class="l_img" src="{{ asset('css/images/logo.jpg') }}"  style="  width: 48px; height: 48px; float:left; margin-top: 5px" ></a></li>
-            <li style="float:left;  height: 48px; line-height: 48px; color: #ffffff" >台韓景點地圖</a></li>
+            <li style="float:left;" ><img class="l_img" src="{{ asset('css/images/logo.jpg') }}"  style="  width: 160px; height: 48px; float:left; margin-top: 5px;border:3px #ff6816 solid;"></a></li>
             <li class="current_page_item"><a href="/" title="">主頁</a></li>
             @canany(['admin', 'member'])
             <li class="mem_bt"><button type="button" class="register" onclick="location.href='{{ url('/user') }}'">個人資料</button></li>
@@ -154,12 +153,12 @@
                         <div class = "modal-body-body">   
                             <br>        
                             <tr>
-                                <td style="padding-right: 50px " required="required">帳號</td>
+                                <td style="padding-right: 50px; padding-bottom: 10px" required="required">帳號</td>
                                 <td>
-                                    <input type="account" name="account"> 
+                                    <input type="account" name="account"><br> 
                                 </td>  
                             </tr>
-                            <tr>
+                            <br>
                             <tr>
                                 <td style="padding-right: 50px " required="required">密碼</td>
                                 <td>

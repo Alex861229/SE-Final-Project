@@ -67,7 +67,7 @@ class SiteController extends Controller
                 return view('welcome', compact('sites','country','error_message'));
             }
             else {
-
+                
                 return view('welcome', compact('sites','country'));
             }
     	}
